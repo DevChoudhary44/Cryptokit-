@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Integrity Checker</title>
+    <title>Text Encryption Tool</title>
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Share+Tech+Mono&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
@@ -247,17 +247,54 @@
         .field { margin-bottom: 18px; }
         .field label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint); margin-bottom: 8px; font-family: var(--font-body); }
         [data-theme="hacker"] .field label { color: rgba(0,255,65,0.6); letter-spacing: 2px; }
-        input[type="text"] { width: 100%; padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: var(--surface-soft); font-size: 13px; font-family: var(--font-mono); color: var(--ink); outline: none; transition: all 0.25s ease; }
-        [data-theme="hacker"] input[type="text"] { background: #000; border-color: rgba(0,255,65,0.2); caret-color: var(--accent-1); }
-        [data-theme="hacker"] input::placeholder { color: rgba(0,255,65,0.25); }
-        input:focus { border-color: var(--accent-1); background: var(--surface); box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.12); }
-        [data-theme="hacker"] input:focus { box-shadow: 0 0 0 3px rgba(0,255,65,0.08), 0 0 15px rgba(0,255,65,0.06); }
+        
+        select, input[type="text"], input[type="password"], textarea {
+            width: 100%; padding: 11px 14px; border-radius: var(--radius-sm);
+            border: 1px solid var(--border-strong); background: var(--surface-soft);
+            font-size: 13px; font-family: var(--font-mono); color: var(--ink);
+            outline: none; transition: all 0.25s ease;
+        }
+        select option { background: var(--surface); color: var(--ink); }
+        [data-theme="hacker"] select, [data-theme="hacker"] input[type="text"],
+        [data-theme="hacker"] input[type="password"], [data-theme="hacker"] textarea {
+            background: #000; border-color: rgba(0,255,65,0.2); caret-color: var(--accent-1);
+        }
+        [data-theme="hacker"] input::placeholder, [data-theme="hacker"] textarea::placeholder { color: rgba(0,255,65,0.25); }
+        select:focus, input:focus, textarea:focus {
+            border-color: var(--accent-1); background: var(--surface);
+            box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.12);
+        }
+        [data-theme="hacker"] select:focus, [data-theme="hacker"] input:focus, [data-theme="hacker"] textarea:focus {
+            box-shadow: 0 0 0 3px rgba(0,255,65,0.08), 0 0 15px rgba(0,255,65,0.06);
+        }
+        
+        textarea { font-family: var(--font-mono); font-size: 13px; min-height: 140px; resize: vertical; line-height: 1.6; }
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .hint { font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
 
-        .check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 6px; }
-        .check { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface-soft); font-size: 13px; font-weight: 500; cursor: pointer; user-select: none; transition: all 0.2s ease; color: var(--ink-soft); }
-        .check:hover { border-color: var(--border-strong); background: var(--surface-hover); }
-        [data-theme="hacker"] .check:hover { border-color: rgba(0,255,65,0.3); background: rgba(0,255,65,0.04); }
-        .check input { accent-color: var(--accent-1); width: 15px; height: 15px; }
+        /* Password field with visibility toggle */
+        .password-wrap { position: relative; }
+        .password-wrap input { padding-right: 42px; }
+        .pw-toggle {
+            position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+            background: none; border: none; color: var(--ink-faint); cursor: pointer;
+            padding: 4px 8px; border-radius: var(--radius-xs); transition: 0.2s;
+        }
+        .pw-toggle:hover { color: var(--accent-1); }
+
+        /* Textarea with copy button */
+        .textarea-wrap { position: relative; }
+        .ta-copy {
+            position: absolute; top: 8px; right: 8px;
+            background: var(--glass); border: 1px solid var(--glass-border);
+            color: var(--accent-1); cursor: pointer;
+            padding: 5px 10px; border-radius: var(--radius-xs);
+            font-size: 11px; font-weight: 700; font-family: var(--font-body);
+            transition: all 0.2s; z-index: 2;
+        }
+        .ta-copy:hover { background: var(--accent-soft); border-color: var(--accent-1); }
+        [data-theme="hacker"] .ta-copy { text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
+        [data-theme="hacker"] .ta-copy:hover { box-shadow: 0 0 8px rgba(0,255,65,0.12); text-shadow: 0 0 6px rgba(0,255,65,0.4); }
 
         .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
         .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; font-family: var(--font-body); cursor: pointer; border: 1px solid var(--border-strong); background: var(--surface-soft); color: var(--ink); transition: all 0.25s ease; }
@@ -273,51 +310,8 @@
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; filter: grayscale(1); }
 
         /* ═══════════════════════════════════════════
-           DROPZONE & FILE INFO
+           STATUS & PASSWORD STRENGTH
         ═══════════════════════════════════════════ */
-        .dropzone { border: 1.5px dashed var(--dz-border); border-radius: var(--radius-md); padding: 40px 24px; text-align: center; background: var(--surface-soft); margin-top: 6px; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; }
-        .dropzone::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 50%, rgba(var(--primary-rgb),0.05), transparent 70%); opacity: 0; transition: opacity 0.3s; }
-        .dropzone:hover::before, .dropzone.drag::before { opacity: 1; }
-        .dropzone:hover, .dropzone.drag { border-color: var(--dz-hover-border); background: var(--dz-hover-bg); }
-        [data-theme="normal"] .dropzone:hover, [data-theme="normal"] .dropzone.drag { box-shadow: 0 0 0 4px rgba(108,99,255,0.08); }
-        [data-theme="hacker"] .dropzone:hover, [data-theme="hacker"] .dropzone.drag { box-shadow: 0 0 30px rgba(0,255,65,0.08); }
-        .dropzone .dz-icon { font-size: 28px; color: var(--ink-faint); display: block; margin-bottom: 12px; position: relative; transition: all 0.3s; }
-        .dropzone:hover .dz-icon, .dropzone.drag .dz-icon { color: var(--accent-1); transform: translateY(-3px); }
-        [data-theme="hacker"] .dropzone:hover .dz-icon { text-shadow: 0 0 12px rgba(0,255,65,0.6); }
-        .dropzone h3 { margin: 0 0 4px 0; font-size: 14px; font-weight: 600; color: var(--ink); position: relative; }
-        .dropzone p { margin: 0; color: var(--ink-faint); font-size: 12px; position: relative; }
-        [data-theme="hacker"] .dropzone p { color: rgba(0,255,65,0.4); }
-
-        .file-info { display: none; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; background: var(--surface-soft); margin-top: 16px; transition: all 0.2s; animation: fadeSlideIn 0.3s ease; }
-        .file-info.active { display: flex; }
-        .file-info:hover { border-color: var(--border-strong); box-shadow: var(--shadow-main); }
-        .file-info .fi-icon { width: 34px; height: 34px; border-radius: 9px; background: rgba(var(--primary-rgb), 0.1); color: var(--accent-1); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-        [data-theme="hacker"] .file-info .fi-icon { background: rgba(0,255,65,0.07); box-shadow: 0 0 8px rgba(0,255,65,0.06); }
-        .file-info .fi-details { flex: 1; overflow: hidden; }
-        .file-info .n { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .file-info .s { font-size: 11px; color: var(--ink-faint); font-family: var(--font-mono); margin-top: 2px; }
-        .file-info .fi-remove { cursor: pointer; color: var(--ink-faint); padding: 5px; transition: 0.2s; }
-        .file-info .fi-remove:hover { color: var(--bad); }
-
-        input[type="file"] { display: none; }
-
-        /* ═══════════════════════════════════════════
-           OUTPUT & STATUS
-        ═══════════════════════════════════════════ */
-        .hash-list { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
-        .hash-row { display: flex; align-items: center; gap: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 13px 14px; background: var(--surface-soft); transition: all 0.2s; animation: fadeSlideIn 0.3s ease;}
-        .hash-row:hover { border-color: var(--border-strong); box-shadow: var(--shadow-main); }
-        [data-theme="hacker"] .hash-row:hover { border-color: rgba(0,255,65,0.25); box-shadow: 0 0 12px rgba(0,255,65,0.04); }
-        .hash-row .algo { flex-shrink: 0; width: 75px; font-size: 11px; font-weight: 700; color: var(--accent-1); letter-spacing: 0.04em; font-family: var(--font-mono); text-transform: uppercase; }
-        [data-theme="hacker"] .hash-row .algo { text-shadow: 0 0 6px rgba(0,255,65,0.3); }
-        .hash-row .hex { flex: 1; min-width: 0; font-family: var(--font-mono); font-size: 12px; color: var(--ink); word-break: break-all; line-height: 1.5; }
-        [data-theme="hacker"] .hash-row .hex { text-shadow: 0 0 4px rgba(0,255,65,0.15); }
-        
-        .copy-btn { font-size: 11px; font-weight: 700; color: var(--accent-1); background: none; border: 1px solid transparent; cursor: pointer; padding: 5px 10px; border-radius: var(--radius-xs); flex-shrink: 0; font-family: var(--font-body); letter-spacing: 0.03em; transition: all 0.2s; }
-        .copy-btn:hover { background: var(--accent-soft); border-color: var(--border); }
-        [data-theme="hacker"] .copy-btn { text-transform: uppercase; letter-spacing: 1px; font-size: 10px; }
-        [data-theme="hacker"] .copy-btn:hover { border-color: var(--accent-1); box-shadow: 0 0 8px rgba(0,255,65,0.12); text-shadow: 0 0 6px rgba(0,255,65,0.4); }
-
         .status { display: none; align-items: flex-start; gap: 10px; border-radius: var(--radius-sm); padding: 14px 16px; margin-top: 24px; font-size: 13px; line-height: 1.5; border: 1px solid transparent; animation: fadeSlideIn 0.3s ease; }
         .status.active { display: flex; }
         .status i { flex-shrink: 0; margin-top: 2px; font-size: 15px; }
@@ -326,6 +320,20 @@
         [data-theme="hacker"] .status-good { border-color: var(--good); box-shadow: 0 0 15px rgba(0,255,65,0.08); text-shadow: 0 0 6px rgba(0,255,65,0.3); }
         .status-bad { background: var(--bad-bg); color: var(--bad); }
         [data-theme="hacker"] .status-bad { border-color: var(--bad); box-shadow: 0 0 15px rgba(255,0,64,0.1); }
+        .status-warn { background: var(--warn-bg); color: var(--warn); }
+        [data-theme="hacker"] .status-warn { border-color: var(--warn); box-shadow: 0 0 10px rgba(255,215,0,0.08); }
+
+        .strength-bar {
+            display: flex; gap: 4px; margin-top: 8px; height: 5px;
+        }
+        .strength-bar span {
+            flex: 1; background: var(--border); border-radius: 3px; transition: 0.3s;
+        }
+        .strength-bar.s1 span:nth-child(-n+1) { background: var(--bad); }
+        .strength-bar.s2 span:nth-child(-n+2) { background: var(--warn); }
+        .strength-bar.s3 span:nth-child(-n+3) { background: var(--accent-2); }
+        .strength-bar.s4 span:nth-child(-n+4) { background: var(--good); }
+        .strength-text { font-size: 11px; color: var(--ink-faint); margin-top: 6px; font-family: var(--font-mono); }
 
         .loader { display: none; margin-left: 8px; font-size: 14px; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -337,11 +345,9 @@
             .topbar-right { flex-wrap: wrap; }
             .tabs { flex-direction: column; gap: 4px; }
             .tab { justify-content: flex-start; padding: 11px 14px; }
-            .check-grid { grid-template-columns: 1fr; }
+            .field-row { grid-template-columns: 1fr; }
             .hero { flex-direction: column; }
             .panel { padding: 20px 16px; }
-            .hash-row { flex-direction: column; align-items: flex-start; gap: 6px; }
-            .hash-row .copy-btn { align-self: flex-end; }
         }
         @media (max-width: 480px) {
             .lock-pill { font-size: 10px; }
@@ -360,7 +366,7 @@
         </a>
         <div class="topbar-right">
             <div class="pill lock-pill">
-                <i class="fa-solid fa-lock"></i> 100% Client-Side — Files Never Leave Your Browser
+                <i class="fa-solid fa-lock"></i> 100% Client-Side — Text Never Leaves Your Browser
             </div>
             <div class="pill toggle-pill" id="theme-toggle">
                 <span class="toggle-label" id="theme-text">Normal</span>
@@ -370,132 +376,131 @@
     </div>
 
     <!-- HERO -->
-    <div class="kicker"><i class="fa-solid fa-shield-halved"></i> INTEGRITY TOOL</div>
+    <div class="kicker"><i class="fa-solid fa-key"></i> CRYPTOGRAPHIC TOOL</div>
     <div class="hero">
         <div class="hero-icon">
-            <i class="fa-solid fa-file-shield"></i>
+            <i class="fa-solid fa-user-secret"></i>
         </div>
         <div class="hero-text">
-            <h1>File Integrity Checker</h1>
-            <p>Calculate cryptographic hashes (SHA-256, SHA-512, etc.) to verify the authenticity and integrity of audio, video, text, and binary files locally.</p>
+            <h1>Text Encryption Tool</h1>
+            <p>Encrypt and decrypt messages with military-grade AES-GCM encryption. Your password derives a key using PBKDF2 — all processed locally in your browser via the Web Crypto API.</p>
         </div>
     </div>
 
     <!-- TABS -->
     <div class="tabs">
-        <div class="tab active" data-target="tab-calc">
-            <i class="fa-solid fa-calculator"></i> Calculate Hashes
+        <div class="tab active" data-target="tab-encrypt">
+            <i class="fa-solid fa-lock"></i> Encrypt Message
         </div>
-        <div class="tab" data-target="tab-verify">
-            <i class="fa-solid fa-check-double"></i> Verify File Match
+        <div class="tab" data-target="tab-decrypt">
+            <i class="fa-solid fa-lock-open"></i> Decrypt Message
         </div>
     </div>
 
-    <!-- TAB 1: CALCULATE HASHES -->
-    <div id="tab-calc" class="tab-panel active">
+    <!-- TAB 1: ENCRYPT -->
+    <div id="tab-encrypt" class="tab-panel active">
         <div class="panel">
             <div class="panel-head">
                 <i class="fa-solid fa-sliders"></i>
-                <h2>Hash Parameters</h2>
+                <h2>Encryption Parameters</h2>
             </div>
-            <p class="panel-sub">Select algorithms and drop a file to generate its cryptographic fingerprints.</p>
+            <p class="panel-sub">Enter your plaintext and a strong password. The output will be a Base64-encoded ciphertext safe to share.</p>
 
             <div class="field">
-                <div class="dropzone" id="dz-calc">
-                    <i class="fa-solid fa-cloud-arrow-up dz-icon"></i>
-                    <h3>Drag & Drop file here</h3>
-                    <p>or click to browse from your device</p>
-                    <input type="file" id="file-calc">
-                </div>
-                <!-- File Info Badge -->
-                <div class="file-info" id="fi-calc">
-                    <div class="fi-icon"><i class="fa-solid fa-file"></i></div>
-                    <div class="fi-details">
-                        <div class="n" id="fi-name-calc">filename.ext</div>
-                        <div class="s" id="fi-size-calc">0 B</div>
-                    </div>
-                    <i class="fa-solid fa-xmark fi-remove" id="fi-rm-calc" title="Remove file"></i>
-                </div>
+                <label for="plain-input">Plaintext Message</label>
+                <textarea id="plain-input" placeholder="Type or paste the secret message you want to encrypt..."></textarea>
+                <div class="hint" id="plain-count">0 characters</div>
             </div>
 
-            <div class="field" style="margin-top:20px;">
-                <label>Target Algorithms</label>
-                <div class="check-grid">
-                    <label class="check"><input type="checkbox" value="SHA-256" checked> SHA-256 (Recommended)</label>
-                    <label class="check"><input type="checkbox" value="SHA-512"> SHA-512</label>
-                    <label class="check"><input type="checkbox" value="SHA-384"> SHA-384</label>
-                    <label class="check"><input type="checkbox" value="SHA-1"> SHA-1 (Legacy)</label>
+            <div class="field-row">
+                <div class="field">
+                    <label for="enc-password">Password</label>
+                    <div class="password-wrap">
+                        <input type="password" id="enc-password" placeholder="Enter a strong passphrase" autocomplete="new-password">
+                        <button class="pw-toggle" data-target="enc-password" title="Show/hide"><i class="fa-solid fa-eye"></i></button>
+                    </div>
+                    <div class="strength-bar" id="strength-bar">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="strength-text" id="strength-text">Password strength: —</div>
+                </div>
+
+                <div class="field">
+                    <label for="enc-algo">Algorithm</label>
+                    <select id="enc-algo">
+                        <option value="AES-GCM-256">AES-GCM 256-bit (Recommended)</option>
+                        <option value="AES-GCM-128">AES-GCM 128-bit (Faster)</option>
+                    </select>
+                    <div class="hint">Authenticated encryption with associated data (AEAD).</div>
                 </div>
             </div>
 
             <div class="btn-row">
-                <button class="btn btn-primary" id="btn-run-calc" disabled>
-                    <i class="fa-solid fa-bolt"></i> Generate Hashes
-                    <i class="fa-solid fa-circle-notch loader" id="loader-calc"></i>
+                <button class="btn btn-primary" id="btn-encrypt" disabled>
+                    <i class="fa-solid fa-bolt"></i> Encrypt Message
+                    <i class="fa-solid fa-circle-notch loader" id="loader-enc"></i>
                 </button>
-                <button class="btn" id="btn-clear-calc">
+                <button class="btn" id="btn-clear-enc">
                     <i class="fa-solid fa-eraser"></i> Clear
                 </button>
             </div>
 
-            <!-- Results List -->
-            <div class="hash-list" id="results-calc"></div>
+            <!-- Output -->
+            <div class="field" style="margin-top: 24px;">
+                <label for="enc-output">Encrypted Output (Base64)</label>
+                <div class="textarea-wrap">
+                    <button class="ta-copy" id="copy-enc"><i class="fa-regular fa-copy"></i> Copy</button>
+                    <textarea id="enc-output" placeholder="Your encrypted ciphertext will appear here..." readonly></textarea>
+                </div>
+            </div>
+
+            <div id="status-enc"></div>
         </div>
     </div>
 
-    <!-- TAB 2: VERIFY FILE -->
-    <div id="tab-verify" class="tab-panel">
+    <!-- TAB 2: DECRYPT -->
+    <div id="tab-decrypt" class="tab-panel">
         <div class="panel">
             <div class="panel-head">
-                <i class="fa-solid fa-scale-balanced"></i>
-                <h2>Compare Expected Hash</h2>
+                <i class="fa-solid fa-key"></i>
+                <h2>Decryption Parameters</h2>
             </div>
-            <p class="panel-sub">Provide a file and the hash you expect it to have. We will calculate and compare them to ensure the file hasn't been altered.</p>
+            <p class="panel-sub">Paste an encrypted Base64 message and enter the correct password to reveal the original plaintext.</p>
 
             <div class="field">
-                <div class="dropzone" id="dz-verify">
-                    <i class="fa-solid fa-cloud-arrow-up dz-icon"></i>
-                    <h3>Drag & Drop file to verify</h3>
-                    <p>or click to browse</p>
-                    <input type="file" id="file-verify">
-                </div>
-                <div class="file-info" id="fi-verify">
-                    <div class="fi-icon"><i class="fa-solid fa-file-circle-check"></i></div>
-                    <div class="fi-details">
-                        <div class="n" id="fi-name-verify">filename.ext</div>
-                        <div class="s" id="fi-size-verify">0 B</div>
-                    </div>
-                    <i class="fa-solid fa-xmark fi-remove" id="fi-rm-verify" title="Remove file"></i>
-                </div>
+                <label for="cipher-input">Encrypted Ciphertext (Base64)</label>
+                <textarea id="cipher-input" placeholder="Paste the encrypted Base64 string here..."></textarea>
             </div>
 
             <div class="field">
-                <label for="hash-input">Expected Hash (Hexadecimal)</label>
-                <input type="text" id="hash-input" placeholder="e.g., e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" autocomplete="off" spellcheck="false">
-            </div>
-
-            <div class="field">
-                <label>Algorithm used for expected hash</label>
-                <div class="check-grid" style="grid-template-columns: repeat(4, 1fr);">
-                    <label class="check"><input type="radio" name="v-algo" value="SHA-256" checked> SHA-256</label>
-                    <label class="check"><input type="radio" name="v-algo" value="SHA-512"> SHA-512</label>
-                    <label class="check"><input type="radio" name="v-algo" value="SHA-384"> SHA-384</label>
-                    <label class="check"><input type="radio" name="v-algo" value="SHA-1"> SHA-1</label>
+                <label for="dec-password">Password</label>
+                <div class="password-wrap">
+                    <input type="password" id="dec-password" placeholder="Enter the password used for encryption" autocomplete="current-password">
+                    <button class="pw-toggle" data-target="dec-password" title="Show/hide"><i class="fa-solid fa-eye"></i></button>
                 </div>
+                <div class="hint">Wrong passwords will fail authentication — no partial decrypts.</div>
             </div>
 
             <div class="btn-row">
-                <button class="btn btn-primary" id="btn-run-verify" disabled>
-                    <i class="fa-solid fa-shield-check"></i> Verify Integrity
-                    <i class="fa-solid fa-circle-notch loader" id="loader-verify"></i>
+                <button class="btn btn-primary" id="btn-decrypt" disabled>
+                    <i class="fa-solid fa-unlock"></i> Decrypt Message
+                    <i class="fa-solid fa-circle-notch loader" id="loader-dec"></i>
                 </button>
-                <button class="btn" id="btn-clear-verify">
+                <button class="btn" id="btn-clear-dec">
                     <i class="fa-solid fa-eraser"></i> Reset
                 </button>
             </div>
 
-            <!-- Verification Status -->
-            <div id="status-area"></div>
+            <!-- Output -->
+            <div class="field" style="margin-top: 24px;">
+                <label for="dec-output">Decrypted Plaintext</label>
+                <div class="textarea-wrap">
+                    <button class="ta-copy" id="copy-dec"><i class="fa-regular fa-copy"></i> Copy</button>
+                    <textarea id="dec-output" placeholder="Your decrypted message will appear here..." readonly></textarea>
+                </div>
+            </div>
+
+            <div id="status-dec"></div>
         </div>
     </div>
 
@@ -529,252 +534,263 @@
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
             panels.forEach(p => p.classList.remove('active'));
-            
             tab.classList.add('active');
             document.getElementById(tab.getAttribute('data-target')).classList.add('active');
         });
     });
 
     /* ═══════════════════════════════════════════
+       PASSWORD VISIBILITY TOGGLE
+    ═══════════════════════════════════════════ */
+    document.querySelectorAll('.pw-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = document.getElementById(btn.getAttribute('data-target'));
+            const icon = btn.querySelector('i');
+            if (target.type === 'password') {
+                target.type = 'text';
+                icon.className = 'fa-solid fa-eye-slash';
+            } else {
+                target.type = 'password';
+                icon.className = 'fa-solid fa-eye';
+            }
+        });
+    });
+
+    /* ═══════════════════════════════════════════
        UTILITIES
     ═══════════════════════════════════════════ */
-    function formatBytes(bytes, decimals = 2) {
-        if (!+bytes) return '0 Bytes';
-        const k = 1024;
-        const dm = decimals < 0 ? 0 : decimals;
-        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+    const enc = new TextEncoder();
+    const dec = new TextDecoder();
+
+    // ArrayBuffer <-> Base64
+    function bufToBase64(buffer) {
+        const bytes = new Uint8Array(buffer);
+        let binary = '';
+        for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+        return btoa(binary);
+    }
+    function base64ToBuf(b64) {
+        const binary = atob(b64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        return bytes.buffer;
     }
 
-    // Convert ArrayBuffer to Hex String
-    function buf2hex(buffer) {
-        return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+    // Derive AES-GCM key from password using PBKDF2
+    async function deriveKey(password, salt, keyBits = 256) {
+        const baseKey = await crypto.subtle.importKey(
+            'raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']
+        );
+        return crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt, iterations: 250000, hash: 'SHA-256' },
+            baseKey,
+            { name: 'AES-GCM', length: keyBits },
+            false,
+            ['encrypt', 'decrypt']
+        );
     }
 
-    // Hash calculation using Web Crypto API
-    async function calculateHash(file, algorithm) {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = async (e) => {
-                try {
-                    const hashBuffer = await crypto.subtle.digest(algorithm, e.target.result);
-                    resolve(buf2hex(hashBuffer));
-                } catch (err) { reject(err); }
-            };
-            reader.onerror = reject;
-            // Read as ArrayBuffer for the Crypto API
-            reader.readAsArrayBuffer(file); 
-        });
-    }
-
-    async function copyToClipboard(text, btnElement) {
+    async function copyToClipboard(text, btn) {
+        if (!text) return;
         try {
             await navigator.clipboard.writeText(text);
-            const originalText = btnElement.innerHTML;
-            btnElement.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
-            setTimeout(() => btnElement.innerHTML = originalText, 2000);
-        } catch (err) {
-            console.error('Failed to copy', err);
-        }
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+            setTimeout(() => btn.innerHTML = original, 1800);
+        } catch (e) { console.error(e); }
     }
 
     /* ═══════════════════════════════════════════
-       FILE HANDLING SETUP (Generic for both tabs)
+       PASSWORD STRENGTH METER
     ═══════════════════════════════════════════ */
-    function setupFileHandling(prefix) {
-        const dropzone = document.getElementById(`dz-${prefix}`);
-        const fileInput = document.getElementById(`file-${prefix}`);
-        const fileInfo = document.getElementById(`fi-${prefix}`);
-        const fiName = document.getElementById(`fi-name-${prefix}`);
-        const fiSize = document.getElementById(`fi-size-${prefix}`);
-        const fiRemove = document.getElementById(`fi-rm-${prefix}`);
-        const runBtn = document.getElementById(`btn-run-${prefix}`);
-        let currentFile = null;
+    const strengthBar = document.getElementById('strength-bar');
+    const strengthText = document.getElementById('strength-text');
+    const encPassword = document.getElementById('enc-password');
+    const plainInput = document.getElementById('plain-input');
+    const plainCount = document.getElementById('plain-count');
+    const btnEncrypt = document.getElementById('btn-encrypt');
 
-        // Click to open dialog
-        dropzone.addEventListener('click', () => fileInput.click());
-
-        // Drag & Drop events
-        dropzone.addEventListener('dragover', (e) => { e.preventDefault(); dropzone.classList.add('drag'); });
-        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('drag'));
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('drag');
-            if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-        });
-
-        // File input change
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length) handleFile(e.target.files[0]);
-        });
-
-        function handleFile(file) {
-            currentFile = file;
-            dropzone.style.display = 'none';
-            fileInfo.classList.add('active');
-            fiName.textContent = file.name;
-            fiSize.textContent = formatBytes(file.size);
-            runBtn.disabled = false;
-        }
-
-        // Remove file
-        fiRemove.addEventListener('click', () => {
-            currentFile = null;
-            fileInput.value = '';
-            fileInfo.classList.remove('active');
-            dropzone.style.display = 'block';
-            runBtn.disabled = true;
-            
-            // Clear outputs specific to the tab
-            if(prefix === 'calc') document.getElementById('results-calc').innerHTML = '';
-            if(prefix === 'verify') document.getElementById('status-area').innerHTML = '';
-        });
-
-        return {
-            getFile: () => currentFile,
-            clear: () => fiRemove.click()
-        };
+    function checkStrength(pw) {
+        let score = 0;
+        if (pw.length >= 8) score++;
+        if (pw.length >= 14) score++;
+        if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) score++;
+        if (/\d/.test(pw) && /[^A-Za-z0-9]/.test(pw)) score++;
+        return score;
     }
 
-    const calcState = setupFileHandling('calc');
-    const verifyState = setupFileHandling('verify');
+    function updateEncryptState() {
+        const pwOk = encPassword.value.length > 0;
+        const textOk = plainInput.value.length > 0;
+        btnEncrypt.disabled = !(pwOk && textOk);
+
+        // Update strength
+        const s = checkStrength(encPassword.value);
+        strengthBar.className = 'strength-bar' + (encPassword.value ? ' s' + s : '');
+        const labels = ['—', 'Weak', 'Fair', 'Good', 'Strong'];
+        strengthText.textContent = 'Password strength: ' + (encPassword.value ? labels[s] : '—');
+    }
+
+    encPassword.addEventListener('input', updateEncryptState);
+    plainInput.addEventListener('input', () => {
+        plainCount.textContent = plainInput.value.length + ' characters';
+        updateEncryptState();
+    });
 
     /* ═══════════════════════════════════════════
-       LOGIC: CALCULATE HASHES TAB
+       ENCRYPT LOGIC
     ═══════════════════════════════════════════ */
-    const btnRunCalc = document.getElementById('btn-run-calc');
-    const btnClearCalc = document.getElementById('btn-clear-calc');
-    const resultsCalc = document.getElementById('results-calc');
-    const loaderCalc = document.getElementById('loader-calc');
+    const encAlgo = document.getElementById('enc-algo');
+    const encOutput = document.getElementById('enc-output');
+    const statusEnc = document.getElementById('status-enc');
+    const loaderEnc = document.getElementById('loader-enc');
 
-    btnRunCalc.addEventListener('click', async () => {
-        const file = calcState.getFile();
-        if (!file) return;
+    btnEncrypt.addEventListener('click', async () => {
+        const password = encPassword.value;
+        const plaintext = plainInput.value;
+        const keyBits = encAlgo.value === 'AES-GCM-128' ? 128 : 256;
 
-        // Get selected algorithms
-        const checkboxes = document.querySelectorAll('#tab-calc input[type="checkbox"]:checked');
-        if (checkboxes.length === 0) {
-            alert('Please select at least one algorithm.');
-            return;
-        }
+        if (!password || !plaintext) return;
 
-        btnRunCalc.disabled = true;
-        loaderCalc.style.display = 'inline-block';
-        resultsCalc.innerHTML = ''; // Clear previous
+        btnEncrypt.disabled = true;
+        loaderEnc.style.display = 'inline-block';
+        statusEnc.innerHTML = '';
+        encOutput.value = '';
 
         try {
-            for (const cb of checkboxes) {
-                const algoName = cb.value; // e.g. "SHA-256"
-                const hashHex = await calculateHash(file, algoName);
-                
-                // Create result row
-                const row = document.createElement('div');
-                row.className = 'hash-row';
-                row.innerHTML = `
-                    <div class="algo">${algoName}</div>
-                    <div class="hex">${hashHex}</div>
-                    <button class="copy-btn" onclick="copyToClipboard('${hashHex}', this)"><i class="fa-regular fa-copy"></i> Copy</button>
-                `;
-                resultsCalc.appendChild(row);
-            }
-        } catch (error) {
-            console.error("Hashing failed", error);
-            resultsCalc.innerHTML = `<div class="status status-bad active"><i class="fa-solid fa-circle-exclamation"></i><div><strong>Error</strong>Failed to read or hash file. File might be too large for browser memory.</div></div>`;
+            const salt = crypto.getRandomValues(new Uint8Array(16));
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const key = await deriveKey(password, salt, keyBits);
+
+            const cipherBuf = await crypto.subtle.encrypt(
+                { name: 'AES-GCM', iv },
+                key,
+                enc.encode(plaintext)
+            );
+
+            // Combine: [salt(16)] + [iv(12)] + [ciphertext]
+            const combined = new Uint8Array(salt.length + iv.length + cipherBuf.byteLength);
+            combined.set(salt, 0);
+            combined.set(iv, salt.length);
+            combined.set(new Uint8Array(cipherBuf), salt.length + iv.length);
+
+            encOutput.value = bufToBase64(combined.buffer);
+
+            statusEnc.innerHTML = `
+                <div class="status status-good active">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div>
+                        <strong>Encryption Successful</strong>
+                        Your message has been encrypted with AES-GCM ${keyBits}. Copy the Base64 output and share it securely.
+                    </div>
+                </div>`;
+        } catch (e) {
+            statusEnc.innerHTML = `
+                <div class="status status-bad active">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Encryption Failed</strong>${e.message || 'Unknown error'}</div>
+                </div>`;
         }
 
-        btnRunCalc.disabled = false;
-        loaderCalc.style.display = 'none';
+        btnEncrypt.disabled = false;
+        loaderEnc.style.display = 'none';
     });
 
-    btnClearCalc.addEventListener('click', () => {
-        calcState.clear();
-        document.querySelectorAll('#tab-calc input[type="checkbox"]').forEach(cb => cb.checked = (cb.value === 'SHA-256'));
+    document.getElementById('btn-clear-enc').addEventListener('click', () => {
+        plainInput.value = '';
+        encPassword.value = '';
+        encOutput.value = '';
+        statusEnc.innerHTML = '';
+        plainCount.textContent = '0 characters';
+        updateEncryptState();
+    });
+
+    document.getElementById('copy-enc').addEventListener('click', function () {
+        copyToClipboard(encOutput.value, this);
     });
 
     /* ═══════════════════════════════════════════
-       LOGIC: VERIFY FILE TAB
+       DECRYPT LOGIC
     ═══════════════════════════════════════════ */
-    const btnRunVerify = document.getElementById('btn-run-verify');
-    const btnClearVerify = document.getElementById('btn-clear-verify');
-    const hashInput = document.getElementById('hash-input');
-    const statusArea = document.getElementById('status-area');
-    const loaderVerify = document.getElementById('loader-verify');
+    const cipherInput = document.getElementById('cipher-input');
+    const decPassword = document.getElementById('dec-password');
+    const decOutput = document.getElementById('dec-output');
+    const btnDecrypt = document.getElementById('btn-decrypt');
+    const statusDec = document.getElementById('status-dec');
+    const loaderDec = document.getElementById('loader-dec');
 
-    // Enable/disable button based on file AND input text
-    hashInput.addEventListener('input', checkVerifyState);
-    
-    // Override handleFile slightly to trigger validation
-    const originalVerifyGetFile = verifyState.getFile;
-    document.getElementById('file-verify').addEventListener('change', checkVerifyState);
-    document.getElementById('dz-verify').addEventListener('drop', () => setTimeout(checkVerifyState, 50));
-    document.getElementById('fi-rm-verify').addEventListener('click', checkVerifyState);
-
-
-    function checkVerifyState() {
-        const file = verifyState.getFile();
-        const hash = hashInput.value.trim();
-        btnRunVerify.disabled = !(file && hash.length > 0);
+    function updateDecryptState() {
+        btnDecrypt.disabled = !(cipherInput.value.trim() && decPassword.value);
     }
+    cipherInput.addEventListener('input', updateDecryptState);
+    decPassword.addEventListener('input', updateDecryptState);
 
-    btnRunVerify.addEventListener('click', async () => {
-        const file = verifyState.getFile();
-        let expectedHash = hashInput.value.trim().toLowerCase();
-        
-        // Remove spaces or colons if user pasted a formatted hash
-        expectedHash = expectedHash.replace(/[:\s]/g, '');
+    btnDecrypt.addEventListener('click', async () => {
+        const password = decPassword.value;
+        const b64 = cipherInput.value.trim();
+        if (!password || !b64) return;
 
-        const algoInput = document.querySelector('input[name="v-algo"]:checked');
-        const algoName = algoInput ? algoInput.value : 'SHA-256';
-
-        if (!file || !expectedHash) return;
-
-        btnRunVerify.disabled = true;
-        loaderVerify.style.display = 'inline-block';
-        statusArea.innerHTML = '';
+        btnDecrypt.disabled = true;
+        loaderDec.style.display = 'inline-block';
+        statusDec.innerHTML = '';
+        decOutput.value = '';
 
         try {
-            const calculatedHash = await calculateHash(file, algoName);
-            
-            if (calculatedHash === expectedHash) {
-                statusArea.innerHTML = `
-                    <div class="status status-good active">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <div>
-                            <strong>Integrity Verified</strong>
-                            The generated ${algoName} hash matches the expected hash perfectly. The file is authentic and unaltered.
-                        </div>
-                    </div>`;
-            } else {
-                statusArea.innerHTML = `
-                    <div class="status status-bad active">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                        <div>
-                            <strong>Verification Failed</strong>
-                            The hashes do not match. The file may be corrupted, altered, or you selected the wrong algorithm.<br><br>
-                            <span style="font-family: var(--font-mono); font-size: 11px; opacity: 0.8">
-                            Expected: ${expectedHash}<br>
-                            Actual&nbsp;&nbsp;: ${calculatedHash}
-                            </span>
-                        </div>
-                    </div>`;
+            const combined = new Uint8Array(base64ToBuf(b64));
+            if (combined.length < 30) throw new Error('Ciphertext is too short or malformed.');
+
+            const salt = combined.slice(0, 16);
+            const iv = combined.slice(16, 28);
+            const cipher = combined.slice(28);
+
+            // Try 256-bit first, then fallback to 128-bit
+            let plainBuf = null;
+            let usedBits = 256;
+
+            try {
+                const key = await deriveKey(password, salt, 256);
+                plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, cipher);
+            } catch {
+                usedBits = 128;
+                const key = await deriveKey(password, salt, 128);
+                plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, cipher);
             }
-        } catch (error) {
-             statusArea.innerHTML = `<div class="status status-warn active"><i class="fa-solid fa-circle-exclamation"></i><div><strong>Processing Error</strong>Could not calculate hash.</div></div>`;
+
+            decOutput.value = dec.decode(plainBuf);
+            statusDec.innerHTML = `
+                <div class="status status-good active">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div>
+                        <strong>Decryption Successful</strong>
+                        Message decrypted using AES-GCM ${usedBits}. Authentication passed — the message is genuine.
+                    </div>
+                </div>`;
+        } catch (e) {
+            statusDec.innerHTML = `
+                <div class="status status-bad active">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>Decryption Failed</strong>
+                        Wrong password, corrupted ciphertext, or invalid Base64 input. Verify all fields and try again.
+                    </div>
+                </div>`;
         }
 
-        btnRunVerify.disabled = false;
-        loaderVerify.style.display = 'none';
+        btnDecrypt.disabled = false;
+        loaderDec.style.display = 'none';
     });
 
-    btnClearVerify.addEventListener('click', () => {
-        verifyState.clear();
-        hashInput.value = '';
-        document.querySelector('input[name="v-algo"][value="SHA-256"]').checked = true;
-        statusArea.innerHTML = '';
-        checkVerifyState();
+    document.getElementById('btn-clear-dec').addEventListener('click', () => {
+        cipherInput.value = '';
+        decPassword.value = '';
+        decOutput.value = '';
+        statusDec.innerHTML = '';
+        updateDecryptState();
     });
 
+    document.getElementById('copy-dec').addEventListener('click', function () {
+        copyToClipboard(decOutput.value, this);
+    });
 </script>
 </body>
 </html>
