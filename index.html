@@ -20,24 +20,20 @@
     <style>
         /* ═══════════════════════════════════
            FIX: Ensure fade-up elements are visible
-           even if JavaScript fails to load
         ═══════════════════════════════════ */
         .fade-up {
             opacity: 1 !important;
             transform: translateY(0) !important;
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
-
         .fade-up.hidden {
             opacity: 0 !important;
             transform: translateY(30px) !important;
         }
-
         .js-loaded .fade-up:not(.visible) {
             opacity: 0;
             transform: translateY(30px);
         }
-
         .js-loaded .fade-up.visible {
             opacity: 1 !important;
             transform: translateY(0) !important;
@@ -54,11 +50,7 @@
             overflow: hidden;
             transition: all 0.3s ease;
         }
-
-        .mobile-theme-submenu.open {
-            display: flex;
-        }
-
+        .mobile-theme-submenu.open { display: flex; }
         .mobile-theme-submenu a {
             padding: 12px 24px 12px 32px !important;
             font-size: 14px !important;
@@ -68,11 +60,7 @@
             align-items: center;
             gap: 10px;
         }
-
-        .mobile-theme-submenu a:last-child {
-            border-bottom: none !important;
-        }
-
+        .mobile-theme-submenu a:last-child { border-bottom: none !important; }
         .mobile-theme-toggle-btn {
             display: flex;
             align-items: center;
@@ -83,15 +71,11 @@
             cursor: pointer;
             font-family: inherit;
         }
-
         .mobile-theme-toggle-btn .theme-arrow {
             transition: transform 0.3s ease;
             font-size: 12px;
         }
-
-        .mobile-theme-toggle-btn.active .theme-arrow {
-            transform: rotate(180deg);
-        }
+        .mobile-theme-toggle-btn.active .theme-arrow { transform: rotate(180deg); }
 
         /* Mobile Developer Mode Popup */
         .mobile-dev-popup {
@@ -105,11 +89,7 @@
             backdrop-filter: blur(6px);
             padding: 20px;
         }
-
-        .mobile-dev-popup.show {
-            display: flex;
-        }
-
+        .mobile-dev-popup.show { display: flex; }
         .mobile-dev-popup-box {
             background: var(--card-bg, #1a1a2e);
             border: 2px solid var(--accent, #7c3aed);
@@ -121,19 +101,16 @@
             box-shadow: 0 20px 60px rgba(124,58,237,0.4);
             animation: popupIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
         }
-
         @keyframes popupIn {
             from { opacity: 0; transform: scale(0.7) translateY(30px); }
             to   { opacity: 1; transform: scale(1) translateY(0); }
         }
-
         .mobile-dev-popup-icon {
             font-size: 52px;
             margin-bottom: 16px;
             display: block;
             filter: drop-shadow(0 0 16px rgba(124,58,237,0.6));
         }
-
         .mobile-dev-popup-title {
             font-size: 20px;
             font-weight: 700;
@@ -141,18 +118,13 @@
             margin-bottom: 12px;
             font-family: 'Space Grotesk', sans-serif;
         }
-
         .mobile-dev-popup-msg {
             font-size: 14px;
             color: var(--text-secondary, #a0aec0);
             line-height: 1.6;
             margin-bottom: 24px;
         }
-
-        .mobile-dev-popup-msg strong {
-            color: var(--accent, #7c3aed);
-        }
-
+        .mobile-dev-popup-msg strong { color: var(--accent, #7c3aed); }
         .mobile-dev-popup-close {
             background: linear-gradient(135deg, #7c3aed, #3b82f6);
             color: #fff;
@@ -166,20 +138,16 @@
             transition: transform 0.2s, box-shadow 0.2s;
             width: 100%;
         }
-
         .mobile-dev-popup-close:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(124,58,237,0.5);
         }
-
         .mobile-theme-submenu a.active-theme {
             color: var(--accent, #7c3aed) !important;
             font-weight: 600;
         }
-
         .mobile-theme-submenu a .theme-active-dot {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background: var(--accent, #7c3aed);
             border-radius: 50%;
             display: inline-block;
@@ -195,13 +163,11 @@
             color: inherit;
             cursor: pointer;
         }
-
         .tools-section {
             display: block !important;
             visibility: visible !important;
             opacity: 1 !important;
         }
-
         .tools-grid {
             display: grid;
             visibility: visible !important;
@@ -217,27 +183,540 @@
             align-items: center;
             width: 100%;
         }
-
         .demo-container {
             margin-left: auto;
             margin-right: auto;
             width: 100%;
             max-width: 900px;
         }
-
-        .demo-header {
-            text-align: center;
-        }
+        .demo-header { text-align: center; }
 
         /* ═══════════════════════════════════
            AUTH SCREEN: Show/Hide logic
         ═══════════════════════════════════ */
-        .auth-screen-hidden {
-            display: none !important;
+        .auth-screen-hidden { display: none !important; }
+        .main-app-hidden { display: none !important; }
+
+        /* ═══════════════════════════════════════════════════
+           NAVBAR ALIGNMENT & SPACING FIXES 
+        ═══════════════════════════════════════════════════ */
+        .navbar {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 15px 40px !important;
+            gap: 20px !important;
+            flex-wrap: nowrap !important;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        .main-app-hidden {
-            display: none !important;
+        .nav-logo {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            flex-shrink: 0 !important;
+            text-decoration: none !important;
+        }
+
+        .nav-premium-indicator {
+            display: none; 
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 4px 10px !important;
+            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(217,119,6,0.1)) !important;
+            border: 1px solid rgba(251,191,36,0.3) !important;
+            border-radius: 20px !important;
+            font-size: 11px !important;
+            font-weight: 600 !important;
+            color: #fbbf24 !important;
+            white-space: nowrap !important;
+            margin-left: 0 !important;
+        }
+        html.premium-active .nav-premium-indicator { display: inline-flex !important; }
+
+        .nav-links {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 25px !important;
+            flex-grow: 1 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+        }
+
+        .nav-links li a {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 6px !important;
+            white-space: nowrap !important; 
+            text-decoration: none !important;
+            font-size: 15px !important;
+            font-weight: 500 !important;
+        }
+
+        .nav-actions {
+            display: flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            flex-shrink: 0 !important;
+            flex-wrap: nowrap !important;
+        }
+
+        /* Standardize all action buttons */
+        .btn-nav-auth, 
+        .btn-back-normal,
+        .btn-nav-cta {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            white-space: nowrap !important;
+            height: 40px !important;
+            box-sizing: border-box !important;
+            padding: 0 16px !important;
+            margin: 0 !important;
+            border-radius: 8px !important;
+            font-family: 'Space Grotesk', sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        /* Auth Toggle Button */
+        .btn-nav-auth {
+            gap: 6px !important;
+            background: rgba(255,255,255,0.05) !important;
+            color: var(--text-primary, #fff) !important;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+        }
+        .btn-nav-auth:hover {
+            background: rgba(255,255,255,0.1) !important;
+            transform: translateY(-1px);
+        }
+
+        /* BACK TO NORMAL MODE BUTTON */
+        .btn-back-normal {
+            display: none !important; /* Hidden by default */
+            gap: 6px !important;
+            background: rgba(255,255,255,0.05) !important;
+            color: var(--text-primary, #fff) !important;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+        }
+        .btn-back-normal:hover {
+            background: rgba(239,68,68,0.1) !important;
+            border-color: rgba(239,68,68,0.4) !important;
+            color: #ef4444 !important;
+            transform: translateY(-1px);
+        }
+        html.premium-active .btn-back-normal { display: inline-flex !important; }
+
+        @media (max-width: 1200px) {
+            .navbar { padding: 15px 20px !important; gap: 15px !important; }
+            .nav-links { display: none !important; } 
+            .nav-actions { display: none !important; } 
+            .hamburger { display: block !important; } 
+        }
+
+        /* ═══════════════════════════════════
+           PREMIUM SECTION & PRICING
+        ═══════════════════════════════════ */
+        .premium-section {
+            padding: 100px 20px;
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(124,58,237,0.04) 50%, rgba(0,0,0,0) 100%);
+        }
+        .premium-container { max-width: 1200px; margin: 0 auto; }
+        .premium-header { text-align: center; margin-bottom: 50px; }
+        .premium-toggle-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        .premium-toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px; height: 34px;
+        }
+        .premium-toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .premium-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: var(--card-bg, #1a1a2e);
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .premium-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px; width: 22px;
+            left: 4px; bottom: 4px;
+            background-color: var(--accent, #7c3aed);
+            transition: .4s;
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent, #7c3aed);
+        }
+        input:checked + .premium-slider:before {
+            transform: translateX(26px);
+            background-color: #fbbf24;
+            box-shadow: 0 0 15px #fbbf24;
+        }
+        .premium-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            align-items: stretch;
+        }
+        .premium-card {
+            background: var(--card-bg, rgba(20,20,35,0.7));
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px 30px;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+        }
+        .premium-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent, #7c3aed);
+            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+        }
+        .premium-card.popular {
+            border: 2px solid #fbbf24;
+            box-shadow: 0 15px 35px rgba(251, 191, 36, 0.15);
+        }
+        .premium-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 20px; right: -35px;
+            background: #fbbf24;
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 35px;
+            transform: rotate(45deg);
+            letter-spacing: 1px;
+        }
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(124,58,237,0.1);
+            color: var(--accent, #7c3aed);
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            width: fit-content;
+        }
+        .premium-card.popular .premium-badge {
+            background: rgba(251,191,36,0.15);
+            color: #fbbf24;
+        }
+        .premium-plan-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary, #fff);
+        }
+        .premium-price-wrap {
+            margin: 20px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .premium-price {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--text-primary, #fff);
+            transition: opacity 0.2s;
+        }
+        .premium-period {
+            font-size: 14px;
+            color: var(--text-secondary, #a0aec0);
+        }
+        .premium-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .premium-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-secondary, #a0aec0);
+        }
+        .premium-features li i { color: #10b981; font-size: 12px; }
+        .premium-features li.disabled {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        .premium-features li.disabled i { color: #ef4444; }
+        .btn-premium-action {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-premium-action.secondary {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary, #fff);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-premium-action.secondary:hover { background: rgba(255,255,255,0.1); }
+        .btn-premium-action.primary {
+            background: var(--accent, #7c3aed);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+        .btn-premium-action.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+        }
+        .btn-premium-action.amber {
+            background: #fbbf24;
+            color: #000;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+        }
+        .btn-premium-action.amber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.5);
+        }
+
+        /* ═══════════════════════════════════════════════════
+           PREMIUM TOOLS SECTION — Hidden by default
+        ═══════════════════════════════════════════════════ */
+        .premium-tools-section {
+            display: none;
+            padding: 80px 20px 60px;
+            position: relative;
+            z-index: 10;
+        }
+        .premium-tools-section.unlocked {
+            display: block !important;
+            animation: premiumReveal 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+        }
+        @keyframes premiumReveal {
+            from { opacity: 0; transform: translateY(40px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .premium-tools-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .premium-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Premium Tool Card */
+        .premium-tool-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            background: var(--card-bg, rgba(20,20,35,0.7));
+            border: 1px solid rgba(251,191,36,0.15);
+            border-radius: 20px;
+            padding: 30px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            cursor: pointer;
+        }
+        .premium-tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+        }
+        .premium-tool-card:hover {
+            transform: translateY(-6px);
+            border-color: #fbbf24;
+            box-shadow: 0 16px 40px rgba(251, 191, 36, 0.15);
+        }
+        .premium-tool-card .premium-crown {
+            position: absolute;
+            top: 14px; right: 16px;
+            font-size: 18px;
+            filter: drop-shadow(0 0 6px rgba(251,191,36,0.6));
+        }
+        .premium-tool-icon {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+        .premium-tool-icon.gold {
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            box-shadow: 0 4px 15px rgba(251,191,36,0.3);
+        }
+        .premium-tool-icon.silver {
+            background: linear-gradient(135deg, #94a3b8, #64748b);
+            box-shadow: 0 4px 15px rgba(148,163,184,0.3);
+        }
+        .premium-tool-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary, #fff);
+        }
+        .premium-tool-desc {
+            font-size: 13px;
+            color: var(--text-secondary, #a0aec0);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+        .premium-tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+        .premium-tool-tags .ptag {
+            padding: 3px 10px;
+            background: rgba(251,191,36,0.1);
+            color: #fbbf24;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .premium-tool-cta {
+            font-size: 13px;
+            font-weight: 600;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Coming Soon card variant */
+        .premium-tool-card.coming-soon {
+            opacity: 0.55;
+            cursor: default;
+            border-style: dashed;
+            border-color: rgba(255,255,255,0.1);
+        }
+        .premium-tool-card.coming-soon::before {
+            background: linear-gradient(90deg, rgba(148,163,184,0.4), rgba(100,116,139,0.4));
+        }
+        .premium-tool-card.coming-soon:hover {
+            transform: none;
+            border-color: rgba(255,255,255,0.15);
+            box-shadow: none;
+        }
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 12px;
+            background: rgba(255,255,255,0.06);
+            color: var(--text-secondary, #a0aec0);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ═══════════════════════════════════════════════════
+           PREMIUM ACTIVE — Global Premium Glow State
+        ═══════════════════════════════════════════════════ */
+        html.premium-active .navbar {
+            border-bottom: 1px solid rgba(251,191,36,0.15) !important;
+        }
+        html.premium-active .hero-badge {
+            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(217,119,6,0.1)) !important;
+            border-color: rgba(251,191,36,0.3) !important;
+        }
+        html.premium-active .hero-badge .dot {
+            background: #fbbf24 !important;
+            box-shadow: 0 0 8px #fbbf24 !important;
+        }
+        html.premium-active .tool-card:hover {
+            box-shadow: 0 16px 40px rgba(251,191,36,0.08) !important;
+        }
+        html.premium-active .stats-section {
+            border-top: 1px solid rgba(251,191,36,0.1);
+            border-bottom: 1px solid rgba(251,191,36,0.1);
+        }
+        html.premium-active .cta-section .cta-glow {
+            background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%) !important;
+        }
+        html.premium-active .scroll-top {
+            background: linear-gradient(135deg, #fbbf24, #d97706) !important;
+            color: #000 !important;
+        }
+        html.premium-active .ai-fab {
+            box-shadow: 0 4px 20px rgba(251,191,36,0.3) !important;
+        }
+
+        /* Premium Success Toast */
+        .premium-toast {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            z-index: 100000;
+            background: linear-gradient(135deg, #fbbf24, #d97706);
+            color: #000;
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 12px 40px rgba(251,191,36,0.5);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            white-space: nowrap;
+        }
+        .premium-toast.show {
+            display: block;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .premium-toast.downgrade {
+            background: linear-gradient(135deg, #64748b, #475569) !important;
+            color: #fff !important;
+            box-shadow: 0 12px 40px rgba(100,116,139,0.5) !important;
         }
     </style>
 </head>
@@ -249,28 +728,25 @@
     <div class="theme-transition-overlay" id="themeOverlay">
         <div class="transition-text" id="transitionText"></div>
     </div>
-
     <div class="scanlines"></div>
-
     <div class="bg-shapes">
         <div class="bg-shape bg-shape-1"></div>
         <div class="bg-shape bg-shape-2"></div>
         <div class="bg-shape bg-shape-3"></div>
     </div>
-
     <canvas id="matrix-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
 
+    <!-- Premium Success Toast -->
+    <div class="premium-toast" id="premiumToast">
+        👑 Premium Activated — Welcome to the elite tier!
+    </div>
 
     <!-- ═══════════════════════════════════════════════════════
-         AUTH SCREEN (Login / Sign Up)
-         First screen shown on load. Frontend-only for now.
-         Styled by auth.css · Logic in auth.js
+         AUTH SCREEN
     ═══════════════════════════════════════════════════════ -->
     <div class="auth-screen" id="authScreen">
         <div class="auth-container">
-
-            <!-- Brand -->
             <a href="#" class="auth-brand" onclick="event.preventDefault();">
                 <div class="nav-logo-icon">
                     <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
@@ -283,396 +759,249 @@
                 </div>
                 <span class="nav-logo-text">CryptoKit</span>
             </a>
-
             <div class="auth-card">
-
-                <!-- ══════════════════════════
-                     LOGIN PANEL
-                ══════════════════════════ -->
+                <!-- LOGIN PANEL -->
                 <div class="auth-panel active" id="loginPanel">
-
                     <div class="auth-panel-head">
                         <div class="section-badge">🔐 Welcome Back</div>
                         <h1 class="auth-title">Log in to <span class="gradient-text">CryptoKit</span></h1>
                         <p class="auth-subtitle">Access your cryptography toolkit and saved tools.</p>
                     </div>
-
                     <div class="auth-banner" id="loginBanner"></div>
-
                     <form class="auth-form" id="loginForm" novalidate onsubmit="return handleLogin(event);">
-
                         <div class="auth-field">
                             <label class="auth-label" for="loginEmail">Email</label>
                             <div class="auth-input-wrap">
                                 <i class="fas fa-envelope auth-input-icon"></i>
-                                <input type="text" class="auth-input" id="loginEmail"
-                                       placeholder="you@example.com" autocomplete="username">
+                                <input type="text" class="auth-input" id="loginEmail" placeholder="you@example.com" autocomplete="username">
                             </div>
                             <span class="auth-error" id="loginEmailError"></span>
                         </div>
-
                         <div class="auth-field">
                             <label class="auth-label" for="loginPassword">Password</label>
                             <div class="auth-input-wrap">
                                 <i class="fas fa-lock auth-input-icon"></i>
-                                <input type="password" class="auth-input" id="loginPassword"
-                                       placeholder="Enter your password" autocomplete="current-password">
-                                <button type="button" class="auth-toggle-eye" id="loginPasswordToggle"
-                                        onclick="togglePasswordVisibility('loginPassword', this);"
-                                        aria-label="Show password">
+                                <input type="password" class="auth-input" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+                                <button type="button" class="auth-toggle-eye" id="loginPasswordToggle" onclick="togglePasswordVisibility('loginPassword', this);" aria-label="Show password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                             <span class="auth-error" id="loginPasswordError"></span>
                         </div>
-
                         <div class="auth-row-between">
                             <label class="auth-checkbox">
                                 <input type="checkbox" id="rememberMe">
                                 <span class="auth-checkbox-box"></span>
                                 <span class="auth-checkbox-label">Remember me</span>
                             </label>
-                            <a href="#" class="auth-link-muted"
-                               onclick="event.preventDefault();handleForgotPassword();">
-                                Forgot password?
-                            </a>
+                            <a href="#" class="auth-link-muted" onclick="event.preventDefault();handleForgotPassword();">Forgot password?</a>
                         </div>
-
                         <button type="submit" class="btn-primary auth-submit-btn">
                             <i class="fas fa-arrow-right-to-bracket"></i> Login
                         </button>
-
                     </form>
-
                     <p class="auth-switch-text">
                         Don't have an account?
                         <a href="#" onclick="event.preventDefault();switchAuthPanel('signup');">Sign Up</a>
                     </p>
-
                 </div>
 
-                <!-- ══════════════════════════
-                     SIGN UP PANEL
-                ══════════════════════════ -->
+                <!-- SIGN UP PANEL -->
                 <div class="auth-panel" id="signupPanel">
-
                     <div class="auth-panel-head">
                         <div class="section-badge">✨ Get Started</div>
                         <h1 class="auth-title">Create your <span class="gradient-text">account</span></h1>
                         <p class="auth-subtitle">Join CryptoKit — free, open source and privacy-first.</p>
                     </div>
-
                     <div class="auth-banner" id="signupBanner"></div>
-
                     <form class="auth-form" id="signupForm" novalidate onsubmit="return handleSignup(event);">
-
                         <div class="auth-field">
                             <label class="auth-label" for="signupName">Name</label>
                             <div class="auth-input-wrap">
                                 <i class="fas fa-user auth-input-icon"></i>
-                                <input type="text" class="auth-input" id="signupName"
-                                       placeholder="Your full name" autocomplete="name">
+                                <input type="text" class="auth-input" id="signupName" placeholder="Your full name" autocomplete="name">
                             </div>
                             <span class="auth-error" id="signupNameError"></span>
                         </div>
-
                         <div class="auth-field">
                             <label class="auth-label" for="signupEmail">Email</label>
                             <div class="auth-input-wrap">
                                 <i class="fas fa-envelope auth-input-icon"></i>
-                                <input type="text" class="auth-input" id="signupEmail"
-                                       placeholder="you@example.com" autocomplete="email">
+                                <input type="text" class="auth-input" id="signupEmail" placeholder="you@example.com" autocomplete="email">
                             </div>
                             <span class="auth-error" id="signupEmailError"></span>
                         </div>
-
                         <div class="auth-field">
                             <label class="auth-label" for="signupPassword">Password</label>
                             <div class="auth-input-wrap">
                                 <i class="fas fa-lock auth-input-icon"></i>
-                                <input type="password" class="auth-input" id="signupPassword"
-                                       placeholder="Create a password" autocomplete="new-password">
-                                <button type="button" class="auth-toggle-eye" id="signupPasswordToggle"
-                                        onclick="togglePasswordVisibility('signupPassword', this);"
-                                        aria-label="Show password">
+                                <input type="password" class="auth-input" id="signupPassword" placeholder="Create a password" autocomplete="new-password">
+                                <button type="button" class="auth-toggle-eye" id="signupPasswordToggle" onclick="togglePasswordVisibility('signupPassword', this);" aria-label="Show password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                             <span class="auth-error" id="signupPasswordError"></span>
                         </div>
-
                         <div class="auth-field">
                             <label class="auth-label" for="signupConfirmPassword">Confirm Password</label>
                             <div class="auth-input-wrap">
                                 <i class="fas fa-lock auth-input-icon"></i>
-                                <input type="password" class="auth-input" id="signupConfirmPassword"
-                                       placeholder="Re-enter your password" autocomplete="new-password">
-                                <button type="button" class="auth-toggle-eye" id="signupConfirmPasswordToggle"
-                                        onclick="togglePasswordVisibility('signupConfirmPassword', this);"
-                                        aria-label="Show password">
+                                <input type="password" class="auth-input" id="signupConfirmPassword" placeholder="Re-enter your password" autocomplete="new-password">
+                                <button type="button" class="auth-toggle-eye" id="signupConfirmPasswordToggle" onclick="togglePasswordVisibility('signupConfirmPassword', this);" aria-label="Show password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                             <span class="auth-error" id="signupConfirmPasswordError"></span>
                         </div>
-
                         <button type="submit" class="btn-primary auth-submit-btn">
                             <i class="fas fa-user-plus"></i> Sign Up
                         </button>
-
                     </form>
-
                     <p class="auth-switch-text">
                         Already have an account?
                         <a href="#" onclick="event.preventDefault();switchAuthPanel('login');">Login</a>
                     </p>
-
                 </div>
-
             </div>
-
             <p class="auth-footnote">
                 <i class="fas fa-circle-info"></i>
                 Frontend preview only — no data is stored or sent anywhere yet.
             </p>
-
         </div>
     </div>
 
 
     <!-- ═══════════════════════════════════════════════════════
          MAIN WEBSITE UI
-         Hidden until login/signup is completed.
-         auth.js toggles visibility between authScreen & mainApp.
     ═══════════════════════════════════════════════════════ -->
     <div id="mainApp" class="main-app-hidden">
 
-
-    <!-- ═══════════════════════════════════
-         NAVBAR
-    ═══════════════════════════════════ -->
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
-
         <a href="#home" class="nav-logo">
             <div class="nav-logo-icon">
                 <svg viewBox="0 0 40 40" width="28" height="28" fill="none">
-                    <rect x="2" y="2" width="36" height="36" rx="8"
-                          stroke="currentColor" stroke-width="2.5"/>
-                    <path d="M20 8L20 14"
-                          stroke="currentColor" stroke-width="2.5"
-                          stroke-linecap="round"/>
-                    <rect x="12" y="14" width="16" height="18" rx="3"
-                          stroke="currentColor" stroke-width="2.5"/>
-                    <circle cx="20" cy="23" r="3"
-                            stroke="currentColor" stroke-width="2"/>
-                    <path d="M20 26L20 28"
-                          stroke="currentColor" stroke-width="2"
-                          stroke-linecap="round"/>
+                    <rect x="2" y="2" width="36" height="36" rx="8" stroke="currentColor" stroke-width="2.5"/>
+                    <path d="M20 8L20 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                    <rect x="12" y="14" width="16" height="18" rx="3" stroke="currentColor" stroke-width="2.5"/>
+                    <circle cx="20" cy="23" r="3" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20 26L20 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
             </div>
             <span class="nav-logo-text">CryptoKit</span>
+            <span class="nav-premium-indicator" id="navPremiumBadge">👑 PRO</span>
         </a>
 
-
-        <!-- NAVIGATION LINKS -->
         <ul class="nav-links">
             <li><a href="#tools">Tools</a></li>
             <li><a href="#how">How it Works</a></li>
+            <li><a href="#premium">Pricing</a></li>
             <li><a href="team.html">Team</a></li>
-            <li>
-                <a href="developer.html">
-                    <i class="fas fa-terminal"></i>
-                    Terminal
-                </a>
-            </li>
+            <li><a href="developer.html"><i class="fas fa-terminal"></i> Terminal</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#feedback">Feedback</a></li>
-            <li>
-                <a href="#"
-                   onclick="event.preventDefault();if(typeof toggleChat==='function')toggleChat();">
-                    Assistant
-                </a>
-            </li>
+            <li><a href="#" onclick="event.preventDefault();if(typeof toggleChat==='function')toggleChat();">Assistant</a></li>
         </ul>
 
-
-        <!-- RIGHT NAV ACTIONS -->
         <div class="nav-actions">
-
-            <!-- MODE DROPDOWN -->
+            <!-- MODE SELECTOR -->
             <div class="mode-selector" id="modeSelector">
-
                 <button class="mode-btn" onclick="if(typeof toggleModeDropdown==='function')toggleModeDropdown();">
                     <span id="modeIcon">☀️</span>
                     <span class="mode-label" id="modeLabel">Normal</span>
                     <i class="fas fa-chevron-down mode-arrow" id="modeArrow"></i>
                 </button>
-
                 <div class="mode-dropdown" id="modeDropdown">
-
-                    <!-- NORMAL MODE -->
                     <div class="mode-option" onclick="if(typeof selectMode==='function')selectMode('normal');">
                         <span class="mode-option-icon">☀️</span>
-                        <div>
-                            <div class="mode-option-title">Normal Mode</div>
-                            <div class="mode-option-desc">Clean &amp; professional look</div>
-                        </div>
+                        <div><div class="mode-option-title">Normal Mode</div><div class="mode-option-desc">Clean &amp; professional look</div></div>
                         <i class="fas fa-check mode-check" id="checkNormal"></i>
                     </div>
-
-                    <!-- HACKER MODE -->
                     <div class="mode-option" onclick="if(typeof selectMode==='function')selectMode('hacker');">
                         <span class="mode-option-icon">💀</span>
-                        <div>
-                            <div class="mode-option-title">Hacker Mode</div>
-                            <div class="mode-option-desc">Matrix &amp; hacker vibes</div>
-                        </div>
+                        <div><div class="mode-option-title">Hacker Mode</div><div class="mode-option-desc">Matrix &amp; hacker vibes</div></div>
                         <i class="fas fa-check mode-check" id="checkHacker" style="display:none;"></i>
                     </div>
-
-                    <!-- DEVELOPER MODE -->
                     <div class="mode-option" onclick="window.location.href='developer.html';">
                         <span class="mode-option-icon">💻</span>
-                        <div>
-                            <div class="mode-option-title">Terminal Mode</div>
-                            <div class="mode-option-desc">Interactive crypto terminal</div>
-                        </div>
+                        <div><div class="mode-option-title">Terminal Mode</div><div class="mode-option-desc">Interactive crypto terminal</div></div>
                         <i class="fas fa-terminal mode-check" style="display:none;"></i>
                     </div>
-
                 </div>
             </div>
 
-            <!-- LOGIN (hidden once authenticated) -->
-            <button class="btn-nav-login" id="navLoginBtn"
-                    onclick="handleLogout();">
-                Login
+            <!-- BACK TO NORMAL MODE (Premium Downgrade) — shown only when premium active -->
+            <button class="btn-back-normal" id="backToNormalBtn" onclick="deactivatePremiumMode();" title="Downgrade to free version">
+                <i class="fas fa-rotate-left"></i> Go back to normal mode
             </button>
 
-            <!-- LOGOUT (shown once authenticated) -->
-            <button class="btn-nav-login" id="navLogoutBtn" style="display:none;"
-                    onclick="handleLogout();">
-                <i class="fas fa-arrow-right-from-bracket"></i> Logout
+            <!-- SINGLE AUTH TOGGLE BUTTON (Login/Logout dynamic) -->
+            <button class="btn-nav-auth" id="navAuthBtn" onclick="handleAuthToggle();">
+                <i class="fas fa-user"></i> Login
             </button>
 
-            <!-- GET STARTED -->
-            <button class="btn-nav-cta">🚀 Get Started</button>
-
+            <!-- GO PREMIUM CTA -->
+            <a href="#premium" class="btn-nav-cta" id="navPremiumBtn">👑 Go Premium</a>
         </div>
 
-        <!-- HAMBURGER -->
         <div class="hamburger" onclick="if(typeof toggleMenu==='function')toggleMenu();">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
-
     </nav>
 
-
-    <!-- ═══════════════════════════════════
-         MOBILE MENU
-    ═══════════════════════════════════ -->
+    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
-
+        <a href="#premium" onclick="if(typeof toggleMenu==='function')toggleMenu();" style="color: #fbbf24 !important; font-weight: bold; border-bottom: 1px solid rgba(251,191,36,0.2) !important;">👑 Go Premium</a>
+        <a href="#" id="mobileBackToNormal" onclick="event.preventDefault();deactivatePremiumMode();if(typeof toggleMenu==='function')toggleMenu();" style="display:none;color:#ef4444 !important;">🔄 Go back to normal mode</a>
         <a href="#tools" onclick="if(typeof toggleMenu==='function')toggleMenu();">🔧 Tools</a>
         <a href="#how" onclick="if(typeof toggleMenu==='function')toggleMenu();">📖 How it Works</a>
         <a href="team.html" onclick="if(typeof toggleMenu==='function')toggleMenu();">👥 Team</a>
         <a href="#about" onclick="if(typeof toggleMenu==='function')toggleMenu();">ℹ️ About</a>
         <a href="#feedback" onclick="if(typeof toggleMenu==='function')toggleMenu();">💬 Feedback</a>
-        <a href="#"
-           onclick="event.preventDefault();if(typeof toggleMenu==='function')toggleMenu();if(typeof toggleChat==='function')toggleChat();">
-            🤖 Assistant
-        </a>
-        <a href="#" onclick="event.preventDefault();handleLogout();">🚪 Logout</a>
-
-        <!-- ── THEME SWITCHER with Submenu ── -->
-        <a href="#"
-           onclick="event.preventDefault();toggleMobileThemeMenu(this);"
-           class="mobile-theme-toggle-btn"
-           id="mobileThemeToggleLink">
+        <a href="#" onclick="event.preventDefault();if(typeof toggleMenu==='function')toggleMenu();if(typeof toggleChat==='function')toggleChat();">🤖 Assistant</a>
+        <a href="#" id="mobileAuthBtn" onclick="event.preventDefault();handleAuthToggle();">👤 Login</a>
+        <a href="#" onclick="event.preventDefault();toggleMobileThemeMenu(this);" class="mobile-theme-toggle-btn" id="mobileThemeToggleLink">
             🎨 Switch Theme
             <i class="fas fa-chevron-down theme-arrow" id="mobileThemeArrow"></i>
         </a>
-
         <div class="mobile-theme-submenu" id="mobileThemeSubmenu">
-
-            <a href="#"
-               id="mobileNormalOption"
-               onclick="event.preventDefault();mobileSwitchTheme('normal');">
-                ☀️ Normal Mode
-                <span class="theme-active-dot" id="normalDot" style="display:none;"></span>
-            </a>
-
-            <a href="#"
-               id="mobileHackerOption"
-               onclick="event.preventDefault();mobileSwitchTheme('hacker');">
-                💀 Hacker Mode
-                <span class="theme-active-dot" id="hackerDot" style="display:none;"></span>
-            </a>
-
-            <a href="#"
-               id="mobileDevOption"
-               onclick="event.preventDefault();showMobileDevPopup();">
-                💻 Terminal Mode
-            </a>
-
+            <a href="#" id="mobileNormalOption" onclick="event.preventDefault();mobileSwitchTheme('normal');">☀️ Normal Mode <span class="theme-active-dot" id="normalDot" style="display:none;"></span></a>
+            <a href="#" id="mobileHackerOption" onclick="event.preventDefault();mobileSwitchTheme('hacker');">💀 Hacker Mode <span class="theme-active-dot" id="hackerDot" style="display:none;"></span></a>
+            <a href="#" id="mobileDevOption" onclick="event.preventDefault();showMobileDevPopup();">💻 Terminal Mode</a>
         </div>
-
     </div>
 
-    <!-- ═══════════════════════════════════
-         MOBILE TERMINAL MODE POPUP
-    ═══════════════════════════════════ -->
+    <!-- MOBILE TERMINAL MODE POPUP -->
     <div class="mobile-dev-popup" id="mobileDevPopup">
         <div class="mobile-dev-popup-box">
             <span class="mobile-dev-popup-icon">🖥️</span>
             <div class="mobile-dev-popup-title">Desktop Only Feature</div>
             <p class="mobile-dev-popup-msg">
-                <strong>Terminal Mode</strong> is optimized for larger screens
-                and requires a desktop or laptop for the best experience.<br><br>
-                Please visit CryptoKit on a <strong>desktop or laptop</strong>
-                to access the interactive crypto terminal.
+                <strong>Terminal Mode</strong> is optimized for larger screens and requires a desktop or laptop for the best experience.<br><br>
+                Please visit CryptoKit on a <strong>desktop or laptop</strong> to access the interactive crypto terminal.
             </p>
-            <button class="mobile-dev-popup-close" id="mobileDevPopupCloseBtn">
-                Got it! 👍
-            </button>
+            <button class="mobile-dev-popup-close" id="mobileDevPopupCloseBtn">Got it! 👍</button>
         </div>
     </div>
 
-    <!-- ═══════════════════════════════════
-         HERO SECTION
-    ═══════════════════════════════════ -->
+    <!-- HERO SECTION -->
     <section class="hero" id="home">
         <div class="hero-container">
-
-            <!-- Hero Left -->
             <div class="hero-left">
                 <div class="hero-badge">
                     <span class="dot"></span>
                     <span>v1.0 Now Live — Open Source &amp; Free</span>
                 </div>
-
                 <h1 class="hero-title glitch" data-text="Your Complete Cryptography Toolkit">
-                    Your Complete
-                    <span class="gradient-text">Cryptography</span>
-                    Toolkit
+                    Your Complete <span class="gradient-text">Cryptography</span> Toolkit
                 </h1>
-
                 <p class="hero-subtitle">
-                    Encrypt, hash, verify and secure your data with professional-grade
-                    cryptographic tools — all in one place. Fast, private, and open source.
+                    Encrypt, hash, verify and secure your data with professional-grade cryptographic tools — all in one place. Fast, private, and open source.
                 </p>
-
                 <div class="hero-buttons">
-                    <a href="team.html" class="btn-primary">
-                        <i class="fas fa-users"></i> Our Team
-                    </a>
-                    <a href="#demo" class="btn-secondary">
-                        <i class="fas fa-play"></i> Live Demo
-                    </a>
+                    <a href="#premium" class="btn-primary"><i class="fas fa-crown"></i> Go Premium</a>
+                    <a href="#demo" class="btn-secondary"><i class="fas fa-play"></i> Live Demo</a>
                 </div>
-
                 <div class="hero-trust">
                     <div class="trust-item"><i class="fas fa-check-circle"></i> No data stored</div>
                     <div class="trust-item"><i class="fas fa-check-circle"></i> Client-side</div>
@@ -680,8 +1009,6 @@
                     <div class="trust-item"><i class="fas fa-check-circle"></i> Free forever</div>
                 </div>
             </div>
-
-            <!-- Hero Terminal with OS Switcher -->
             <div class="hero-terminal">
                 <div class="terminal-header">
                     <div class="terminal-dots">
@@ -690,257 +1017,234 @@
                         <div class="terminal-dot green"></div>
                     </div>
                     <span class="terminal-title" id="terminalTitle">cryptokit ~ zsh</span>
-
                     <div class="terminal-os-switch">
-                        <button class="os-btn active" id="osMac" onclick="if(typeof switchTermOS==='function')switchTermOS('mac');" title="macOS Terminal">
-                            <i class="fab fa-apple"></i>
-                        </button>
-                        <button class="os-btn" id="osWin" onclick="if(typeof switchTermOS==='function')switchTermOS('win');" title="Windows CMD">
-                            <i class="fab fa-windows"></i>
-                        </button>
+                        <button class="os-btn active" id="osMac" onclick="if(typeof switchTermOS==='function')switchTermOS('mac');" title="macOS Terminal"><i class="fab fa-apple"></i></button>
+                        <button class="os-btn" id="osWin" onclick="if(typeof switchTermOS==='function')switchTermOS('win');" title="Windows CMD"><i class="fab fa-windows"></i></button>
                     </div>
                 </div>
                 <div class="terminal-body" id="terminalBody"></div>
             </div>
-
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════
-         LIVE DEMO SECTION
-    ═══════════════════════════════════ -->
+    <!-- LIVE DEMO SECTION -->
     <section class="live-demo" id="demo">
         <div class="demo-container">
-
             <div class="demo-header">
                 <h2>⚡ Try It <span class="gradient-text">Right Now</span></h2>
                 <p>No sign up needed — experience the tools instantly</p>
             </div>
-
             <div class="demo-tabs">
                 <button class="demo-tab active" onclick="if(typeof setDemoTab==='function')setDemoTab(this,'hash');"># Hash Generator</button>
                 <button class="demo-tab" onclick="if(typeof setDemoTab==='function')setDemoTab(this,'base64');">⇄ Base64 Encode</button>
                 <button class="demo-tab" onclick="if(typeof setDemoTab==='function')setDemoTab(this,'password');">🔑 Password Check</button>
             </div>
-
             <div class="demo-input-area">
-                <textarea
-                    class="demo-input"
-                    id="demoInput"
-                    placeholder="Type anything here to see it in action..."
-                    oninput="if(typeof runDemo==='function')runDemo();"
-                ></textarea>
+                <textarea class="demo-input" id="demoInput" placeholder="Type anything here to see it in action..." oninput="if(typeof runDemo==='function')runDemo();"></textarea>
                 <div class="demo-controls">
                     <select class="demo-select" id="demoAlgo" onchange="if(typeof runDemo==='function')runDemo();">
                         <option value="sha256">SHA-256</option>
                         <option value="sha512">SHA-512</option>
                         <option value="md5">MD5 (weak)</option>
                     </select>
-                    <button class="btn-primary" onclick="if(typeof runDemo==='function')runDemo();" style="padding:10px 18px;font-size:13px;">
-                        Generate
-                    </button>
+                    <button class="btn-primary" onclick="if(typeof runDemo==='function')runDemo();" style="padding:10px 18px;font-size:13px;">Generate</button>
                 </div>
             </div>
-
             <div class="demo-result" id="demoResult">
                 <span class="demo-result-placeholder">Your result will appear here...</span>
             </div>
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════
-         TOOLS SECTION
-    ═══════════════════════════════════ -->
+    <!-- TOOLS SECTION -->
     <section class="tools-section" id="tools">
         <div class="tools-header">
             <div class="section-badge">🔧 Our Tools</div>
-            <h2 class="section-title">
-                Powerful <span class="gradient-text">Cryptography Tools</span>
-            </h2>
-            <p class="section-subtitle">
-                Everything you need for data security in one place.
-                Professional grade, completely free.
-            </p>
+            <h2 class="section-title">Powerful <span class="gradient-text">Cryptography Tools</span></h2>
+            <p class="section-subtitle">Everything you need for data security in one place. Professional grade, completely free.</p>
         </div>
-
         <div class="tools-grid">
-
-            <!-- Tool 1: RSA -->
             <a href="rsa-keytool.html" class="tool-card" id="tool-rsa">
                 <div class="tool-icon purple"><i class="fas fa-key"></i></div>
                 <div class="tool-name">RSA Key Generator</div>
-                <div class="tool-desc">
-                    Generate secure RSA key pairs with configurable sizes.
-                    Analyze key strength and export in PEM format.
-                </div>
-                <div class="tool-tags">
-                    <span class="tag">RSA-2048</span>
-                    <span class="tag">RSA-4096</span>
-                    <span class="tag">PEM</span>
-                </div>
+                <div class="tool-desc">Generate secure RSA key pairs with configurable sizes. Analyze key strength and export in PEM format.</div>
+                <div class="tool-tags"><span class="tag">RSA-2048</span><span class="tag">RSA-4096</span><span class="tag">PEM</span></div>
                 <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
             </a>
-
-            <!-- Tool 2: File Integrity -->
             <a href="file-integrity.html" class="tool-card" id="tool-integrity">
                 <div class="tool-icon blue"><i class="fas fa-fingerprint"></i></div>
                 <div class="tool-name">File Integrity Checker</div>
-                <div class="tool-desc">
-                    Verify file authenticity by generating and comparing
-                    cryptographic hashes. Detect any tampering instantly.
-                </div>
-                <div class="tool-tags">
-                    <span class="tag">SHA-256</span>
-                    <span class="tag">SHA-512</span>
-                    <span class="tag">MD5</span>
-                </div>
+                <div class="tool-desc">Verify file authenticity by generating and comparing cryptographic hashes. Detect any tampering instantly.</div>
+                <div class="tool-tags"><span class="tag">SHA-256</span><span class="tag">SHA-512</span><span class="tag">MD5</span></div>
                 <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
             </a>
-
-            <!-- Tool 3: Hash Generator -->
             <a href="hash-generator.html" class="tool-card" id="tool-hash">
                 <div class="tool-icon green"><i class="fas fa-barcode"></i></div>
                 <div class="tool-name">Hash Generator</div>
-                <div class="tool-desc">
-                    Generate cryptographic hashes for text and files
-                    using multiple algorithms simultaneously.
-                </div>
-                <div class="tool-tags">
-                    <span class="tag">MD5</span>
-                    <span class="tag">SHA-1</span>
-                    <span class="tag">BLAKE2</span>
-                </div>
+                <div class="tool-desc">Generate cryptographic hashes for text and files using multiple algorithms simultaneously.</div>
+                <div class="tool-tags"><span class="tag">MD5</span><span class="tag">SHA-1</span><span class="tag">BLAKE2</span></div>
                 <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
             </a>
-
-            <!-- Tool 4: Encrypt/Decrypt -->
             <a href="text-encrypt.html" class="tool-card" id="tool-encrypt">
                 <div class="tool-icon red"><i class="fas fa-user-lock"></i></div>
                 <div class="tool-name">Text Encrypt / Decrypt</div>
-                <div class="tool-desc">
-                    Encrypt and decrypt messages using AES-256 or RSA.
-                    Secure your sensitive information with one click.
-                </div>
-                <div class="tool-tags">
-                    <span class="tag">AES-256</span>
-                    <span class="tag">RSA</span>
-                    <span class="tag">CBC</span>
-                </div>
+                <div class="tool-desc">Encrypt and decrypt messages using AES-256 or RSA. Secure your sensitive information with one click.</div>
+                <div class="tool-tags"><span class="tag">AES-256</span><span class="tag">RSA</span><span class="tag">CBC</span></div>
                 <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
             </a>
-
-            <!-- Tool 5: Digital Signature -->
             <a href="digital-signature.html" class="tool-card" id="tool-signature">
                 <div class="tool-icon yellow"><i class="fas fa-file-contract"></i></div>
                 <div class="tool-name">Digital Signature</div>
-                <div class="tool-desc">
-                    Sign and verify documents digitally. Ensure
-                    authenticity and non-repudiation of your data.
-                </div>
-                <div class="tool-tags">
-                    <span class="tag">RSA-PSS</span>
-                    <span class="tag">ECDSA</span>
-                    <span class="tag">Verify</span>
-                </div>
+                <div class="tool-desc">Sign and verify documents digitally. Ensure authenticity and non-repudiation of your data.</div>
+                <div class="tool-tags"><span class="tag">RSA-PSS</span><span class="tag">ECDSA</span><span class="tag">Verify</span></div>
                 <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
             </a>
-
-            <!-- Tool 6: Password -->
             <a href="password-generator.html" class="tool-card" id="tool-password">
                 <div class="tool-icon pink"><i class="fas fa-unlock-keyhole"></i></div>
                 <div class="tool-name">Password Tools</div>
-                <div class="tool-desc">
-                    Generate cryptographically secure passwords and
-                    analyze strength with entropy calculations.
-                </div>
-                <div class="tool-tags">
-                    <span class="tag">Entropy</span>
-                    <span class="tag">CSPRNG</span>
-                    <span class="tag">Strength</span>
-                </div>
+                <div class="tool-desc">Generate cryptographically secure passwords and analyze strength with entropy calculations.</div>
+                <div class="tool-tags"><span class="tag">Entropy</span><span class="tag">CSPRNG</span><span class="tag">Strength</span></div>
                 <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
             </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         PREMIUM TOOLS SECTION — Hidden until activated
+    ═══════════════════════════════════════════════════ -->
+    <section class="premium-tools-section" id="premiumToolsSection">
+        <div class="premium-tools-header">
+            <div class="section-badge" style="background: rgba(251,191,36,0.1); color: #fbbf24;">👑 Premium Tools</div>
+            <h2 class="section-title">
+                Exclusive <span class="gradient-text">Premium Arsenal</span>
+            </h2>
+            <p class="section-subtitle">Advanced tools unlocked with your premium subscription. More dropping soon.</p>
+        </div>
+
+        <div class="premium-tools-grid">
+
+            <!-- Premium Tool 1: Crypto Security Scanner (ACTIVE) -->
+            <a href="crypto-scanner.html" class="premium-tool-card" id="ptool-scanner">
+                <span class="premium-crown">👑</span>
+                <div class="premium-tool-icon gold"><i class="fas fa-shield-virus"></i></div>
+                <div class="premium-tool-name">Crypto Security Scanner</div>
+                <div class="premium-tool-desc">
+                    Deep-scan your cryptographic implementations for vulnerabilities, weak ciphers, deprecated protocols, and configuration flaws. Get actionable security recommendations instantly.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag">Vuln Scan</span>
+                    <span class="ptag">TLS Audit</span>
+                    <span class="ptag">Cipher Check</span>
+                    <span class="ptag">NIST</span>
+                </div>
+                <div class="premium-tool-cta">Launch Scanner <i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Premium Tool 2: Coming Soon -->
+            <div class="premium-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-network-wired"></i></div>
+                <div class="premium-tool-name">Quantum Key Exchange</div>
+                <div class="premium-tool-desc">
+                    Simulate post-quantum key exchange protocols including Kyber and NTRU. Test quantum-resistant handshakes.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Kyber</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">NTRU</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
+
+            <!-- Premium Tool 3: Coming Soon -->
+            <div class="premium-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-certificate"></i></div>
+                <div class="premium-tool-name">Certificate Analyzer</div>
+                <div class="premium-tool-desc">
+                    Parse, validate, and inspect X.509 certificates. Check chain of trust, expiry, and cipher suites.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">X.509</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">SSL/TLS</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
+
+            <!-- Premium Tool 4: Coming Soon -->
+            <div class="premium-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-code-compare"></i></div>
+                <div class="premium-tool-name">Steganography Suite</div>
+                <div class="premium-tool-desc">
+                    Hide encrypted messages inside images, audio, and documents. Extract hidden payloads with detection tools.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Images</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Audio</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
+
+            <!-- Premium Tool 5: Coming Soon -->
+            <div class="premium-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-vault"></i></div>
+                <div class="premium-tool-name">Secure Vault Manager</div>
+                <div class="premium-tool-desc">
+                    Client-side encrypted vault for sensitive credentials. Zero-knowledge architecture with AES-256-GCM.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Vault</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">ZK</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
+
+            <!-- Premium Tool 6: Coming Soon -->
+            <div class="premium-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-diagram-project"></i></div>
+                <div class="premium-tool-name">Protocol Visualizer</div>
+                <div class="premium-tool-desc">
+                    Visual step-by-step walkthrough of cryptographic protocols like TLS handshake, Diffie-Hellman, and OAuth flows.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">TLS</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">DH</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
 
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════
-         WHY US SECTION
-    ═══════════════════════════════════ -->
+    <!-- WHY US SECTION -->
     <section class="why-section" id="about">
         <div class="why-container">
-
             <div class="why-content">
                 <div class="section-badge">✨ Why CryptoKit</div>
-                <h2 class="section-title">
-                    Built for <span class="gradient-text">Security First</span>
-                </h2>
-                <p class="section-subtitle" style="margin-bottom:28px;">
-                    Designed with privacy and security as the top priority — not an afterthought.
-                </p>
+                <h2 class="section-title">Built for <span class="gradient-text">Security First</span></h2>
+                <p class="section-subtitle" style="margin-bottom:28px;">Designed with privacy and security as the top priority — not an afterthought.</p>
                 <ul class="why-list">
-                    <li>
-                        <div class="check"><i class="fas fa-check"></i></div>
-                        <span>Your files and keys are <strong>never stored</strong> on our servers</span>
-                    </li>
-                    <li>
-                        <div class="check"><i class="fas fa-check"></i></div>
-                        <span>Many operations run <strong>client-side</strong> for maximum privacy</span>
-                    </li>
-                    <li>
-                        <div class="check"><i class="fas fa-check"></i></div>
-                        <span>All algorithms follow <strong>NIST &amp; OWASP</strong> recommendations</span>
-                    </li>
-                    <li>
-                        <div class="check"><i class="fas fa-check"></i></div>
-                        <span>Full source code on <strong>GitHub</strong> — audit it yourself</span>
-                    </li>
-                    <li>
-                        <div class="check"><i class="fas fa-check"></i></div>
-                        <span>Weak algorithm <strong>warnings built-in</strong> to guide best practices</span>
-                    </li>
+                    <li><div class="check"><i class="fas fa-check"></i></div><span>Your files and keys are <strong>never stored</strong> on our servers</span></li>
+                    <li><div class="check"><i class="fas fa-check"></i></div><span>Many operations run <strong>client-side</strong> for maximum privacy</span></li>
+                    <li><div class="check"><i class="fas fa-check"></i></div><span>All algorithms follow <strong>NIST &amp; OWASP</strong> recommendations</span></li>
+                    <li><div class="check"><i class="fas fa-check"></i></div><span>Full source code on <strong>GitHub</strong> — audit it yourself</span></li>
+                    <li><div class="check"><i class="fas fa-check"></i></div><span>Weak algorithm <strong>warnings built-in</strong> to guide best practices</span></li>
                 </ul>
             </div>
-
             <div class="why-features">
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <div class="feature-title">Secure by Design</div>
-                    <div class="feature-desc">Industry-standard crypto implementations only</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-title">Lightning Fast</div>
-                    <div class="feature-desc">Results in milliseconds, no waiting</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <div class="feature-title">Privacy First</div>
-                    <div class="feature-desc">Zero data retention policy, always</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📖</div>
-                    <div class="feature-title">Open Source</div>
-                    <div class="feature-desc">MIT licensed. Fork, audit, contribute</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌐</div>
-                    <div class="feature-title">No Install</div>
-                    <div class="feature-desc">100% browser-based, any device</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🆓</div>
-                    <div class="feature-title">Free Forever</div>
-                    <div class="feature-desc">No premium tiers. No hidden charges.</div>
-                </div>
+                <div class="feature-card"><div class="feature-icon">🛡️</div><div class="feature-title">Secure by Design</div><div class="feature-desc">Industry-standard crypto implementations only</div></div>
+                <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Lightning Fast</div><div class="feature-desc">Results in milliseconds, no waiting</div></div>
+                <div class="feature-card"><div class="feature-icon">🔒</div><div class="feature-title">Privacy First</div><div class="feature-desc">Zero data retention policy, always</div></div>
+                <div class="feature-card"><div class="feature-icon">📖</div><div class="feature-title">Open Source</div><div class="feature-desc">MIT licensed. Fork, audit, contribute</div></div>
+                <div class="feature-card"><div class="feature-icon">🌐</div><div class="feature-title">No Install</div><div class="feature-desc">100% browser-based, any device</div></div>
+                <div class="feature-card"><div class="feature-icon">🆓</div><div class="feature-title">Free Forever</div><div class="feature-desc">No premium tiers. No hidden charges.</div></div>
             </div>
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════
-         HOW IT WORKS
-    ═══════════════════════════════════ -->
+    <!-- HOW IT WORKS -->
     <section class="how-section" id="how">
         <div class="how-header">
             <div class="section-badge">📖 Process</div>
@@ -948,128 +1252,128 @@
             <p class="section-subtitle" style="margin:0 auto;">Three simple steps to secure your data</p>
         </div>
         <div class="how-steps">
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <div class="step-icon">🎯</div>
-                <div class="step-title">Choose Your Tool</div>
-                <div class="step-desc">Browse our cryptographic tools and pick the right one</div>
-            </div>
-            <div class="step-connector">
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <div class="step-icon">📥</div>
-                <div class="step-title">Input Your Data</div>
-                <div class="step-desc">Enter text, upload a file, or paste your keys</div>
-            </div>
-            <div class="step-connector">
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="step-card">
-                <div class="step-number">3</div>
-                <div class="step-icon">📤</div>
-                <div class="step-title">Get Results Instantly</div>
-                <div class="step-desc">Download, copy, or share your secure results</div>
-            </div>
+            <div class="step-card"><div class="step-number">1</div><div class="step-icon">🎯</div><div class="step-title">Choose Your Tool</div><div class="step-desc">Browse our cryptographic tools and pick the right one</div></div>
+            <div class="step-connector"><i class="fas fa-chevron-right"></i></div>
+            <div class="step-card"><div class="step-number">2</div><div class="step-icon">📥</div><div class="step-title">Input Your Data</div><div class="step-desc">Enter text, upload a file, or paste your keys</div></div>
+            <div class="step-connector"><i class="fas fa-chevron-right"></i></div>
+            <div class="step-card"><div class="step-number">3</div><div class="step-icon">📤</div><div class="step-title">Get Results Instantly</div><div class="step-desc">Download, copy, or share your secure results</div></div>
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════
-         STATS SECTION
-    ═══════════════════════════════════ -->
+    <!-- STATS SECTION -->
     <section class="stats-section">
         <div class="stats-container">
-            <div class="stat-card">
-                <div class="stat-icon">🔧</div>
-                <span class="stat-number" data-target="12">0</span>
-                <div class="stat-label">Tools Available</div>
+            <div class="stat-card"><div class="stat-icon">🔧</div><span class="stat-number" data-target="12">0</span><div class="stat-label">Tools Available</div></div>
+            <div class="stat-card"><div class="stat-icon">⚡</div><span class="stat-number" data-target="50" data-suffix="K+">0</span><div class="stat-label">Operations Done</div></div>
+            <div class="stat-card"><div class="stat-icon">🔒</div><span class="stat-number" data-target="256" data-suffix="-bit">0</span><div class="stat-label">Max Encryption</div></div>
+            <div class="stat-card"><div class="stat-icon">🗄️</div><span class="stat-number" data-target="0" data-suffix=" Files">0</span><div class="stat-label">Data Stored</div></div>
+        </div>
+    </section>
+
+    <!-- PREMIUM PRICING SECTION -->
+    <section class="premium-section" id="premium">
+        <div class="premium-container">
+            <div class="premium-header">
+                <div class="section-badge">👑 Go Premium</div>
+                <h2 class="section-title">Unlock Advanced <span class="gradient-text">Cryptographic Power</span></h2>
+                <p class="section-subtitle" style="margin: 0 auto; max-width: 600px;">Gain access to custom integrations, massive file limits, post-quantum cryptography structures, and zero-knowledge storage grids.</p>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">⚡</div>
-                <span class="stat-number" data-target="50" data-suffix="K+">0</span>
-                <div class="stat-label">Operations Done</div>
+            <div class="premium-toggle-wrap">
+                <span id="billingMonthly" style="font-weight: 600; color: var(--text-primary, #fff);">Monthly Billing</span>
+                <label class="premium-toggle-switch">
+                    <input type="checkbox" id="billingToggle" onchange="toggleBillingPeriod(this)">
+                    <span class="premium-slider"></span>
+                </label>
+                <span id="billingYearly" style="color: var(--text-secondary, #a0aec0);">Yearly Billing <span style="background: #10b981; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 8px; margin-left: 5px; font-weight: bold;">Save 20%</span></span>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">🔒</div>
-                <span class="stat-number" data-target="256" data-suffix="-bit">0</span>
-                <div class="stat-label">Max Encryption</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🗄️</div>
-                <span class="stat-number" data-target="0" data-suffix=" Files">0</span>
-                <div class="stat-label">Data Stored</div>
+            <div class="premium-grid">
+                <!-- Free Tier -->
+                <div class="premium-card">
+                    <div>
+                        <div class="premium-badge">🛡️ Standard</div>
+                        <h3 class="premium-plan-title">Community</h3>
+                        <p style="color: var(--text-secondary, #a0aec0); font-size: 14px; min-height: 42px;">Great for beginners and basic payload signature creation.</p>
+                        <div class="premium-price-wrap"><span class="premium-price">$0</span><span class="premium-period">/ forever</span></div>
+                        <ul class="premium-features">
+                            <li><i class="fas fa-check"></i> Standard Hash Generation</li>
+                            <li><i class="fas fa-check"></i> Basic RSA Key Tool (up to 2048-bit)</li>
+                            <li><i class="fas fa-check"></i> File Integrity (up to 50MB)</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Quantum-Resistant NTRU / Kyber</li>
+                            <li class="disabled"><i class="fas fa-times"></i> High-Throughput API Gateway</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Fully Decoupled Local Backups</li>
+                        </ul>
+                    </div>
+                    <button class="btn-premium-action secondary" disabled>Current Plan</button>
+                </div>
+                <!-- Pro Tier -->
+                <div class="premium-card popular">
+                    <div>
+                        <div class="premium-badge">⚡ Advanced</div>
+                        <h3 class="premium-plan-title">Pro Cipher</h3>
+                        <p style="color: var(--text-secondary, #a0aec0); font-size: 14px; min-height: 42px;">Perfect for security architects, developers, &amp; advanced users.</p>
+                        <div class="premium-price-wrap"><span class="premium-price" id="proPrice">$9</span><span class="premium-period" id="proPeriod">/ month</span></div>
+                        <ul class="premium-features">
+                            <li><i class="fas fa-check"></i> <strong>Everything in Community</strong></li>
+                            <li><i class="fas fa-check"></i> RSA Keys up to 8192-bit</li>
+                            <li><i class="fas fa-check"></i> Unlimited file size checking</li>
+                            <li><i class="fas fa-check"></i> AES-256 GCM authenticated mode</li>
+                            <li><i class="fas fa-check"></i> Dedicated Priority Support channels</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Premium Developer API Access</li>
+                        </ul>
+                    </div>
+                    <button class="btn-premium-action primary" id="proPlanBtn" onclick="openPaymentModal('Pro Cipher', '$9', 'pro')">Upgrade to Pro <i class="fas fa-star"></i></button>
+                </div>
+                <!-- Enterprise Tier -->
+                <div class="premium-card">
+                    <div>
+                        <div class="premium-badge" style="background: rgba(59,130,246,0.15); color: #3b82f6;">🌌 Quantum-Safe</div>
+                        <h3 class="premium-plan-title">Quantum Enterprise</h3>
+                        <p style="color: var(--text-secondary, #a0aec0); font-size: 14px; min-height: 42px;">Next-generation post-quantum security structures and full systems control.</p>
+                        <div class="premium-price-wrap"><span class="premium-price" id="enterprisePrice">$29</span><span class="premium-period" id="enterprisePeriod">/ month</span></div>
+                        <ul class="premium-features">
+                            <li><i class="fas fa-check"></i> <strong>Everything in Pro Cipher</strong></li>
+                            <li><i class="fas fa-check"></i> Post-quantum Algorithms (Kyber, Dilithium)</li>
+                            <li><i class="fas fa-check"></i> Secure SDK &amp; Developer API Access</li>
+                            <li><i class="fas fa-check"></i> Zero-Knowledge decentralized cloud backup</li>
+                            <li><i class="fas fa-check"></i> Customized enterprise deployment pipelines</li>
+                            <li><i class="fas fa-check"></i> Direct 1-on-1 advisor assistance</li>
+                        </ul>
+                    </div>
+                    <button class="btn-premium-action amber" id="enterprisePlanBtn" onclick="openPaymentModal('Quantum Enterprise', '$29', 'enterprise')">Get Quantum <i class="fas fa-bolt"></i></button>
+                </div>
             </div>
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════
-         FEEDBACK & REVIEWS
-    ═══════════════════════════════════ -->
+    <!-- FEEDBACK & REVIEWS -->
     <section class="feedback-section" id="feedback">
-
         <div class="feedback-header">
             <div class="section-badge">💬 Feedback</div>
             <h2 class="section-title">What People <span class="gradient-text">Say</span></h2>
             <p class="section-subtitle" style="margin:0 auto;">Reviews from our community</p>
         </div>
-
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <p class="review-text">
-                    "CryptoKit is exactly what I needed. Fast, free, and privacy-focused.
-                    The hash generator is incredibly useful for my workflow."
-                </p>
-                <div class="review-author">
-                    <div class="review-avatar">D</div>
-                    <div>
-                        <div class="review-name">David Kim</div>
-                        <div class="review-role">Security Engineer</div>
-                    </div>
-                </div>
+                <p class="review-text">"CryptoKit is exactly what I needed. Fast, free, and privacy-focused. The hash generator is incredibly useful for my workflow."</p>
+                <div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">David Kim</div><div class="review-role">Security Engineer</div></div></div>
             </div>
-
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <p class="review-text">
-                    "The hacker mode is incredible! Love the Matrix aesthetic.
-                    Finally a crypto toolkit that doesn't look boring."
-                </p>
-                <div class="review-author">
-                    <div class="review-avatar">E</div>
-                    <div>
-                        <div class="review-name">Emma Wilson</div>
-                        <div class="review-role">CS Student</div>
-                    </div>
-                </div>
+                <p class="review-text">"The hacker mode is incredible! Love the Matrix aesthetic. Finally a crypto toolkit that doesn't look boring."</p>
+                <div class="review-author"><div class="review-avatar">E</div><div><div class="review-name">Emma Wilson</div><div class="review-role">CS Student</div></div></div>
             </div>
-
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <p class="review-text">
-                    "Open source and zero data storage is a game changer.
-                    I recommend CryptoKit to all my developer colleagues."
-                </p>
-                <div class="review-author">
-                    <div class="review-avatar">R</div>
-                    <div>
-                        <div class="review-name">Raj Sharma</div>
-                        <div class="review-role">Full Stack Dev</div>
-                    </div>
-                </div>
+                <p class="review-text">"Open source and zero data storage is a game changer. I recommend CryptoKit to all my developer colleagues."</p>
+                <div class="review-author"><div class="review-avatar">R</div><div><div class="review-name">Raj Sharma</div><div class="review-role">Full Stack Dev</div></div></div>
             </div>
         </div>
-
         <div class="feedback-form-wrapper" id="feedbackFormWrapper">
-            <h3 class="feedback-form-title">
-                Share Your <span class="gradient-text">Feedback</span>
-            </h3>
+            <h3 class="feedback-form-title">Share Your <span class="gradient-text">Feedback</span></h3>
             <form class="feedback-form" id="feedbackForm" onsubmit="if(typeof submitFeedback==='function')return submitFeedback(event);event.preventDefault();">
                 <div class="feedback-row">
-                    <input type="text"  class="feedback-input" id="fbName" placeholder="Your Name"  required>
+                    <input type="text" class="feedback-input" id="fbName" placeholder="Your Name" required>
                     <input type="email" class="feedback-input" placeholder="Your Email" required>
                 </div>
                 <div class="feedback-rating" id="feedbackRating">
@@ -1080,48 +1384,29 @@
                     <span class="rating-star" onclick="if(typeof setRating==='function')setRating(4);">☆</span>
                     <span class="rating-star" onclick="if(typeof setRating==='function')setRating(5);">☆</span>
                 </div>
-                <textarea
-                    class="feedback-textarea"
-                    placeholder="Tell us what you think..."
-                    rows="4"
-                    required
-                ></textarea>
-                <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
-                    <i class="fas fa-paper-plane"></i> Submit Feedback
-                </button>
+                <textarea class="feedback-textarea" placeholder="Tell us what you think..." rows="4" required></textarea>
+                <button type="submit" class="btn-primary" style="width:100%;justify-content:center;"><i class="fas fa-paper-plane"></i> Submit Feedback</button>
             </form>
         </div>
-
     </section>
 
-
-    <!-- ═══════════════════════════════════
-         CTA SECTION
-    ═══════════════════════════════════ -->
+    <!-- CTA SECTION -->
     <section class="cta-section">
         <div class="cta-container">
             <div class="cta-glow"></div>
             <h2>Ready to <span class="gradient-text">Secure Your Data?</span></h2>
             <p>Join thousands of developers and security professionals who trust CryptoKit.</p>
             <div class="cta-buttons">
-                <a href="#tools" class="btn-primary">
-                    <i class="fas fa-rocket"></i> Start Using Tools
-                </a>
-                <a href="#" class="btn-secondary">
-                    <i class="fab fa-github"></i> View on GitHub
-                </a>
+                <a href="#tools" class="btn-primary"><i class="fas fa-rocket"></i> Start Using Tools</a>
+                <a href="https://github.com/CryptoKit-Team/OurCryptoKit" class="btn-secondary"><i class="fab fa-github"></i> View on GitHub</a>
             </div>
         </div>
     </section>
 
-
-    <!-- ═══════════════════════════════════
-         FOOTER
-    ═══════════════════════════════════ -->
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-top">
-
                 <div class="footer-brand">
                     <a href="#home" class="nav-logo">
                         <div class="nav-logo-icon">
@@ -1137,13 +1422,12 @@
                     </a>
                     <p>A free, open-source cryptography toolkit. Privacy-first, always.</p>
                     <div class="footer-social">
-                        <a href="#" class="social-btn"><i class="fab fa-github"></i></a>
+                        <a href="https://github.com/CryptoKit-Team/OurCryptoKit" class="social-btn"><i class="fab fa-github"></i></a>
                         <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-btn"><i class="fab fa-discord"></i></a>
                         <a href="#" class="social-btn"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-
                 <div class="footer-col">
                     <h4>Tools</h4>
                     <ul>
@@ -1154,7 +1438,6 @@
                         <li><a href="password-generator.html">Password Tools</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Resources</h4>
                     <ul>
@@ -1164,7 +1447,6 @@
                         <li><a href="limitations.html">Limitations</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
@@ -1175,9 +1457,7 @@
                         <li><a href="Support.html">Support &amp; Contact</a></li>
                     </ul>
                 </div>
-
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; 2026 CryptoKit. MIT License. Made with ❤️ by the CryptoKit Team</p>
                 <div class="footer-bottom-links">
@@ -1189,49 +1469,24 @@
         </div>
     </footer>
 
+    <!-- SCROLL TO TOP -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'});"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- ═══════════════════════════════════
-         SCROLL TO TOP
-    ═══════════════════════════════════ -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'});">
-        <i class="fas fa-chevron-up"></i>
-    </button>
+    <!-- AI ASSISTANT FAB -->
+    <button class="ai-fab" id="aiFab" onclick="if(typeof toggleChat==='function')toggleChat();" title="Ask CryptoBot"><span id="fabIcon">🤖</span></button>
 
-
-    <!-- ═══════════════════════════════════
-         AI ASSISTANT — FLOATING BUTTON
-    ═══════════════════════════════════ -->
-    <button class="ai-fab" id="aiFab" onclick="if(typeof toggleChat==='function')toggleChat();" title="Ask CryptoBot">
-        <span id="fabIcon">🤖</span>
-    </button>
-
-
-    <!-- ═══════════════════════════════════
-         AI ASSISTANT — CHAT WINDOW
-    ═══════════════════════════════════ -->
+    <!-- AI CHAT WINDOW -->
     <div class="ai-chat-window" id="aiChatWindow">
-
         <div class="ai-chat-header">
             <div class="ai-header-info">
                 <div class="ai-avatar" id="aiAvatar">🤖</div>
-                <div>
-                    <span class="ai-name" id="aiName">CryptoBot</span>
-                    <span class="ai-status">
-                        <span class="ai-status-dot"></span>
-                        <span id="aiStatusText">Online · Ready</span>
-                    </span>
-                </div>
+                <div><span class="ai-name" id="aiName">CryptoBot</span><span class="ai-status"><span class="ai-status-dot"></span><span id="aiStatusText">Online · Ready</span></span></div>
             </div>
             <div class="ai-header-actions">
-                <button class="ai-header-btn" onclick="if(typeof clearChat==='function')clearChat();" title="Clear">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-                <button class="ai-header-btn" onclick="if(typeof toggleChat==='function')toggleChat();" title="Close">
-                    <i class="fas fa-times"></i>
-                </button>
+                <button class="ai-header-btn" onclick="if(typeof clearChat==='function')clearChat();" title="Clear"><i class="fas fa-trash-alt"></i></button>
+                <button class="ai-header-btn" onclick="if(typeof toggleChat==='function')toggleChat();" title="Close"><i class="fas fa-times"></i></button>
             </div>
         </div>
-
         <div class="ai-categories">
             <span class="ai-categories-label">Browse by topic</span>
             <div class="ai-category-chips">
@@ -1241,25 +1496,45 @@
                 <button class="ai-chip" onclick="if(typeof askCategory==='function')askCategory('help');">❓ Help</button>
             </div>
         </div>
-
         <div class="ai-messages" id="aiMessages"></div>
-
         <div class="ai-input-area">
-            <textarea
-                class="ai-input"
-                id="aiInput"
-                placeholder="Ask me anything about cryptography..."
-                rows="1"
-                onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();if(typeof sendMessage==='function')sendMessage();}"
-                oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px';"
-            ></textarea>
-            <button class="ai-send-btn" onclick="if(typeof sendMessage==='function')sendMessage();">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+            <textarea class="ai-input" id="aiInput" placeholder="Ask me anything about cryptography..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();if(typeof sendMessage==='function')sendMessage();}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,90)+'px';"></textarea>
+            <button class="ai-send-btn" onclick="if(typeof sendMessage==='function')sendMessage();"><i class="fas fa-paper-plane"></i></button>
         </div>
-
     </div>
 
+    <!-- PREMIUM PAYMENT MODAL -->
+    <div class="mobile-dev-popup" id="premiumPaymentModal">
+        <div class="mobile-dev-popup-box" style="max-width: 420px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <span class="premium-badge" id="modalPlanBadge" style="margin-bottom: 0;">⚡ Pro Cipher</span>
+                <button onclick="closePaymentModal()" style="background:none; border:none; cursor:pointer; color:var(--text-secondary,#a0aec0); font-size: 18px;"><i class="fas fa-times"></i></button>
+            </div>
+            <h3 class="mobile-dev-popup-title" style="text-align: left; margin-bottom: 5px;">Activate <span class="gradient-text">Premium Access</span></h3>
+            <p class="mobile-dev-popup-msg" style="text-align: left; margin-bottom: 20px;">Simulate your upgrade to unlock premium toolkit features. No actual charge will be made.</p>
+            <form id="premiumPaymentForm" onsubmit="handlePremiumPaymentSubmit(event)">
+                <div style="margin-bottom: 15px;">
+                    <label class="auth-label" style="font-size: 12px; margin-bottom: 6px; display: block; color: var(--text-primary, #fff);">Cardholder Name</label>
+                    <div class="auth-input-wrap"><i class="fas fa-user auth-input-icon"></i><input type="text" class="auth-input" id="cardName" placeholder="Satoshi Nakamoto" required></div>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label class="auth-label" style="font-size: 12px; margin-bottom: 6px; display: block; color: var(--text-primary, #fff);">Card Number</label>
+                    <div class="auth-input-wrap"><i class="fas fa-credit-card auth-input-icon"></i><input type="text" class="auth-input" id="cardNumber" placeholder="4111 2222 3333 4444" pattern="[0-9\s]{13,19}" maxlength="19" required oninput="formatCardNumber(this)"></div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 24px;">
+                    <div>
+                        <label class="auth-label" style="font-size: 12px; margin-bottom: 6px; display: block; color: var(--text-primary, #fff);">Expiry Date</label>
+                        <div class="auth-input-wrap"><i class="fas fa-calendar-alt auth-input-icon"></i><input type="text" class="auth-input" id="cardExpiry" placeholder="MM/YY" maxlength="5" required oninput="formatCardExpiry(this)"></div>
+                    </div>
+                    <div>
+                        <label class="auth-label" style="font-size: 12px; margin-bottom: 6px; display: block; color: var(--text-primary, #fff);">CVV / CVC</label>
+                        <div class="auth-input-wrap"><i class="fas fa-shield-halved auth-input-icon"></i><input type="password" class="auth-input" id="cardCvv" placeholder="123" maxlength="4" required></div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary auth-submit-btn" style="width: 100%; border: none;">Confirm &amp; Pay <span id="modalPlanPrice" style="margin-left: 5px;">$9.00</span></button>
+            </form>
+        </div>
+    </div>
 
     </div><!-- /#mainApp -->
 
@@ -1267,15 +1542,10 @@
     <!-- ═══════════════════════════════════════════════════════
          SCRIPTS
     ═══════════════════════════════════════════════════════ -->
-
-    <!-- Anti-flash: check auth state BEFORE any other script runs -->
     <script>
         (function () {
             var isAuthed = (function () {
-                try {
-                    return sessionStorage.getItem('cryptokit_auth') === 'true' ||
-                           localStorage.getItem('cryptokit_auth') === 'true';
-                } catch (e) { return false; }
+                try { return sessionStorage.getItem('cryptokit_auth') === 'true' || localStorage.getItem('cryptokit_auth') === 'true'; } catch (e) { return false; }
             })();
             if (isAuthed) {
                 document.getElementById('authScreen').classList.add('auth-screen-hidden');
@@ -1286,253 +1556,354 @@
 
     <script src="kb.js"></script>
     <script src="script.js"></script>
-
-    <!-- Auth Logic (Login/Signup) -->
     <script src="auth.js"></script>
 
-
-    <!-- ═══════════════════════════════════
-         MOBILE THEME & DEV POPUP SCRIPTS
-    ═══════════════════════════════════ -->
     <script>
         /* ══════════════════════════════════════════════
-           ERROR HANDLER
+           ERROR HANDLER & FALLBACKS
         ══════════════════════════════════════════════ */
-        window.addEventListener('error', function(e) {
-            console.warn('Resource loading error:', e.message || e);
-        }, true);
+        window.addEventListener('error', function(e) { console.warn('Resource loading error:', e.message || e); }, true);
 
-        /* ══════════════════════════════════════════════
-           FALLBACK: critical functions if script.js fails
-        ══════════════════════════════════════════════ */
-        if (typeof toggleChat !== 'function') {
-            window.toggleChat = function() {
-                var chatWindow = document.getElementById('aiChatWindow');
-                if (chatWindow) {
-                    chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+        if (typeof toggleChat !== 'function') { window.toggleChat = function() { var cw = document.getElementById('aiChatWindow'); if (cw) cw.style.display = cw.style.display === 'flex' ? 'none' : 'flex'; }; }
+        if (typeof toggleMenu !== 'function') { window.toggleMenu = function() { var m = document.getElementById('mobileMenu'); var h = document.querySelector('.hamburger'); if (m) m.classList.toggle('active'); if (h) h.classList.toggle('active'); }; }
+        if (typeof selectMode !== 'function') { window.selectMode = function(mode) { document.documentElement.setAttribute('data-theme', mode); localStorage.setItem('cryptokit-theme', mode); }; }
+        if (typeof toggleModeDropdown !== 'function') { window.toggleModeDropdown = function() { var d = document.getElementById('modeDropdown'); if (d) d.classList.toggle('active'); }; }
+
+        /* ──────────────────────────────────────
+           SINGLE LOGIN/LOGOUT TOGGLE HANDLER
+        ────────────────────────────────────── */
+        window.handleAuthToggle = function() {
+            var isAuthed = false;
+            try { isAuthed = sessionStorage.getItem('cryptokit_auth') === 'true' || localStorage.getItem('cryptokit_auth') === 'true'; } catch(e) {}
+            
+            if (isAuthed) {
+                // Perform Logout
+                if (typeof handleLogout === 'function') {
+                    handleLogout();
+                } else {
+                    sessionStorage.removeItem('cryptokit_auth');
+                    localStorage.removeItem('cryptokit_auth');
+                    window.location.reload();
                 }
-            };
-        }
+            } else {
+                // Show Login Screen
+                document.getElementById('mainApp').classList.add('main-app-hidden');
+                document.getElementById('authScreen').classList.remove('auth-screen-hidden');
+                if (typeof switchAuthPanel === 'function') switchAuthPanel('login');
+            }
+        };
 
-        if (typeof toggleMenu !== 'function') {
-            window.toggleMenu = function() {
-                var menu = document.getElementById('mobileMenu');
-                var hamburger = document.querySelector('.hamburger');
-                if (menu) menu.classList.toggle('active');
-                if (hamburger) hamburger.classList.toggle('active');
-            };
-        }
-
-        if (typeof selectMode !== 'function') {
-            window.selectMode = function(mode) {
-                document.documentElement.setAttribute('data-theme', mode);
-                localStorage.setItem('cryptokit-theme', mode);
-            };
-        }
-
-        if (typeof toggleModeDropdown !== 'function') {
-            window.toggleModeDropdown = function() {
-                var dropdown = document.getElementById('modeDropdown');
-                if (dropdown) dropdown.classList.toggle('active');
-            };
+        function updateAuthButtons() {
+            var isAuthed = false;
+            try { isAuthed = sessionStorage.getItem('cryptokit_auth') === 'true' || localStorage.getItem('cryptokit_auth') === 'true'; } catch(e) {}
+            
+            var navAuthBtn = document.getElementById('navAuthBtn');
+            if (navAuthBtn) {
+                navAuthBtn.innerHTML = isAuthed ? '<i class="fas fa-arrow-right-from-bracket"></i> Logout' : '<i class="fas fa-user"></i> Login';
+            }
+            
+            var mobileAuthBtn = document.getElementById('mobileAuthBtn');
+            if (mobileAuthBtn) {
+                mobileAuthBtn.innerHTML = isAuthed ? '🚪 Logout' : '👤 Login';
+            }
         }
 
         /* ──────────────────────────────────────
-           Toggle the mobile theme submenu
+           Mobile theme submenu
         ────────────────────────────────────── */
         function toggleMobileThemeMenu(btn) {
-            var submenu = document.getElementById('mobileThemeSubmenu');
-            var arrow   = document.getElementById('mobileThemeArrow');
-            if (!submenu || !arrow) return;
-
-            var isOpen = submenu.classList.contains('open');
-
-            if (isOpen) {
-                submenu.classList.remove('open');
-                arrow.style.transform = 'rotate(0deg)';
-            } else {
-                submenu.classList.add('open');
-                arrow.style.transform = 'rotate(180deg)';
-                updateMobileThemeDots();
-            }
+            var s = document.getElementById('mobileThemeSubmenu'), a = document.getElementById('mobileThemeArrow');
+            if (!s || !a) return;
+            if (s.classList.contains('open')) { s.classList.remove('open'); a.style.transform = 'rotate(0deg)'; }
+            else { s.classList.add('open'); a.style.transform = 'rotate(180deg)'; updateMobileThemeDots(); }
+        }
+        function mobileSwitchTheme(mode) {
+            if (typeof selectMode === 'function') selectMode(mode); else document.documentElement.setAttribute('data-theme', mode);
+            updateMobileThemeDots();
+            setTimeout(function() { var s = document.getElementById('mobileThemeSubmenu'), a = document.getElementById('mobileThemeArrow'); if (s) s.classList.remove('open'); if (a) a.style.transform = 'rotate(0deg)'; if (typeof toggleMenu === 'function') toggleMenu(); }, 400);
+        }
+        function updateMobileThemeDots() {
+            var t = document.documentElement.getAttribute('data-theme') || 'normal';
+            var nd = document.getElementById('normalDot'), hd = document.getElementById('hackerDot');
+            var nl = document.getElementById('mobileNormalOption'), hl = document.getElementById('mobileHackerOption');
+            if (nd) nd.style.display = 'none'; if (hd) hd.style.display = 'none';
+            if (nl) nl.classList.remove('active-theme'); if (hl) hl.classList.remove('active-theme');
+            if (t === 'hacker') { if (hd) hd.style.display = 'inline-block'; if (hl) hl.classList.add('active-theme'); }
+            else { if (nd) nd.style.display = 'inline-block'; if (nl) nl.classList.add('active-theme'); }
+        }
+        function showMobileDevPopup() {
+            var s = document.getElementById('mobileThemeSubmenu'), a = document.getElementById('mobileThemeArrow');
+            if (s) s.classList.remove('open'); if (a) a.style.transform = 'rotate(0deg)';
+            if (typeof toggleMenu === 'function') toggleMenu();
+            var p = document.getElementById('mobileDevPopup');
+            if (p) { p.classList.add('show'); document.body.style.overflow = 'hidden'; }
         }
 
         /* ──────────────────────────────────────
-           Switch theme from mobile submenu
+           PREMIUM SYSTEM
         ────────────────────────────────────── */
-        function mobileSwitchTheme(mode) {
-            if (typeof selectMode === 'function') {
-                selectMode(mode);
+        var activePlanId = null;
+
+        function toggleBillingPeriod(toggleInput) {
+            var y = toggleInput.checked;
+            var pp = document.getElementById('proPrice'), ppd = document.getElementById('proPeriod');
+            var ep = document.getElementById('enterprisePrice'), epd = document.getElementById('enterprisePeriod');
+            var mt = document.getElementById('billingMonthly'), yt = document.getElementById('billingYearly');
+            pp.style.opacity = '0'; ep.style.opacity = '0';
+            if (y) {
+                mt.style.color = 'var(--text-secondary, #a0aec0)'; mt.style.fontWeight = 'normal';
+                yt.style.color = 'var(--text-primary, #fff)'; yt.style.fontWeight = '600';
+                setTimeout(function() { pp.innerText = '$7'; ppd.innerText = '/ month (billed annually)'; ep.innerText = '$23'; epd.innerText = '/ month (billed annually)'; pp.style.opacity = '1'; ep.style.opacity = '1'; }, 200);
             } else {
-                document.documentElement.setAttribute('data-theme', mode);
+                mt.style.color = 'var(--text-primary, #fff)'; mt.style.fontWeight = '600';
+                yt.style.color = 'var(--text-secondary, #a0aec0)'; yt.style.fontWeight = 'normal';
+                setTimeout(function() { pp.innerText = '$9'; ppd.innerText = '/ month'; ep.innerText = '$29'; epd.innerText = '/ month'; pp.style.opacity = '1'; ep.style.opacity = '1'; }, 200);
+            }
+        }
+
+        function openPaymentModal(planName, price, planId) {
+            activePlanId = planId;
+            var m = document.getElementById('premiumPaymentModal');
+            document.getElementById('modalPlanBadge').innerText = planName;
+            document.getElementById('modalPlanPrice').innerText = price;
+            if (m) { m.classList.add('show'); document.body.style.overflow = 'hidden'; }
+        }
+
+        function closePaymentModal() {
+            var m = document.getElementById('premiumPaymentModal');
+            if (m) { m.classList.remove('show'); document.body.style.overflow = ''; }
+        }
+
+        function formatCardNumber(input) {
+            var v = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            var m = v.match(/\d{4,16}/g), mt = m && m[0] || '', p = [];
+            for (var i = 0; i < mt.length; i += 4) p.push(mt.substring(i, i + 4));
+            input.value = p.length > 0 ? p.join(' ') : v;
+        }
+
+        function formatCardExpiry(input) {
+            var v = input.value.replace(/\D/g, '');
+            input.value = v.length > 2 ? v.substring(0, 2) + '/' + v.substring(2, 4) : v;
+        }
+
+        /* ──────────────────────────────────────
+           ACTIVATE PREMIUM
+        ────────────────────────────────────── */
+        function activatePremiumMode(tier) {
+            document.documentElement.classList.add('premium-active');
+            localStorage.setItem('cryptokit_premium_tier', tier);
+            activePlanId = tier;
+
+            var premiumTools = document.getElementById('premiumToolsSection');
+            if (premiumTools) premiumTools.classList.add('unlocked');
+
+            var navCta = document.getElementById('navPremiumBtn');
+            if (navCta) {
+                if (tier === 'pro') {
+                    navCta.innerHTML = '✨ Pro Cipher';
+                    navCta.style.background = 'linear-gradient(135deg, #fbbf24, #d97706)';
+                    navCta.style.color = '#000';
+                } else if (tier === 'enterprise') {
+                    navCta.innerHTML = '🌌 Enterprise';
+                    navCta.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+                    navCta.style.color = '#fff';
+                }
+                navCta.href = '#premiumToolsSection';
             }
 
-            updateMobileThemeDots();
+            var navBadge = document.getElementById('navPremiumBadge');
+            if (navBadge) {
+                navBadge.innerText = tier === 'enterprise' ? '🌌 QUANTUM' : '👑 PRO';
+            }
+
+            var mobileBackBtn = document.getElementById('mobileBackToNormal');
+            if (mobileBackBtn) mobileBackBtn.style.display = 'block';
+
+            if (tier === 'pro') {
+                var pb = document.getElementById('proPlanBtn');
+                if (pb) { pb.innerText = 'Plan Active ✅'; pb.disabled = true; pb.style.opacity = '0.6'; pb.style.cursor = 'default'; }
+            } else if (tier === 'enterprise') {
+                var eb = document.getElementById('enterprisePlanBtn');
+                if (eb) { eb.innerText = 'Plan Active ✅'; eb.disabled = true; eb.style.opacity = '0.6'; eb.style.cursor = 'default'; }
+                var pb2 = document.getElementById('proPlanBtn');
+                if (pb2) { pb2.innerText = 'Included ✅'; pb2.disabled = true; pb2.style.opacity = '0.6'; pb2.style.cursor = 'default'; }
+            }
+
+            var toast = document.getElementById('premiumToast');
+            if (toast) {
+                toast.classList.remove('downgrade');
+                toast.innerText = tier === 'enterprise'
+                    ? '🌌 Quantum Enterprise Activated — All tools unlocked!'
+                    : '👑 Pro Cipher Activated — Premium tools unlocked!';
+                toast.classList.add('show');
+                setTimeout(function() { toast.classList.remove('show'); }, 4000);
+            }
 
             setTimeout(function() {
-                var submenu = document.getElementById('mobileThemeSubmenu');
-                var arrow = document.getElementById('mobileThemeArrow');
-                if (submenu) submenu.classList.remove('open');
-                if (arrow) arrow.style.transform = 'rotate(0deg)';
-                if (typeof toggleMenu === 'function') toggleMenu();
-            }, 400);
+                var el = document.getElementById('premiumToolsSection');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 600);
         }
 
         /* ──────────────────────────────────────
-           Show active theme dot indicators
+           DEACTIVATE PREMIUM (Go back to normal mode)
         ────────────────────────────────────── */
-        function updateMobileThemeDots() {
-            var currentTheme = document.documentElement.getAttribute('data-theme') || 'normal';
-
-            var normalDot  = document.getElementById('normalDot');
-            var hackerDot  = document.getElementById('hackerDot');
-            var normalLink = document.getElementById('mobileNormalOption');
-            var hackerLink = document.getElementById('mobileHackerOption');
-
-            if (normalDot) normalDot.style.display = 'none';
-            if (hackerDot) hackerDot.style.display = 'none';
-            if (normalLink) normalLink.classList.remove('active-theme');
-            if (hackerLink) hackerLink.classList.remove('active-theme');
-
-            if (currentTheme === 'hacker') {
-                if (hackerDot)  hackerDot.style.display  = 'inline-block';
-                if (hackerLink) hackerLink.classList.add('active-theme');
-            } else {
-                if (normalDot)  normalDot.style.display  = 'inline-block';
-                if (normalLink) normalLink.classList.add('active-theme');
+        function deactivatePremiumMode() {
+            if (!confirm('Are you sure you want to downgrade back to the free Community version? You will lose access to all premium tools.')) {
+                return;
             }
-        }
 
-        /* ──────────────────────────────────────
-           Show Developer Mode desktop-only popup
-        ────────────────────────────────────── */
-        function showMobileDevPopup() {
-            var submenu = document.getElementById('mobileThemeSubmenu');
-            var arrow = document.getElementById('mobileThemeArrow');
-            if (submenu) submenu.classList.remove('open');
-            if (arrow) arrow.style.transform = 'rotate(0deg)';
-            if (typeof toggleMenu === 'function') toggleMenu();
+            document.documentElement.classList.remove('premium-active');
+            localStorage.removeItem('cryptokit_premium_tier');
+            activePlanId = null;
 
-            var popup = document.getElementById('mobileDevPopup');
-            if (popup) {
-                popup.classList.add('show');
-                document.body.style.overflow = 'hidden';
+            var premiumTools = document.getElementById('premiumToolsSection');
+            if (premiumTools) premiumTools.classList.remove('unlocked');
+
+            var navCta = document.getElementById('navPremiumBtn');
+            if (navCta) {
+                navCta.innerHTML = '👑 Go Premium';
+                navCta.style.background = '';
+                navCta.style.color = '';
+                navCta.href = '#premium';
             }
+
+            var navBadge = document.getElementById('navPremiumBadge');
+            if (navBadge) navBadge.innerText = '👑 PRO';
+
+            var mobileBackBtn = document.getElementById('mobileBackToNormal');
+            if (mobileBackBtn) mobileBackBtn.style.display = 'none';
+
+            var pb = document.getElementById('proPlanBtn');
+            if (pb) {
+                pb.innerHTML = 'Upgrade to Pro <i class="fas fa-star"></i>';
+                pb.disabled = false;
+                pb.style.opacity = '';
+                pb.style.cursor = 'pointer';
+            }
+            var eb = document.getElementById('enterprisePlanBtn');
+            if (eb) {
+                eb.innerHTML = 'Get Quantum <i class="fas fa-bolt"></i>';
+                eb.disabled = false;
+                eb.style.opacity = '';
+                eb.style.cursor = 'pointer';
+            }
+
+            var toast = document.getElementById('premiumToast');
+            if (toast) {
+                toast.innerText = '🔄 Downgraded to Community — Welcome back!';
+                toast.classList.add('downgrade');
+                toast.classList.add('show');
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                    setTimeout(function() { toast.classList.remove('downgrade'); }, 500);
+                }, 3500);
+            }
+
+            setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 400);
         }
 
         /* ──────────────────────────────────────
-           Hide Developer Mode popup
+           Payment submit handler
         ────────────────────────────────────── */
-        function hideMobileDevPopup(event) {
-            var popup = document.getElementById('mobileDevPopup');
-            if (!popup) return;
+        function handlePremiumPaymentSubmit(event) {
+            event.preventDefault();
+            var btn = event.target.querySelector('button[type="submit"]');
+            var origHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Authenticating...';
 
-            if (event && event.target && event.target !== popup) return;
-
-            popup.classList.remove('show');
-            document.body.style.overflow = '';
+            setTimeout(function() {
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Initializing Key Vault...';
+                setTimeout(function() {
+                    btn.disabled = false;
+                    btn.innerHTML = origHTML;
+                    closePaymentModal();
+                    var form = document.getElementById('premiumPaymentForm');
+                    if (form) form.reset();
+                    activatePremiumMode(activePlanId);
+                }, 1500);
+            }, 1500);
         }
 
         /* ──────────────────────────────────────
-           DOM Ready — setup event listeners
+           DOM Ready
         ────────────────────────────────────── */
         document.addEventListener('DOMContentLoaded', function () {
-
-            // Close button for dev popup
             var closeBtn = document.getElementById('mobileDevPopupCloseBtn');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    var popup = document.getElementById('mobileDevPopup');
-                    if (popup) {
-                        popup.classList.remove('show');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
+            if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); var p = document.getElementById('mobileDevPopup'); if (p) { p.classList.remove('show'); document.body.style.overflow = ''; } });
 
-            // Overlay click to close
-            var popupOverlay = document.getElementById('mobileDevPopup');
-            if (popupOverlay) {
-                popupOverlay.addEventListener('click', function(e) {
-                    if (e.target === popupOverlay) {
-                        popupOverlay.classList.remove('show');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
+            var popupOv = document.getElementById('mobileDevPopup');
+            if (popupOv) popupOv.addEventListener('click', function(e) { if (e.target === popupOv) { popupOv.classList.remove('show'); document.body.style.overflow = ''; } });
+
+            var payModal = document.getElementById('premiumPaymentModal');
+            if (payModal) payModal.addEventListener('click', function(e) { if (e.target === payModal) closePaymentModal(); });
 
             updateMobileThemeDots();
+            updateAuthButtons(); // Sets correct login/out text automatically
 
             // ═══════════════════════════════════
-            // Intersection Observer for fade-up
+            // RESTORE PREMIUM STATE (silent)
             // ═══════════════════════════════════
+            var savedTier = localStorage.getItem('cryptokit_premium_tier');
+            if (savedTier && (savedTier === 'pro' || savedTier === 'enterprise')) {
+                document.documentElement.classList.add('premium-active');
+                activePlanId = savedTier;
+                var pts = document.getElementById('premiumToolsSection');
+                if (pts) pts.classList.add('unlocked');
+
+                var navCta = document.getElementById('navPremiumBtn');
+                if (navCta) {
+                    if (savedTier === 'pro') {
+                        navCta.innerHTML = '✨ Pro Cipher';
+                        navCta.style.background = 'linear-gradient(135deg, #fbbf24, #d97706)';
+                        navCta.style.color = '#000';
+                    } else {
+                        navCta.innerHTML = '🌌 Enterprise';
+                        navCta.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
+                        navCta.style.color = '#fff';
+                    }
+                    navCta.href = '#premiumToolsSection';
+                }
+
+                var navBadge = document.getElementById('navPremiumBadge');
+                if (navBadge) navBadge.innerText = savedTier === 'enterprise' ? '🌌 QUANTUM' : '👑 PRO';
+
+                var mbb = document.getElementById('mobileBackToNormal');
+                if (mbb) mbb.style.display = 'block';
+
+                if (savedTier === 'pro') {
+                    var pb = document.getElementById('proPlanBtn');
+                    if (pb) { pb.innerText = 'Plan Active ✅'; pb.disabled = true; pb.style.opacity = '0.6'; pb.style.cursor = 'default'; }
+                } else {
+                    var eb = document.getElementById('enterprisePlanBtn');
+                    if (eb) { eb.innerText = 'Plan Active ✅'; eb.disabled = true; eb.style.opacity = '0.6'; eb.style.cursor = 'default'; }
+                    var pb2 = document.getElementById('proPlanBtn');
+                    if (pb2) { pb2.innerText = 'Included ✅'; pb2.disabled = true; pb2.style.opacity = '0.6'; pb2.style.cursor = 'default'; }
+                }
+            }
+
             try {
-                var fadeElements = document.querySelectorAll('.fade-up');
-                if (fadeElements.length > 0 && 'IntersectionObserver' in window) {
+                var fadeEls = document.querySelectorAll('.fade-up');
+                if (fadeEls.length > 0 && 'IntersectionObserver' in window) {
                     document.body.classList.add('js-loaded');
-
-                    var observer = new IntersectionObserver(function(entries) {
-                        entries.forEach(function(entry) {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('visible');
-                                observer.unobserve(entry.target);
-                            }
-                        });
+                    var obs = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(en) { if (en.isIntersecting) { en.target.classList.add('visible'); obs.unobserve(en.target); } });
                     }, { threshold: 0.1 });
-
-                    fadeElements.forEach(function(el) {
-                        observer.observe(el);
-                    });
+                    fadeEls.forEach(function(el) { obs.observe(el); });
                 }
-            } catch(e) {
-                document.querySelectorAll('.fade-up').forEach(function(el) {
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                });
-            }
-
-            // ═══════════════════════════════════
-            // Show/hide Login vs Logout button
-            // based on auth state
-            // ═══════════════════════════════════
-            var isAuthed = false;
-            try {
-                isAuthed = sessionStorage.getItem('cryptokit_auth') === 'true' ||
-                           localStorage.getItem('cryptokit_auth') === 'true';
-            } catch(e) {}
-
-            var navLoginBtn  = document.getElementById('navLoginBtn');
-            var navLogoutBtn = document.getElementById('navLogoutBtn');
-
-            if (isAuthed) {
-                if (navLoginBtn)  navLoginBtn.style.display  = 'none';
-                if (navLogoutBtn) navLogoutBtn.style.display  = 'inline-flex';
-            } else {
-                if (navLoginBtn)  navLoginBtn.style.display  = 'inline-flex';
-                if (navLogoutBtn) navLogoutBtn.style.display  = 'none';
-            }
+            } catch(e) { document.querySelectorAll('.fade-up').forEach(function(el) { el.style.opacity = '1'; el.style.transform = 'translateY(0)'; }); }
         });
 
-        /* ──────────────────────────────────────
-           Close popup on Escape key
-        ────────────────────────────────────── */
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                var popup = document.getElementById('mobileDevPopup');
-                if (popup && popup.classList.contains('show')) {
-                    popup.classList.remove('show');
-                    document.body.style.overflow = '';
-                }
+                var p = document.getElementById('mobileDevPopup');
+                if (p && p.classList.contains('show')) { p.classList.remove('show'); document.body.style.overflow = ''; }
+                closePaymentModal();
             }
         });
 
-        /* ──────────────────────────────────────
-           Legacy alias
-        ────────────────────────────────────── */
-        function mobileThemeSwitch() {
-            toggleMobileThemeMenu();
-        }
+        function mobileThemeSwitch() { toggleMobileThemeMenu(); }
     </script>
 
 </body>

@@ -1,4 +1,13 @@
 /* ═══════════════════════════════════════════════════════
+   KNOWLEDGE BASE (KB) - Sample entries
+   Note: Ensure your actual KB array is defined before this file
+═══════════════════════════════════════════════════════ */
+
+// If KB is not defined externally, uncomment this:
+// var KB = KB || [];
+
+
+/* ═══════════════════════════════════════════════════════
    CATEGORY RESPONSES
 ═══════════════════════════════════════════════════════ */
 
@@ -15,6 +24,10 @@ var catResp = {
         t: '<strong>🛡️ Security Advice:</strong><br><br>⚠️ Is MD5 safe?<br>🔑 RSA key size guide<br>💪 Strong password tips<br><br>What is your question?',
         s: ['Is MD5 safe?', 'RSA key size?', 'Password tips']
     },
+    premium: {
+        t: '<strong>👑 Premium Features:</strong><br><br>🌟 Advanced encryption suite<br>⚡ Faster processing<br>🔐 Extended key sizes<br>📊 Detailed analytics<br>🎨 Golden VIP theme<br><br>Upgrade to unlock!',
+        s: ['View pricing', 'Premium benefits', 'Upgrade now']
+    },
     help: {
         t: '<strong>❓ I can help with:</strong><br><br>🔧 Finding the right tool<br>📚 Explaining concepts<br>🛡️ Security best practices<br><br>Just type naturally!',
         s: ['All tools', 'Learn crypto', 'Security advice']
@@ -26,12 +39,32 @@ var fallbacks = [
     'That\'s outside my knowledge base! 🤖<br><br>I specialize in cryptography. Try browsing by category above!'
 ];
 
+var premiumFallbacks = [
+    '👑 Even VIP intelligence has limits! Try asking about our elite crypto tools or premium features.<br><br><em>Your questions receive priority processing.</em>',
+    '⚡ Query not in the gold vault yet. Try asking about advanced encryption, premium tools, or exclusive features.'
+];
+
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM STATUS HELPER
+═══════════════════════════════════════════════════════ */
+
+function isPremiumUser() {
+    return !!localStorage.getItem('cryptokit_premium_tier');
+}
+
+function getPremiumTier() {
+    return localStorage.getItem('cryptokit_premium_tier') || null;
+}
+
 
 /* ═══════════════════════════════════════════════════════
    MATCHING ENGINE
 ═══════════════════════════════════════════════════════ */
 
 function findMatch(q) {
+    if (typeof KB === 'undefined' || !KB || !KB.length) return null;
+    
     var query = q.toLowerCase().replace(/[?!.,]/g, '').trim();
     var words = query.split(/\s+/);
     var best  = null;
@@ -88,11 +121,30 @@ function toggleChat() {
 /* ── Welcome Message ── */
 function showWelcome() {
     var h   = (currentTheme === 'hacker');
-    var msg = h
-        ? '> GHOST TERMINAL ONLINE<br>> KB LOADED [' + KB.length + ' entries]<br>> SECURE CHANNEL ACTIVE<br><br>I am <strong>GHOST</strong>. Ask about encryption, hashing, or tools.<br><em>Type /help for commands.</em>'
-        : '👋 Hi! I\'m <strong>CryptoBot</strong>!<br><br>🔧 Find the <strong>right tool</strong><br>📚 <strong>Explain</strong> crypto concepts<br>🛡️ <strong>Security advice</strong><br><br>What can I help with?';
+    var isPremium = isPremiumUser();
+    
+    var msg;
+    var suggestions;
+    
+    if (h) {
+        if (isPremium) {
+            msg = '> ★ ELITE VIP TERMINAL ONLINE ★<br>> GOLD PROTOCOLS LOADED<br>> QUANTUM CHANNEL ACTIVE<br>> KB LOADED [' + (typeof KB !== 'undefined' ? KB.length : 0) + ' entries]<br><br>I am <strong>GHOST VIP</strong> 👑<br>Your elite crypto assistant.<br><em>Type /help for premium commands.</em>';
+            suggestions = ['Premium features', 'Advanced RSA', 'Elite encryption', '/vip'];
+        } else {
+            msg = '> GHOST TERMINAL ONLINE<br>> KB LOADED [' + (typeof KB !== 'undefined' ? KB.length : 0) + ' entries]<br>> SECURE CHANNEL ACTIVE<br><br>I am <strong>GHOST</strong> 👾<br>Ask about encryption, hashing, or tools.<br><em>Type /help for commands.</em>';
+            suggestions = ['What is SHA-256?', 'Is MD5 safe?', 'Show all tools', 'What is RSA?'];
+        }
+    } else {
+        if (isPremium) {
+            msg = '👑 Welcome, <strong>Premium Member</strong>!<br><br>I\'m <strong>CryptoBot Pro</strong><br><br>✨ Priority responses<br>🔐 Advanced tool access<br>📊 Detailed analytics<br>🎯 Personalized guidance<br><br>How may I assist you today?';
+            suggestions = ['Premium tools', 'Advanced crypto', 'VIP features', 'Show all tools'];
+        } else {
+            msg = '👋 Hi! I\'m <strong>CryptoBot</strong>!<br><br>🔧 Find the <strong>right tool</strong><br>📚 <strong>Explain</strong> crypto concepts<br>🛡️ <strong>Security advice</strong><br><br>What can I help with?';
+            suggestions = ['What is SHA-256?', 'Is MD5 safe?', 'Show all tools', 'What is RSA?'];
+        }
+    }
 
-    addBot(msg, ['What is SHA-256?', 'Is MD5 safe?', 'Show all tools', 'What is RSA?']);
+    addBot(msg, suggestions);
     msgCount++;
 }
 
@@ -105,16 +157,19 @@ function addBot(html, sug, tid, tn) {
 
     var msgs = document.getElementById('aiMessages');
     var h    = (currentTheme === 'hacker');
+    var isPremium = isPremiumUser();
 
     var wrapper = document.createElement('div');
     wrapper.className = 'ai-msg';
 
     var avatar = document.createElement('div');
     avatar.className   = 'ai-msg-avatar bot';
-    avatar.textContent = h ? '👾' : '🤖';
+    if (isPremium) avatar.classList.add('premium');
+    avatar.textContent = h ? (isPremium ? '👑' : '👾') : (isPremium ? '👑' : '🤖');
 
     var content = document.createElement('div');
     content.className  = 'ai-msg-content bot';
+    if (isPremium) content.classList.add('premium');
 
     var textDiv = document.createElement('div');
     textDiv.innerHTML  = html;
@@ -124,20 +179,34 @@ function addBot(html, sug, tid, tn) {
     if (tid) {
         var toolBtn = document.createElement('button');
         toolBtn.className = 'ai-tool-btn';
-        toolBtn.innerHTML = '<i class="fas fa-arrow-right"></i> ' + (h ? '> OPEN: ' : 'Open ') + tn;
-        toolBtn.onclick = (function(toolId, isHacker) {
+        if (isPremium) toolBtn.classList.add('premium');
+        
+        var btnIcon = isPremium ? '<i class="fas fa-crown"></i>' : '<i class="fas fa-arrow-right"></i>';
+        var btnPrefix = h ? (isPremium ? '> [VIP] OPEN: ' : '> OPEN: ') : (isPremium ? 'Open [VIP] ' : 'Open ');
+        toolBtn.innerHTML = btnIcon + ' ' + btnPrefix + tn;
+        
+        toolBtn.onclick = (function(toolId, isHacker, premiumStatus) {
             return function() {
                 var el = document.getElementById(toolId);
                 if (el) {
                     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    el.style.transition = 'box-shadow 0.3s';
-                    el.style.boxShadow  = isHacker
-                        ? '0 0 40px rgba(0,255,65,0.5)'
-                        : '0 0 40px rgba(108,99,255,0.4)';
-                    setTimeout(function() { el.style.boxShadow = ''; }, 2500);
+                    el.style.transition = 'box-shadow 0.4s';
+                    
+                    // Enhanced golden glow effect based on tier
+                    if (premiumStatus) {
+                        el.style.boxShadow = isHacker
+                            ? '0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 215, 0, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.1)'
+                            : '0 0 50px rgba(245, 166, 35, 0.6), 0 0 80px rgba(245, 166, 35, 0.3)';
+                    } else {
+                        el.style.boxShadow = isHacker
+                            ? '0 0 40px rgba(0, 255, 65, 0.5)'
+                            : '0 0 40px rgba(108, 99, 255, 0.4)';
+                    }
+                        
+                    setTimeout(function() { el.style.boxShadow = ''; }, 2800);
                 }
             };
-        })(tid, h);
+        })(tid, h, isPremium);
         content.appendChild(toolBtn);
     }
 
@@ -148,6 +217,7 @@ function addBot(html, sug, tid, tn) {
         for (var i = 0; i < sug.length; i++) {
             var sugBtn = document.createElement('button');
             sugBtn.className   = 'ai-suggestion-btn';
+            if (isPremium) sugBtn.classList.add('premium');
             sugBtn.textContent = h ? '> ' + sug[i] : sug[i];
             sugBtn.onclick = (function(s) {
                 return function() { sendQuery(s); };
@@ -160,9 +230,10 @@ function addBot(html, sug, tid, tn) {
     // Feedback Row
     var fb = document.createElement('div');
     fb.className = 'ai-feedback';
+    var thanksColor = isPremium ? '#FFD700' : 'var(--success)';
     fb.innerHTML =
         '<span>Helpful?</span>' +
-        '<button class="ai-fb-btn" onclick="this.parentElement.innerHTML=\'<span style=color:var(--success)>✅ Thanks!</span>\'">👍</button>' +
+        '<button class="ai-fb-btn" onclick="this.parentElement.innerHTML=\'<span style=color:' + thanksColor + '>' + (isPremium ? '👑 Thanks, VIP!' : '✅ Thanks!') + '</span>\'">👍</button>' +
         '<button class="ai-fb-btn" onclick="this.parentElement.innerHTML=\'<span style=color:var(--accent)>😔 Try rephrasing.</span>\'">👎</button>';
     content.appendChild(fb);
 
@@ -177,16 +248,19 @@ function addBot(html, sug, tid, tn) {
 function addUser(text) {
     var msgs = document.getElementById('aiMessages');
     var h    = (currentTheme === 'hacker');
+    var isPremium = isPremiumUser();
 
     var wrapper = document.createElement('div');
     wrapper.className = 'ai-msg user';
 
     var avatar = document.createElement('div');
     avatar.className   = 'ai-msg-avatar user';
-    avatar.textContent = h ? '💀' : '👤';
+    if (isPremium) avatar.classList.add('premium');
+    avatar.textContent = h ? (isPremium ? '⚡' : '💀') : (isPremium ? '⭐' : '👤');
 
     var content = document.createElement('div');
     content.className  = 'ai-msg-content user';
+    if (isPremium) content.classList.add('premium');
     content.textContent = text;
 
     wrapper.appendChild(content);
@@ -200,6 +274,7 @@ function addUser(text) {
 function showTyping() {
     var msgs = document.getElementById('aiMessages');
     var h    = (currentTheme === 'hacker');
+    var isPremium = isPremiumUser();
 
     var d  = document.createElement('div');
     d.className = 'ai-typing';
@@ -207,10 +282,12 @@ function showTyping() {
 
     var av = document.createElement('div');
     av.className   = 'ai-msg-avatar bot';
-    av.textContent = h ? '👾' : '🤖';
+    if (isPremium) av.classList.add('premium');
+    av.textContent = h ? (isPremium ? '👑' : '👾') : (isPremium ? '👑' : '🤖');
 
     var dots = document.createElement('div');
     dots.className = 'ai-typing-dots';
+    if (isPremium) dots.classList.add('premium');
     dots.innerHTML =
         '<div class="ai-typing-dot"></div>' +
         '<div class="ai-typing-dot"></div>' +
@@ -242,6 +319,7 @@ function sendMessage() {
 /* ── Process Query ── */
 function sendQuery(q) {
     var h = (currentTheme === 'hacker');
+    var isPremium = isPremiumUser();
 
     if (h && q.charAt(0) === '/') {
         handleCmd(q);
@@ -252,18 +330,25 @@ function sendQuery(q) {
     showTyping();
     msgCount++;
 
+    // Premium users get faster responses
+    var delay = isPremium ? (300 + Math.random() * 200) : (600 + Math.random() * 400);
+
     setTimeout(function() {
         hideTyping();
         var m = findMatch(q);
         if (m) {
             addBot(m.ans, m.sg || [], m.tid || null, m.tn || null);
         } else {
+            var fallbackList = isPremium ? premiumFallbacks : fallbacks;
+            var defaultSug = isPremium 
+                ? ['Premium tools', 'VIP features', 'Advanced crypto']
+                : ['Show all tools', 'Learn crypto', 'Security advice'];
             addBot(
-                fallbacks[Math.floor(Math.random() * fallbacks.length)],
-                ['Show all tools', 'Learn crypto', 'Security advice']
+                fallbackList[Math.floor(Math.random() * fallbackList.length)],
+                defaultSug
             );
         }
-    }, 600 + Math.random() * 400);
+    }, delay);
 }
 
 
@@ -271,12 +356,18 @@ function sendQuery(q) {
 function handleCmd(cmd) {
     addUser(cmd);
     showTyping();
+    var isPremium = isPremiumUser();
 
     setTimeout(function() {
         hideTyping();
         var c = cmd.toLowerCase().trim();
 
-        if      (c === '/help')    { addBot('> COMMANDS:<br>/tools /hash /rsa /encrypt /file /pass /sign /clear /about<br><br>Or just type naturally.', ['/tools', '/hash', '/rsa']); }
+        if      (c === '/help')    { 
+            var helpText = isPremium 
+                ? '> ★ VIP COMMANDS ★:<br>/tools /hash /rsa /encrypt /file /pass /sign<br>/vip /premium /elite /clear /about<br><br>Or just type naturally.'
+                : '> COMMANDS:<br>/tools /hash /rsa /encrypt /file /pass /sign /clear /about<br><br>Or just type naturally.';
+            addBot(helpText, isPremium ? ['/vip', '/premium', '/tools'] : ['/tools', '/hash', '/rsa']); 
+        }
         else if (c === '/tools')   { askCategory('tools'); }
         else if (c === '/hash')    { addBot('> LAUNCHING: Hash Generator...',       [], 'tool-hash',      'Hash Generator'); }
         else if (c === '/rsa')     { addBot('> LAUNCHING: RSA Generator...',        [], 'tool-rsa',       'RSA Key Generator'); }
@@ -284,6 +375,13 @@ function handleCmd(cmd) {
         else if (c === '/file')    { addBot('> LAUNCHING: File Integrity...',       [], 'tool-integrity', 'File Integrity Checker'); }
         else if (c === '/pass')    { addBot('> LAUNCHING: Password Tools...',       [], 'tool-password',  'Password Tools'); }
         else if (c === '/sign')    { addBot('> LAUNCHING: Digital Signature...',    [], 'tool-signature', 'Digital Signature'); }
+        else if (c === '/vip' || c === '/premium' || c === '/elite') {
+            if (isPremium) {
+                addBot('> ★ VIP STATUS: ACTIVE ★<br>> TIER: ' + (getPremiumTier() || 'PRO') + '<br>> GOLD PROTOCOLS: ENABLED<br>> PRIORITY QUEUE: BYPASSED<br><br>You have full access, Elite.', ['Premium tools', 'VIP features']);
+            } else {
+                askCategory('premium');
+            }
+        }
         else if (c === '/clear')   {
             document.getElementById('aiMessages').innerHTML = '';
             msgCount = 0;
@@ -318,10 +416,10 @@ function clearChat() {
 
 /* ══════════════════════════════════════════════════════
    ── Update AI Theme ──
-   Called every time mode switches (hacker ↔ normal).
-   Fixes: name stays "GHOST" when switching back to normal.
+   Called every time mode switches OR premium status changes
 ══════════════════════════════════════════════════════ */
 function updateAiTheme(isH) {
+    var isPremium = isPremiumUser();
 
     /* ── Header elements ── */
     var fabIcon  = document.getElementById('fabIcon');
@@ -329,32 +427,49 @@ function updateAiTheme(isH) {
     var aiName   = document.getElementById('aiName');
     var aiStatus = document.getElementById('aiStatusText');
     var aiInput  = document.querySelector('.ai-input');
+    var aiFab    = document.getElementById('aiFab');
+    var aiWindow = document.getElementById('aiChatWindow');
 
     /* ── Apply icon / name / status / placeholder ── */
-    if (fabIcon)  fabIcon.textContent  = isH ? '👾' : '🤖';
-    if (aiAvatar) aiAvatar.textContent = isH ? '👾' : '🤖';
-    if (aiStatus) aiStatus.textContent = isH ? 'ONLINE · SECURE' : 'Online · Ready';
+    if (fabIcon)  fabIcon.textContent  = isH ? (isPremium ? '👑' : '👾') : (isPremium ? '👑' : '🤖');
+    if (aiAvatar) aiAvatar.textContent = isH ? (isPremium ? '👑' : '👾') : (isPremium ? '👑' : '🤖');
+    if (aiStatus) aiStatus.textContent = isH ? (isPremium ? '★ ELITE · SECURE ★' : 'ONLINE · SECURE') : (isPremium ? '👑 PREMIUM · READY' : 'Online · Ready');
     if (aiInput)  aiInput.placeholder  = isH
-        ? '> TYPE QUERY OR /help...'
-        : 'Ask me anything about cryptography...';
+        ? (isPremium ? '> VIP QUERY OR /help...' : '> TYPE QUERY OR /help...')
+        : (isPremium ? 'Ask CryptoBot Pro anything...' : 'Ask me anything about cryptography...');
 
     /* ── FIX: Force name update with reflow trick ── */
     if (aiName) {
-        aiName.textContent   = '';          /* clear first         */
-        aiName.offsetHeight;                /* force browser reflow */
-        aiName.textContent   = isH ? 'GHOST' : 'CryptoBot'; /* set new name */
+        aiName.textContent   = '';          
+        aiName.offsetHeight;                
+        aiName.textContent   = isH ? (isPremium ? 'GHOST VIP 👑' : 'GHOST') : (isPremium ? 'CryptoBot Pro' : 'CryptoBot'); 
+    }
+
+    /* ── Apply Premium classes to FAB and Chat Window ── */
+    if (aiFab) {
+        if (isPremium) aiFab.classList.add('premium');
+        else aiFab.classList.remove('premium');
+    }
+    
+    if (aiWindow) {
+        if (isPremium) aiWindow.classList.add('premium');
+        else aiWindow.classList.remove('premium');
     }
 
     /* ── Update all existing bot avatars already in chat ── */
     var botAvatars = document.querySelectorAll('.ai-msg-avatar.bot');
     for (var i = 0; i < botAvatars.length; i++) {
-        botAvatars[i].textContent = isH ? '👾' : '🤖';
+        botAvatars[i].textContent = isH ? (isPremium ? '👑' : '👾') : (isPremium ? '👑' : '🤖');
+        if (isPremium) botAvatars[i].classList.add('premium');
+        else botAvatars[i].classList.remove('premium');
     }
 
     /* ── Update all existing user avatars already in chat ── */
     var userAvatars = document.querySelectorAll('.ai-msg-avatar.user');
     for (var i = 0; i < userAvatars.length; i++) {
-        userAvatars[i].textContent = isH ? '💀' : '👤';
+        userAvatars[i].textContent = isH ? (isPremium ? '⚡' : '💀') : (isPremium ? '⭐' : '👤');
+        if (isPremium) userAvatars[i].classList.add('premium');
+        else userAvatars[i].classList.remove('premium');
     }
 
     /* ── Update suggestion button prefixes ── */
@@ -366,12 +481,50 @@ function updateAiTheme(isH) {
         } else if (!isH && txt.substring(0, 2) === '> ') {
             sugBtns[i].textContent = txt.substring(2);
         }
+        if (isPremium) sugBtns[i].classList.add('premium');
+        else sugBtns[i].classList.remove('premium');
     }
 }
 
 
+/* ══════════════════════════════════════════════════════
+   ── Refresh UI when Premium Status Changes ──
+   Call this after user upgrades/downgrades premium
+══════════════════════════════════════════════════════ */
+function refreshPremiumUI() {
+    var isH = (currentTheme === 'hacker');
+    var isPremium = isPremiumUser();
+    
+    // Update AI Theme
+    updateAiTheme(isH);
+    
+    // Update body class for global premium styling
+    if (isPremium) {
+        document.body.classList.add('premium-user');
+    } else {
+        document.body.classList.remove('premium-user');
+    }
+    
+    // Refresh chat welcome if open
+    if (chatOpen) {
+        var msgs = document.getElementById('aiMessages');
+        if (msgs) msgs.innerHTML = '';
+        msgCount = 0;
+        showWelcome();
+    }
+    
+    // Restart matrix rain to apply gold colors immediately
+    if (isH) {
+        mFrameCount = 0; // Force re-check of premium status
+    }
+}
+
+// Expose globally for external upgrade handlers
+window.refreshPremiumUI = refreshPremiumUI;
+
+
 /* ═══════════════════════════════════════════════════════
-   PARTICLE CANVAS — Normal Mode
+   PARTICLE CANVAS — Normal Mode (with Premium Gold particles)
 ═══════════════════════════════════════════════════════ */
 
 var pCanvas = document.getElementById('particle-canvas');
@@ -386,7 +539,16 @@ resizePC();
 var particles = [];
 var HEX_CHARS = '0123456789ABCDEF';
 
+// Standard Normal Mode Colors
+var standardParticleColors = ['#6C63FF', '#00B4D8'];
+
+// Premium Normal Mode Colors (Gold/Amber)
+var premiumParticleColors = ['#F5A623', '#F76B1C', '#D48000', '#FFD700'];
+
 function createParticle() {
+    var isPremium = isPremiumUser();
+    var colorPool = isPremium ? premiumParticleColors : standardParticleColors;
+    
     return {
         x:       Math.random() * pCanvas.width,
         y:       Math.random() * pCanvas.height,
@@ -394,16 +556,30 @@ function createParticle() {
         speed:   Math.random() * 0.4 + 0.2,
         opacity: Math.random() * 0.3 + 0.1,
         char:    HEX_CHARS[Math.floor(Math.random() * HEX_CHARS.length)],
-        color:   Math.random() > 0.5 ? '#6C63FF' : '#00B4D8'
+        color:   colorPool[Math.floor(Math.random() * colorPool.length)]
     };
 }
 
 for (var i = 0; i < 60; i++) { particles.push(createParticle()); }
 
 var pAnimId;
+var pFrameCount = 0;
+var pIsPremium = false;
 
 function animateParticles() {
     if (currentTheme !== 'normal') return;
+    
+    // Cache premium check every 30 frames
+    if (pFrameCount++ % 30 === 0) {
+        var newPremium = isPremiumUser();
+        if (newPremium !== pIsPremium) {
+            pIsPremium = newPremium;
+            // Regenerate particles with new color pool
+            particles = [];
+            for (var i = 0; i < 60; i++) { particles.push(createParticle()); }
+        }
+    }
+    
     pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
 
     for (var i = 0; i < particles.length; i++) {
@@ -432,7 +608,7 @@ animateParticles();
 
 
 /* ═══════════════════════════════════════════════════════
-   MATRIX RAIN — Hacker Mode
+   MATRIX RAIN — Hacker Mode (With Premium Golden Matrix)
 ═══════════════════════════════════════════════════════ */
 
 var mCanvas = document.getElementById('matrix-canvas');
@@ -450,25 +626,45 @@ var columns      = Math.floor(mCanvas.width / fontSize);
 var drops        = [];
 for (var i = 0; i < columns; i++) drops[i] = 1;
 
-var matrixColors = [
+// Standard Hacker Green Colors
+var standardMatrixColors = [
     '#00FF41','#00FF41','#00FF41','#00FF41','#00FF41',
     '#39FF14','#39FF14','#CCFF00','#00E5FF'
 ];
 
+// Premium Hacker Gold Colors (Enhanced Elite Palette)
+var premiumMatrixColors = [
+    '#FFD700', '#FFD700', '#FFD700', '#FFD700',
+    '#FFED4E', '#FFED4E', '#FFA500', '#FFA500',
+    '#B39700', '#FFFFFF'
+];
+
 var mAnimId;
+var mFrameCount = 0;
+var mIsPremium  = false;
 
 function drawMatrix() {
     if (currentTheme !== 'hacker') return;
 
-    mCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    // Cache the premium check every 30 frames to save performance
+    if (mFrameCount++ % 30 === 0) {
+        mIsPremium = isPremiumUser();
+    }
+
+    var activeColors = mIsPremium ? premiumMatrixColors : standardMatrixColors;
+
+    // Slightly different fade for premium (deeper black for gold contrast)
+    mCtx.fillStyle = mIsPremium ? 'rgba(0, 0, 0, 0.06)' : 'rgba(0, 0, 0, 0.05)';
     mCtx.fillRect(0, 0, mCanvas.width, mCanvas.height);
     mCtx.font = fontSize + 'px Share Tech Mono';
 
     for (var i = 0; i < drops.length; i++) {
         var ch = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+        
         mCtx.fillStyle = (drops[i] * fontSize < 50)
             ? '#FFFFFF'
-            : matrixColors[Math.floor(Math.random() * matrixColors.length)];
+            : activeColors[Math.floor(Math.random() * activeColors.length)];
+            
         mCtx.fillText(ch, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > mCanvas.height && Math.random() > 0.975) {
@@ -492,7 +688,6 @@ window.addEventListener('resize', function() {
 
 /* ═══════════════════════════════════════════════════════
    TERMINAL SYSTEM — Clean Typewriter Animation
-   Single authoritative system. No duplicate runners.
 ═══════════════════════════════════════════════════════ */
 
 /* ── Terminal data for each OS ── */
@@ -755,6 +950,16 @@ var hackerBoot = [
     '> ACCESS GRANTED. WELCOME, HACKER. 🟢'
 ];
 
+var premiumHackerBoot = [
+    '> ★ INITIALIZING VIP ELITE MODE ★',
+    '> LOADING QUANTUM GOLD PROTOCOLS...',
+    '> BYPASSING ALL FIREWALLS...',
+    '> ACTIVATING GOLDEN NEON TERMINAL...',
+    '> UNLOCKING PREMIUM ENCRYPTION LAYERS...',
+    '> ENGAGING ELITE VISUAL SIGNATURE...',
+    '> ★ VIP ACCESS GRANTED. WELCOME, ELITE. 👑 ★'
+];
+
 var normalBoot = [
     '> SWITCHING TO NORMAL MODE...',
     '> RESTORING CLEAN INTERFACE...',
@@ -762,11 +967,28 @@ var normalBoot = [
     '> DONE. WELCOME BACK. ✓'
 ];
 
+var premiumNormalBoot = [
+    '> ★ SWITCHING TO PREMIUM NORMAL MODE ★',
+    '> RESTORING LUXURY INTERFACE...',
+    '> LOADING GOLD ACCENTS...',
+    '> DONE. WELCOME, PREMIUM MEMBER. 👑'
+];
+
 function showTransition(msgs, callback) {
     var overlay = document.getElementById('themeOverlay');
     var textEl  = document.getElementById('transitionText');
     overlay.classList.add('active');
     textEl.innerHTML = '';
+    
+    // Apply gold color for premium transitions
+    var isPremium = isPremiumUser();
+    if (isPremium) {
+        textEl.style.color = '#FFD700';
+        textEl.style.textShadow = '0 0 20px #FFD700';
+    } else {
+        textEl.style.color = '';
+        textEl.style.textShadow = '';
+    }
 
     var idx = 0;
 
@@ -820,9 +1042,6 @@ function mobileThemeSwitch() {
 
 /* ══════════════════════════════════════════════════════
    MAIN MODE SELECTOR
-   FIX: updateAiTheme() is now called BEFORE the chat
-        is cleared/re-shown so the header name is always
-        correct when showWelcome() reads currentTheme.
 ══════════════════════════════════════════════════════ */
 function selectMode(mode) {
 
@@ -836,7 +1055,15 @@ function selectMode(mode) {
     if (mode === currentTheme) return;
 
     var isGoingHacker = (mode === 'hacker');
-    var bootMsgs      = isGoingHacker ? hackerBoot : normalBoot;
+    var isPremium = isPremiumUser();
+    
+    // Select appropriate boot sequence based on tier
+    var bootMsgs;
+    if (isGoingHacker) {
+        bootMsgs = isPremium ? premiumHackerBoot : hackerBoot;
+    } else {
+        bootMsgs = isPremium ? premiumNormalBoot : normalBoot;
+    }
 
     showTransition(bootMsgs, function() {
 
@@ -853,14 +1080,15 @@ function selectMode(mode) {
             columns = Math.floor(mCanvas.width / fontSize);
             drops   = [];
             for (var i = 0; i < columns; i++) drops[i] = 1;
+            mFrameCount = 0; // Reset frame count to re-check premium
             drawMatrix();
 
             var mi = document.getElementById('modeIcon');
             var ml = document.getElementById('modeLabel');
             var cn = document.getElementById('checkNormal');
             var ch = document.getElementById('checkHacker');
-            if (mi) mi.textContent   = '💀';
-            if (ml) ml.textContent   = 'Hacker';
+            if (mi) mi.textContent   = isPremium ? '👑' : '💀';
+            if (ml) ml.textContent   = isPremium ? 'Elite' : 'Hacker';
             if (cn) cn.style.display = 'none';
             if (ch) ch.style.display = 'inline';
 
@@ -873,37 +1101,39 @@ function selectMode(mode) {
             cancelAnimationFrame(mAnimId);
             mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
 
+            pFrameCount = 0; // Reset to re-check premium colors
             animateParticles();
 
             var mi2 = document.getElementById('modeIcon');
             var ml2 = document.getElementById('modeLabel');
             var cn2 = document.getElementById('checkNormal');
             var ch2 = document.getElementById('checkHacker');
-            if (mi2) mi2.textContent   = '☀️';
-            if (ml2) ml2.textContent   = 'Normal';
+            if (mi2) mi2.textContent   = isPremium ? '⭐' : '☀️';
+            if (ml2) ml2.textContent   = isPremium ? 'Premium' : 'Normal';
             if (cn2) cn2.style.display = 'inline';
             if (ch2) ch2.style.display = 'none';
         }
 
-        /*
-         * ── FIX: updateAiTheme FIRST ──
-         * Update the header name/icon BEFORE clearing the chat.
-         * This guarantees aiName reads the correct value
-         * and showWelcome() uses the already-updated currentTheme.
-         */
+        /* ── Update AI Theme and refresh chat automatically ── */
         updateAiTheme(isGoingHacker);
+        
+        /* ── Update body class for global premium styling ── */
+        if (isPremium) {
+            document.body.classList.add('premium-user');
+        } else {
+            document.body.classList.remove('premium-user');
+        }
 
-        /* ── Then reset chat (always, not just when open) ── */
         var msgs = document.getElementById('aiMessages');
         if (msgs) msgs.innerHTML = '';
         msgCount = 0;
 
-        /* Only re-show welcome if chat window is actually open */
         if (chatOpen) {
             showWelcome();
         }
     });
 }
+
 
 /* Backwards-compat wrapper */
 function toggleTheme() {
@@ -920,11 +1150,11 @@ var scrollTopBtn = document.getElementById('scrollTop');
 
 window.addEventListener('scroll', function() {
     if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-        scrollTopBtn.classList.add('visible');
+        if (navbar) navbar.classList.add('scrolled');
+        if (scrollTopBtn) scrollTopBtn.classList.add('visible');
     } else {
-        navbar.classList.remove('scrolled');
-        scrollTopBtn.classList.remove('visible');
+        if (navbar) navbar.classList.remove('scrolled');
+        if (scrollTopBtn) scrollTopBtn.classList.remove('visible');
     }
 });
 
@@ -1064,6 +1294,85 @@ function copyResult(text) {
 
 
 /* ═══════════════════════════════════════════════════════
+   PREMIUM UPGRADE HANDLERS
+═══════════════════════════════════════════════════════ */
+
+/* Simulate upgrade (for testing) - Call this from your payment success handler */
+function activatePremium(tier) {
+    tier = tier || 'pro';
+    localStorage.setItem('cryptokit_premium_tier', tier);
+    localStorage.setItem('cryptokit_premium_since', new Date().toISOString());
+    
+    // Show upgrade celebration
+    showPremiumUpgradeNotification(tier);
+    
+    // Refresh all UI
+    refreshPremiumUI();
+}
+
+/* Downgrade / cancel premium */
+function deactivatePremium() {
+    localStorage.removeItem('cryptokit_premium_tier');
+    localStorage.removeItem('cryptokit_premium_since');
+    refreshPremiumUI();
+}
+
+/* Expose globally */
+window.activatePremium = activatePremium;
+window.deactivatePremium = deactivatePremium;
+window.isPremiumUser = isPremiumUser;
+window.getPremiumTier = getPremiumTier;
+
+
+/* Show upgrade celebration overlay */
+function showPremiumUpgradeNotification(tier) {
+    var overlay = document.createElement('div');
+    overlay.style.cssText = 
+        'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);' +
+        'z-index:99999;display:flex;align-items:center;justify-content:center;' +
+        'animation:fadeIn 0.4s ease;backdrop-filter:blur(10px);';
+    
+    var box = document.createElement('div');
+    box.style.cssText = 
+        'text-align:center;color:#FFD700;font-family:"Space Grotesk",sans-serif;' +
+        'padding:60px 40px;border-radius:24px;' +
+        'background:linear-gradient(135deg,rgba(20,15,0,0.95),rgba(40,30,0,0.9));' +
+        'border:2px solid #FFD700;' +
+        'box-shadow:0 0 80px rgba(255,215,0,0.5),inset 0 0 40px rgba(255,215,0,0.1);' +
+        'max-width:500px;animation:crownPop 0.6s cubic-bezier(0.34,1.56,0.64,1);';
+    
+    box.innerHTML = 
+        '<div style="font-size:80px;margin-bottom:20px;animation:crown-float 2s ease-in-out infinite;">👑</div>' +
+        '<h1 style="font-size:32px;font-weight:800;margin-bottom:12px;letter-spacing:2px;text-shadow:0 0 20px #FFD700;">WELCOME TO VIP</h1>' +
+        '<p style="font-size:16px;opacity:0.9;margin-bottom:30px;">You now have <strong style="color:#FFED4E;">' + tier.toUpperCase() + '</strong> access</p>' +
+        '<button onclick="this.parentElement.parentElement.remove()" style="' +
+        'padding:14px 40px;border:none;border-radius:12px;font-family:inherit;font-weight:700;' +
+        'background:linear-gradient(135deg,#FFED4E,#FFD700,#FFA500);color:#000;cursor:pointer;' +
+        'font-size:14px;letter-spacing:2px;text-transform:uppercase;' +
+        'box-shadow:0 0 30px rgba(255,215,0,0.5);">ENTER</button>';
+    
+    overlay.appendChild(box);
+    document.body.appendChild(overlay);
+    
+    // Add animation styles if not present
+    if (!document.getElementById('premium-anim-styles')) {
+        var style = document.createElement('style');
+        style.id = 'premium-anim-styles';
+        style.textContent = 
+            '@keyframes fadeIn { from{opacity:0;} to{opacity:1;} }' +
+            '@keyframes crownPop { from{transform:scale(0.5);opacity:0;} to{transform:scale(1);opacity:1;} }' +
+            '@keyframes crown-float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }';
+        document.head.appendChild(style);
+    }
+    
+    // Auto-close after 5 seconds
+    setTimeout(function() {
+        if (overlay.parentElement) overlay.remove();
+    }, 5000);
+}
+
+
+/* ═══════════════════════════════════════════════════════
    INTERSECTION OBSERVERS
 ═══════════════════════════════════════════════════════ */
 
@@ -1138,12 +1447,17 @@ function submitFeedback(event) {
     var form   = document.getElementById('feedbackForm');
     var inputs = form.querySelectorAll('input, textarea');
     var name   = inputs[0].value;
+    var isPremium = isPremiumUser();
 
     var wrapper = document.querySelector('.feedback-form-wrapper');
+    var celebrateIcon = isPremium ? '👑' : '🎉';
+    var thankyouColor = isPremium ? '#FFD700' : 'var(--text-primary)';
+    var thankyouTitle = isPremium ? 'Thank You, VIP ' + name + '!' : 'Thank You, ' + name + '!';
+    
     wrapper.innerHTML =
         '<div style="text-align:center;padding:40px 20px;">' +
-        '<div style="font-size:48px;margin-bottom:16px;">🎉</div>' +
-        '<h3 style="font-family:Space Grotesk,sans-serif;font-size:22px;font-weight:700;color:var(--text-primary);margin-bottom:8px;">Thank You, ' + name + '!</h3>' +
+        '<div style="font-size:48px;margin-bottom:16px;">' + celebrateIcon + '</div>' +
+        '<h3 style="font-family:Space Grotesk,sans-serif;font-size:22px;font-weight:700;color:' + thankyouColor + ';margin-bottom:8px;' + (isPremium ? 'text-shadow:0 0 15px #FFD700;' : '') + '">' + thankyouTitle + '</h3>' +
         '<p style="color:var(--text-secondary);font-size:15px;">Your ' + currentRating + '-star feedback has been received.<br>We truly appreciate your input!</p>' +
         '</div>';
 
@@ -1152,7 +1466,7 @@ function submitFeedback(event) {
 
 
 /* ═══════════════════════════════════════════════════════
-   PAGE LOAD — Restore saved theme + boot terminal
+   PAGE LOAD — Restore saved theme + boot terminal + Auth Checks
 ═══════════════════════════════════════════════════════ */
 
 window.addEventListener('DOMContentLoaded', function() {
@@ -1160,44 +1474,30 @@ window.addEventListener('DOMContentLoaded', function() {
     /* 1. Boot the terminal (mac by default) */
     setTimeout(function() { startTerminal('mac'); }, 600);
 
-    /* 2. Restore saved theme (silently, no overlay) */
+    /* 2. Apply premium class to body if user is premium */
+    if (isPremiumUser()) {
+        document.body.classList.add('premium-user');
+    }
+
+    /* 3. Restore saved theme (silently, no overlay) */
     var savedTheme = localStorage.getItem('cryptokit-theme');
     if (savedTheme && savedTheme !== currentTheme) {
         currentTheme = (savedTheme === 'hacker') ? 'normal' : 'hacker';
         selectMode(savedTheme);
+    } else {
+        // Even without switching theme, update AI to reflect premium status
+        updateAiTheme(currentTheme === 'hacker');
     }
+    
+    /* 4. Sync Auth Buttons on load (if window func is available) */
+    if (typeof window.updateAuthButtons === 'function') {
+        window.updateAuthButtons();
+    }
+    
+    /* 5. Listen for storage changes (premium status changes in other tabs) */
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'cryptokit_premium_tier') {
+            refreshPremiumUI();
+        }
+    });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
