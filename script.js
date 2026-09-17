@@ -192,7 +192,6 @@ function addBot(html, sug, tid, tn) {
                     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     el.style.transition = 'box-shadow 0.4s';
                     
-                    // Enhanced golden glow effect based on tier
                     if (premiumStatus) {
                         el.style.boxShadow = isHacker
                             ? '0 0 60px rgba(255, 215, 0, 0.8), 0 0 100px rgba(255, 215, 0, 0.4), inset 0 0 30px rgba(255, 215, 0, 0.1)'
@@ -377,7 +376,7 @@ function handleCmd(cmd) {
         else if (c === '/sign')    { addBot('> LAUNCHING: Digital Signature...',    [], 'tool-signature', 'Digital Signature'); }
         else if (c === '/vip' || c === '/premium' || c === '/elite') {
             if (isPremium) {
-                addBot('> ★ VIP STATUS: ACTIVE ★<br>> TIER: ' + (getPremiumTier() || 'PRO') + '<br>> GOLD PROTOCOLS: ENABLED<br>> PRIORITY QUEUE: BYPASSED<br><br>You have full access, Elite.', ['Premium tools', 'VIP features']);
+                addBot('> ★ VIP STATUS: ACTIVE ★<br>> TIER: ' + (getPremiumTier() || 'PRO').toUpperCase() + '<br>> GOLD PROTOCOLS: ENABLED<br>> PRIORITY QUEUE: BYPASSED<br><br>You have full access, Elite.', ['Premium tools', 'VIP features']);
             } else {
                 askCategory('premium');
             }
@@ -528,13 +527,14 @@ window.refreshPremiumUI = refreshPremiumUI;
 ═══════════════════════════════════════════════════════ */
 
 var pCanvas = document.getElementById('particle-canvas');
-var pCtx    = pCanvas.getContext('2d');
+var pCtx    = pCanvas ? pCanvas.getContext('2d') : null;
 
 function resizePC() {
+    if (!pCanvas) return;
     pCanvas.width  = window.innerWidth;
     pCanvas.height = window.innerHeight;
 }
-resizePC();
+if (pCanvas) resizePC();
 
 var particles = [];
 var HEX_CHARS = '0123456789ABCDEF';
@@ -546,6 +546,7 @@ var standardParticleColors = ['#6C63FF', '#00B4D8'];
 var premiumParticleColors = ['#F5A623', '#F76B1C', '#D48000', '#FFD700'];
 
 function createParticle() {
+    if (!pCanvas) return {};
     var isPremium = isPremiumUser();
     var colorPool = isPremium ? premiumParticleColors : standardParticleColors;
     
@@ -560,14 +561,16 @@ function createParticle() {
     };
 }
 
-for (var i = 0; i < 60; i++) { particles.push(createParticle()); }
+if (pCanvas) {
+    for (var i = 0; i < 60; i++) { particles.push(createParticle()); }
+}
 
 var pAnimId;
 var pFrameCount = 0;
 var pIsPremium = false;
 
 function animateParticles() {
-    if (currentTheme !== 'normal') return;
+    if (currentTheme !== 'normal' || !pCanvas) return;
     
     // Cache premium check every 30 frames
     if (pFrameCount++ % 30 === 0) {
@@ -604,7 +607,7 @@ function animateParticles() {
     pAnimId = requestAnimationFrame(animateParticles);
 }
 
-animateParticles();
+if (pCanvas) animateParticles();
 
 
 /* ═══════════════════════════════════════════════════════
@@ -612,17 +615,18 @@ animateParticles();
 ═══════════════════════════════════════════════════════ */
 
 var mCanvas = document.getElementById('matrix-canvas');
-var mCtx    = mCanvas.getContext('2d');
+var mCtx    = mCanvas ? mCanvas.getContext('2d') : null;
 
 function resizeMC() {
+    if (!mCanvas) return;
     mCanvas.width  = window.innerWidth;
     mCanvas.height = window.innerHeight;
 }
-resizeMC();
+if (mCanvas) resizeMC();
 
 var matrixChars  = 'アイウエオカキクケコサシスセソ0123456789ABCDEF{}[]<>|/*&^%$#@!';
 var fontSize     = 14;
-var columns      = Math.floor(mCanvas.width / fontSize);
+var columns      = mCanvas ? Math.floor(mCanvas.width / fontSize) : 0;
 var drops        = [];
 for (var i = 0; i < columns; i++) drops[i] = 1;
 
@@ -644,7 +648,7 @@ var mFrameCount = 0;
 var mIsPremium  = false;
 
 function drawMatrix() {
-    if (currentTheme !== 'hacker') return;
+    if (currentTheme !== 'hacker' || !mCanvas) return;
 
     // Cache the premium check every 30 frames to save performance
     if (mFrameCount++ % 30 === 0) {
@@ -680,9 +684,11 @@ function drawMatrix() {
 window.addEventListener('resize', function() {
     resizePC();
     resizeMC();
-    columns = Math.floor(mCanvas.width / fontSize);
-    drops   = [];
-    for (var i = 0; i < columns; i++) drops[i] = 1;
+    if (mCanvas) {
+        columns = Math.floor(mCanvas.width / fontSize);
+        drops   = [];
+        for (var i = 0; i < columns; i++) drops[i] = 1;
+    }
 });
 
 
@@ -937,9 +943,9 @@ function switchTermOS(os) {
 }
 
 
-/* ═══════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════
    THEME TOGGLE — Boot Messages & Transition
-═══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════ */
 
 var hackerBoot = [
     '> INITIALIZING HACKER MODE...',
@@ -977,6 +983,10 @@ var premiumNormalBoot = [
 function showTransition(msgs, callback) {
     var overlay = document.getElementById('themeOverlay');
     var textEl  = document.getElementById('transitionText');
+    if (!overlay || !textEl) {
+        callback();
+        return;
+    }
     overlay.classList.add('active');
     textEl.innerHTML = '';
     
@@ -1074,12 +1084,14 @@ function selectMode(mode) {
             localStorage.setItem('cryptokit-theme', 'hacker');
 
             cancelAnimationFrame(pAnimId);
-            pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+            if (pCtx && pCanvas) pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
 
-            mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
-            columns = Math.floor(mCanvas.width / fontSize);
-            drops   = [];
-            for (var i = 0; i < columns; i++) drops[i] = 1;
+            if (mCtx && mCanvas) {
+                mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+                columns = Math.floor(mCanvas.width / fontSize);
+                drops   = [];
+                for (var i = 0; i < columns; i++) drops[i] = 1;
+            }
             mFrameCount = 0; // Reset frame count to re-check premium
             drawMatrix();
 
@@ -1099,7 +1111,7 @@ function selectMode(mode) {
             localStorage.setItem('cryptokit-theme', 'normal');
 
             cancelAnimationFrame(mAnimId);
-            mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
+            if (mCtx && mCanvas) mCtx.clearRect(0, 0, mCanvas.width, mCanvas.height);
 
             pFrameCount = 0; // Reset to re-check premium colors
             animateParticles();
@@ -1159,7 +1171,8 @@ window.addEventListener('scroll', function() {
 });
 
 function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
+    var mm = document.getElementById('mobileMenu');
+    if (mm) mm.classList.toggle('open');
 }
 
 
@@ -1179,18 +1192,20 @@ function setDemoTab(btn, mode) {
     var inp = document.getElementById('demoInput');
 
     if (mode === 'hash') {
-        sel.style.display = 'block';
-        inp.placeholder   = 'Type text to hash...';
+        if (sel) sel.style.display = 'block';
+        if (inp) inp.placeholder   = 'Type text to hash...';
     } else if (mode === 'base64') {
-        sel.style.display = 'none';
-        inp.placeholder   = 'Type text to encode in Base64...';
+        if (sel) sel.style.display = 'none';
+        if (inp) inp.placeholder   = 'Type text to encode in Base64...';
     } else {
-        sel.style.display = 'none';
-        inp.placeholder   = 'Enter a password to check strength...';
+        if (sel) sel.style.display = 'none';
+        if (inp) inp.placeholder   = 'Enter a password to check strength...';
     }
 
-    document.getElementById('demoResult').innerHTML =
-        '<span class="demo-result-placeholder">Your result will appear here...</span>';
+    var res = document.getElementById('demoResult');
+    if (res) {
+        res.innerHTML = '<span class="demo-result-placeholder">Your result will appear here...</span>';
+    }
 }
 
 function sha256Hash(msg) {
@@ -1236,8 +1251,11 @@ function getPassStrength(p) {
 }
 
 function runDemo() {
-    var val = document.getElementById('demoInput').value;
+    var inputEl = document.getElementById('demoInput');
     var res = document.getElementById('demoResult');
+    if (!inputEl || !res) return;
+
+    var val = inputEl.value;
 
     if (!val.trim()) {
         res.innerHTML = '<span class="demo-result-placeholder">Your result will appear here...</span>';
@@ -1245,7 +1263,8 @@ function runDemo() {
     }
 
     if (demoMode === 'hash') {
-        var algo = document.getElementById('demoAlgo').value;
+        var algoEl = document.getElementById('demoAlgo');
+        var algo = algoEl ? algoEl.value : 'sha256';
         var hashPromise;
 
         if      (algo === 'sha256') hashPromise = sha256Hash(val);
@@ -1297,35 +1316,37 @@ function copyResult(text) {
    PREMIUM UPGRADE HANDLERS
 ═══════════════════════════════════════════════════════ */
 
-/* Simulate upgrade (for testing) - Call this from your payment success handler */
 function activatePremium(tier) {
-    tier = tier || 'pro';
+    tier = (tier || 'gold').toLowerCase();
     localStorage.setItem('cryptokit_premium_tier', tier);
     localStorage.setItem('cryptokit_premium_since', new Date().toISOString());
     
-    // Show upgrade celebration
     showPremiumUpgradeNotification(tier);
-    
-    // Refresh all UI
     refreshPremiumUI();
 }
 
-/* Downgrade / cancel premium */
 function deactivatePremium() {
     localStorage.removeItem('cryptokit_premium_tier');
     localStorage.removeItem('cryptokit_premium_since');
     refreshPremiumUI();
 }
 
-/* Expose globally */
 window.activatePremium = activatePremium;
 window.deactivatePremium = deactivatePremium;
 window.isPremiumUser = isPremiumUser;
 window.getPremiumTier = getPremiumTier;
 
 
-/* Show upgrade celebration overlay */
 function showPremiumUpgradeNotification(tier) {
+    var isSilver = (tier === 'silver' || tier === 'pro');
+    
+    var colorMain  = isSilver ? '#C0C0C0' : '#FFD700';
+    var colorLight = isSilver ? '#FFFFFF' : '#FFED4E';
+    var colorDark  = isSilver ? '#808080' : '#FFA500';
+    var icon       = isSilver ? '🛡️' : '👑';
+    var tierName   = isSilver ? 'ADVANCE (SILVER)' : 'QUANTUM (GOLD)';
+    var rgbShadow  = isSilver ? '192,192,192' : '255,215,0';
+    
     var overlay = document.createElement('div');
     overlay.style.cssText = 
         'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.85);' +
@@ -1334,27 +1355,26 @@ function showPremiumUpgradeNotification(tier) {
     
     var box = document.createElement('div');
     box.style.cssText = 
-        'text-align:center;color:#FFD700;font-family:"Space Grotesk",sans-serif;' +
+        'text-align:center;color:' + colorMain + ';font-family:"Space Grotesk",sans-serif;' +
         'padding:60px 40px;border-radius:24px;' +
-        'background:linear-gradient(135deg,rgba(20,15,0,0.95),rgba(40,30,0,0.9));' +
-        'border:2px solid #FFD700;' +
-        'box-shadow:0 0 80px rgba(255,215,0,0.5),inset 0 0 40px rgba(255,215,0,0.1);' +
+        'background:linear-gradient(135deg,rgba(20,20,20,0.95),rgba(40,40,40,0.9));' +
+        'border:2px solid ' + colorMain + ';' +
+        'box-shadow:0 0 80px rgba(' + rgbShadow + ',0.5),inset 0 0 40px rgba(' + rgbShadow + ',0.1);' +
         'max-width:500px;animation:crownPop 0.6s cubic-bezier(0.34,1.56,0.64,1);';
     
     box.innerHTML = 
-        '<div style="font-size:80px;margin-bottom:20px;animation:crown-float 2s ease-in-out infinite;">👑</div>' +
-        '<h1 style="font-size:32px;font-weight:800;margin-bottom:12px;letter-spacing:2px;text-shadow:0 0 20px #FFD700;">WELCOME TO VIP</h1>' +
-        '<p style="font-size:16px;opacity:0.9;margin-bottom:30px;">You now have <strong style="color:#FFED4E;">' + tier.toUpperCase() + '</strong> access</p>' +
+        '<div style="font-size:80px;margin-bottom:20px;animation:crown-float 2s ease-in-out infinite;">' + icon + '</div>' +
+        '<h1 style="font-size:32px;font-weight:800;margin-bottom:12px;letter-spacing:2px;text-shadow:0 0 20px ' + colorMain + ';">WELCOME TO VIP</h1>' +
+        '<p style="font-size:16px;opacity:0.9;margin-bottom:30px;color:#fff;">You now have <strong style="color:' + colorLight + ';">' + tierName + '</strong> access</p>' +
         '<button onclick="this.parentElement.parentElement.remove()" style="' +
         'padding:14px 40px;border:none;border-radius:12px;font-family:inherit;font-weight:700;' +
-        'background:linear-gradient(135deg,#FFED4E,#FFD700,#FFA500);color:#000;cursor:pointer;' +
+        'background:linear-gradient(135deg,' + colorLight + ',' + colorMain + ',' + colorDark + ');color:#000;cursor:pointer;' +
         'font-size:14px;letter-spacing:2px;text-transform:uppercase;' +
-        'box-shadow:0 0 30px rgba(255,215,0,0.5);">ENTER</button>';
+        'box-shadow:0 0 30px rgba(' + rgbShadow + ',0.5);">ENTER</button>';
     
     overlay.appendChild(box);
     document.body.appendChild(overlay);
     
-    // Add animation styles if not present
     if (!document.getElementById('premium-anim-styles')) {
         var style = document.createElement('style');
         style.id = 'premium-anim-styles';
@@ -1365,7 +1385,6 @@ function showPremiumUpgradeNotification(tier) {
         document.head.appendChild(style);
     }
     
-    // Auto-close after 5 seconds
     setTimeout(function() {
         if (overlay.parentElement) overlay.remove();
     }, 5000);
@@ -1445,11 +1464,15 @@ function submitFeedback(event) {
     if (currentRating === 0) { alert('Please select a rating!'); return false; }
 
     var form   = document.getElementById('feedbackForm');
+    if (!form) return false;
+
     var inputs = form.querySelectorAll('input, textarea');
-    var name   = inputs[0].value;
+    var name   = inputs[0] ? inputs[0].value : 'User';
     var isPremium = isPremiumUser();
 
     var wrapper = document.querySelector('.feedback-form-wrapper');
+    if (!wrapper) return false;
+
     var celebrateIcon = isPremium ? '👑' : '🎉';
     var thankyouColor = isPremium ? '#FFD700' : 'var(--text-primary)';
     var thankyouTitle = isPremium ? 'Thank You, VIP ' + name + '!' : 'Thank You, ' + name + '!';
@@ -1485,19 +1508,19 @@ window.addEventListener('DOMContentLoaded', function() {
         currentTheme = (savedTheme === 'hacker') ? 'normal' : 'hacker';
         selectMode(savedTheme);
     } else {
-        // Even without switching theme, update AI to reflect premium status
         updateAiTheme(currentTheme === 'hacker');
     }
     
-    /* 4. Sync Auth Buttons on load (if window func is available) */
+    /* 4. Sync Auth Buttons on load */
     if (typeof window.updateAuthButtons === 'function') {
         window.updateAuthButtons();
     }
     
-    /* 5. Listen for storage changes (premium status changes in other tabs) */
+    /* 5. Listen for storage changes */
     window.addEventListener('storage', function(e) {
         if (e.key === 'cryptokit_premium_tier') {
             refreshPremiumUI();
         }
     });
+
 });

@@ -155,24 +155,157 @@
         }
 
         /* ═══════════════════════════════════
-           FIX: Tool cards always clickable
+           RESTORED: Base Card Styles
         ═══════════════════════════════════ */
         .tool-card {
-            display: block;
-            text-decoration: none;
-            color: inherit;
+            border-radius: 16px; padding: 28px;
+            transition: all 0.4s; cursor: pointer;
+            position: relative; overflow: hidden; display: block;
+            text-decoration: none; color: inherit;
+        }
+        [data-theme="normal"] .tool-card {
+            background: #fff; border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+        [data-theme="hacker"] .tool-card {
+            background: #050505; border: 1px solid rgba(0, 255, 65, 0.15);
+        }
+        .tool-card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            opacity: 0; transition: opacity 0.4s;
+        }
+        [data-theme="normal"] .tool-card::before {
+            background: linear-gradient(90deg, #6C63FF, #00B4D8);
+        }
+        [data-theme="hacker"] .tool-card::before {
+            background: linear-gradient(90deg, #00FF41, #00FFFF);
+            box-shadow: 0 0 10px #00FF41;
+        }
+        .tool-card:hover::before { opacity: 1; }
+        [data-theme="normal"] .tool-card:hover {
+            border-color: rgba(108, 99, 255, 0.4);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+        [data-theme="hacker"] .tool-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 0 25px var(--primary-glow);
+            animation: none;
+        }
+
+        .feature-card { border-radius: 14px; padding: 22px; transition: all 0.3s; }
+        [data-theme="normal"] .feature-card {
+            background: #fff; border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+        [data-theme="hacker"] .feature-card {
+            background: #050505; border: 1px solid rgba(0, 255, 65, 0.1);
+        }
+        [data-theme="normal"] .feature-card:hover {
+            border-color: rgba(108, 99, 255, 0.3);
+            box-shadow: var(--shadow-hover);
+        }
+        [data-theme="hacker"] .feature-card:hover {
+            border-color: rgba(0, 255, 65, 0.4); animation: none;
+        }
+
+        .stat-card {
+            border-radius: 16px; padding: 28px 20px;
+            text-align: center; transition: all 0.3s;
+        }
+        [data-theme="normal"] .stat-card {
+            background: #fff; border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow);
+        }
+        [data-theme="hacker"] .stat-card {
+            background: #050505; border: 1px solid rgba(0, 255, 65, 0.15);
+        }
+        [data-theme="normal"] .stat-card:hover {
+            transform: translateY(-4px); box-shadow: var(--shadow-hover);
+        }
+        [data-theme="hacker"] .stat-card:hover {
+            transform: translateY(-4px); border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow); animation: none;
+        }
+
+        .review-card {
+            border-radius: 16px; padding: 28px; transition: all 0.3s;
+        }
+        [data-theme="normal"] .review-card {
+            background: #fff; border: 1px solid var(--glass-border); box-shadow: var(--shadow);
+        }
+        [data-theme="hacker"] .review-card {
+            background: #050505; border: 1px solid rgba(0, 255, 65, 0.12);
+        }
+        [data-theme="normal"] .review-card:hover {
+            box-shadow: var(--shadow-hover); transform: translateY(-4px);
+        }
+        [data-theme="hacker"] .review-card:hover {
+            border-color: rgba(0, 255, 65, 0.4); transform: translateY(-4px);
+        }
+
+        .tools-section, .tools-grid { display: block !important; visibility: visible !important; opacity: 1 !important; }
+        .tools-grid { display: grid !important; }
+
+        /* ═══════════════════════════════════
+           USE NOW BUTTON ON TOOL CARDS
+        ═══════════════════════════════════ */
+        .tool-cta.use-now-btn {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px; 
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            opacity: 1 !important;
+            transform: none !important;
+            width: 100%;
+            box-sizing: border-box;
+            transition: all 0.25s ease;
             cursor: pointer;
         }
-        .tools-section {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
+        /* Normal mode */
+        [data-theme="normal"] .tool-cta.use-now-btn {
+            background: linear-gradient(135deg, #6C63FF, #8B5CF6);
+            color: #fff !important;
+            box-shadow: 0 4px 14px rgba(108, 99, 255, 0.35);
         }
-        .tools-grid {
-            display: grid;
-            visibility: visible !important;
-            opacity: 1 !important;
+        [data-theme="normal"] .tool-card:hover .tool-cta.use-now-btn {
+            background: linear-gradient(135deg, #5b54e6, #7c4fe0);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.5);
+            transform: translateY(-2px) !important;
         }
+        /* Hacker mode */
+        [data-theme="hacker"] .tool-cta.use-now-btn {
+            background: transparent;
+            color: #00FF41 !important;
+            border: 1px solid #00FF41;
+            box-shadow: 0 0 12px rgba(0, 255, 65, 0.3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        [data-theme="hacker"] .tool-card:hover .tool-cta.use-now-btn {
+            background: #00FF41;
+            color: #000 !important;
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
+        }
+        /* Premium active gold tint */
+        html.premium-active .tool-cta.use-now-btn {
+            background: linear-gradient(135deg, #fbbf24, #d97706) !important;
+            color: #000 !important;
+            border: none !important;
+            box-shadow: 0 4px 14px rgba(251, 191, 36, 0.4) !important;
+        }
+        html.premium-active .tool-card:hover .tool-cta.use-now-btn {
+            box-shadow: 0 6px 22px rgba(251, 191, 36, 0.55) !important;
+            transform: translateY(-2px) !important;
+        }
+
 
         /* ═══════════════════════════════════
            FIX: Live Demo centering
@@ -210,7 +343,6 @@
             width: 100%;
             box-sizing: border-box;
         }
-
         .nav-logo {
             display: flex !important;
             align-items: center !important;
@@ -218,7 +350,6 @@
             flex-shrink: 0 !important;
             text-decoration: none !important;
         }
-
         .nav-premium-indicator {
             display: none; 
             align-items: center !important;
@@ -234,7 +365,6 @@
             margin-left: 0 !important;
         }
         html.premium-active .nav-premium-indicator { display: inline-flex !important; }
-
         .nav-links {
             display: flex !important;
             align-items: center !important;
@@ -245,7 +375,6 @@
             padding: 0 !important;
             list-style: none !important;
         }
-
         .nav-links li a {
             display: inline-flex !important;
             align-items: center !important;
@@ -255,7 +384,6 @@
             font-size: 15px !important;
             font-weight: 500 !important;
         }
-
         .nav-actions {
             display: flex !important;
             align-items: center !important;
@@ -265,9 +393,7 @@
         }
 
         /* Standardize all action buttons */
-        .btn-nav-auth, 
-        .btn-back-normal,
-        .btn-nav-cta {
+        .btn-nav-auth, .btn-back-normal, .btn-nav-cta {
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -284,8 +410,6 @@
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
-        /* Auth Toggle Button */
         .btn-nav-auth {
             gap: 6px !important;
             background: rgba(255,255,255,0.05) !important;
@@ -296,10 +420,8 @@
             background: rgba(255,255,255,0.1) !important;
             transform: translateY(-1px);
         }
-
-        /* BACK TO NORMAL MODE BUTTON */
         .btn-back-normal {
-            display: none !important; /* Hidden by default */
+            display: none !important;
             gap: 6px !important;
             background: rgba(255,255,255,0.05) !important;
             color: var(--text-primary, #fff) !important;
@@ -320,16 +442,21 @@
             .hamburger { display: block !important; } 
         }
 
-        /* ═══════════════════════════════════
-           PREMIUM SECTION & PRICING
-        ═══════════════════════════════════ */
+        /* ═══════════════════════════════════════════════════════
+           PREMIUM SECTION & PERFECT EQUIDISTANT ALIGNMENT FIX
+        ═══════════════════════════════════════════════════════ */
         .premium-section {
             padding: 100px 20px;
             position: relative;
             z-index: 10;
             background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(124,58,237,0.04) 50%, rgba(0,0,0,0) 100%);
         }
-        .premium-container { max-width: 1200px; margin: 0 auto; }
+        .premium-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            width: 100%;
+            box-sizing: border-box;
+        }
         .premium-header { text-align: center; margin-bottom: 50px; }
         .premium-toggle-wrap {
             display: flex;
@@ -368,87 +495,207 @@
             background-color: #fbbf24;
             box-shadow: 0 0 15px #fbbf24;
         }
+
+        /* ── Strict 3-Column Equal Grid with Exact Spacing ── */
         .premium-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            align-items: stretch;
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 30px !important;
+            align-items: stretch !important;
+            justify-content: center !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            box-sizing: border-box !important;
         }
+
+        /* Base Card Container Override: Forces Equal Width & Height & Top Alignment */
         .premium-card {
-            background: var(--card-bg, rgba(20,20,35,0.7));
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 24px;
-            padding: 40px 30px;
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
+            border-radius: 24px !important;
+            padding: 40px 30px !important;
+            position: relative !important;
+            top: 0 !important;
+            left: 0 !important;
+            margin: 0 !important;
+            transform: translateY(0) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            overflow: hidden !important;
+            backdrop-filter: blur(12px) !important;
+            box-sizing: border-box !important;
+            width: 100% !important;
+            min-width: 0 !important; 
+            height: 100% !important;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
         }
+
+        /* Equal Hover Behavior for All Cards */
         .premium-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent, #7c3aed);
-            box-shadow: 0 20px 40px rgba(124, 58, 237, 0.15);
+            transform: translateY(-8px) !important;
+            z-index: 5 !important;
         }
-        .premium-card.popular {
-            border: 2px solid #fbbf24;
-            box-shadow: 0 15px 35px rgba(251, 191, 36, 0.15);
+
+        /* ─── Card 1: Bronze Metallic (Community Free Tier) ─── */
+        .premium-grid > *:nth-child(1) {
+            background: linear-gradient(145deg, #2b1810 0%, #54311e 30%, #8c5230 50%, #54311e 70%, #1f110a 100%) !important;
+            background-size: 200% 200% !important;
+            border: 2px solid #cd7f32 !important;
+            box-shadow: 0 12px 35px rgba(205, 127, 50, 0.35), inset 0 1px 0 rgba(255, 200, 160, 0.3) !important;
+            animation: metallic-flow 7s ease-in-out infinite !important;
         }
+        .premium-grid > *:nth-child(1):hover {
+            border-color: #e89855 !important;
+            box-shadow: 0 20px 50px rgba(205, 127, 50, 0.55), inset 0 1px 0 rgba(255, 200, 160, 0.5) !important;
+        }
+        .premium-grid > *:nth-child(1) .premium-plan-title {
+            color: #ffca9e !important;
+            text-shadow: 0 0 10px rgba(205, 127, 50, 0.5) !important;
+        }
+        .premium-grid > *:nth-child(1) .premium-price {
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(255, 200, 160, 0.6) !important;
+        }
+        .premium-grid > *:nth-child(1) .premium-period,
+        .premium-grid > *:nth-child(1) p,
+        .premium-grid > *:nth-child(1) li {
+            color: #f3d2c1 !important;
+        }
+        .premium-grid > *:nth-child(1) .premium-badge {
+            background: rgba(205, 127, 50, 0.2) !important;
+            color: #ffca9e !important;
+            border: 1px solid rgba(205, 127, 50, 0.4) !important;
+        }
+
+        /* ─── Card 2: Silver Metallic (Pro Cipher Tier) ─── */
+        .premium-grid > *:nth-child(2) {
+            background: linear-gradient(145deg, #1c2026 0%, #3d434d 25%, #88929e 50%, #3d434d 75%, #14171a 100%) !important;
+            background-size: 200% 200% !important;
+            border: 2px solid #e2e8f0 !important;
+            box-shadow: 0 12px 40px rgba(226, 232, 240, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+            animation: metallic-flow 6s ease-in-out infinite !important;
+        }
+        .premium-grid > *:nth-child(2):hover {
+            border-color: #ffffff !important;
+            box-shadow: 0 20px 55px rgba(255, 255, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+        }
+        .premium-grid > *:nth-child(2) .premium-plan-title {
+            color: #ffffff !important;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6) !important;
+        }
+        .premium-grid > *:nth-child(2) .premium-price {
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
+        }
+        .premium-grid > *:nth-child(2) .premium-period,
+        .premium-grid > *:nth-child(2) p,
+        .premium-grid > *:nth-child(2) li {
+            color: #e2e8f0 !important;
+        }
+        .premium-grid > *:nth-child(2) .premium-badge {
+            background: rgba(226, 232, 240, 0.15) !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(226, 232, 240, 0.3) !important;
+        }
+
+        /* ─── Card 3: Gold Metallic (Quantum Enterprise Tier) ─── */
+        .premium-grid > *:nth-child(3) {
+            background: linear-gradient(145deg, #261e00 0%, #5c4700 25%, #b88f00 45%, #ffd700 55%, #b88f00 70%, #1a1300 100%) !important;
+            background-size: 200% 200% !important;
+            border: 2px solid #ffd700 !important;
+            box-shadow: 0 15px 45px rgba(255, 215, 0, 0.45), inset 0 1px 0 rgba(255, 245, 180, 0.6) !important;
+            animation: metallic-flow 5s ease-in-out infinite, gold-pulse-glow 3s ease-in-out infinite !important;
+        }
+        .premium-grid > *:nth-child(3):hover {
+            border-color: #ffed4e !important;
+            box-shadow: 0 22px 65px rgba(255, 215, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+        }
+        .premium-grid > *:nth-child(3) .premium-plan-title {
+            color: #ffed4e !important;
+            text-shadow: 0 0 14px rgba(255, 215, 0, 0.7) !important;
+        }
+        .premium-grid > *:nth-child(3) .premium-price {
+            color: #ffffff !important;
+            text-shadow: 0 0 18px rgba(255, 215, 0, 0.8) !important;
+        }
+        .premium-grid > *:nth-child(3) .premium-period,
+        .premium-grid > *:nth-child(3) p,
+        .premium-grid > *:nth-child(3) li {
+            color: #fff4b3 !important;
+        }
+        .premium-grid > *:nth-child(3) .premium-badge {
+            background: rgba(255, 215, 0, 0.15) !important;
+            color: #ffd700 !important;
+            border: 1px solid rgba(255, 215, 0, 0.4) !important;
+        }
+
+        /* Metallic shine glow for list checkmarks */
+        .premium-grid li i {
+            color: #00ff88 !important;
+            filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6)) !important;
+        }
+
+        /* ─── Keyframe Animations ─── */
+        @keyframes metallic-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes gold-pulse-glow {
+            0%, 100% { box-shadow: 0 15px 45px rgba(255, 215, 0, 0.45), inset 0 1px 0 rgba(255, 245, 180, 0.6); }
+            50% { box-shadow: 0 20px 60px rgba(255, 215, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.8); }
+        }
+
         .premium-card.popular::before {
             content: 'MOST POPULAR';
             position: absolute;
             top: 20px; right: -35px;
-            background: #fbbf24;
-            color: #000;
+            background: #e2e8f0;
+            color: #14171a;
             font-size: 10px;
-            font-weight: 700;
+            font-weight: 800;
             padding: 4px 35px;
             transform: rotate(45deg);
             letter-spacing: 1px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
+
         .premium-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 6px 12px;
-            background: rgba(124,58,237,0.1);
-            color: var(--accent, #7c3aed);
             border-radius: 30px;
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 20px;
             width: fit-content;
         }
-        .premium-card.popular .premium-badge {
-            background: rgba(251,191,36,0.15);
-            color: #fbbf24;
-        }
+
         .premium-plan-title {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: var(--text-primary, #fff);
         }
+
         .premium-price-wrap {
             margin: 20px 0;
             display: flex;
             align-items: baseline;
             gap: 8px;
         }
+
         .premium-price {
             font-family: 'Space Grotesk', sans-serif;
             font-size: 48px;
             font-weight: 700;
-            color: var(--text-primary, #fff);
             transition: opacity 0.2s;
         }
+
         .premium-period {
             font-size: 14px;
-            color: var(--text-secondary, #a0aec0);
         }
+
         .premium-features {
             list-style: none;
             padding: 0;
@@ -457,20 +704,23 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
+            flex-grow: 1; /* Pushes action button cleanly to bottom of all cards */
         }
+
         .premium-features li {
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 14px;
-            color: var(--text-secondary, #a0aec0);
         }
-        .premium-features li i { color: #10b981; font-size: 12px; }
+
         .premium-features li.disabled {
             opacity: 0.5;
             text-decoration: line-through;
         }
-        .premium-features li.disabled i { color: #ef4444; }
+
+        .premium-features li.disabled i { color: #ef4444 !important; filter: none !important; }
+
         .btn-premium-action {
             width: 100%;
             padding: 14px;
@@ -486,29 +736,36 @@
             justify-content: center;
             gap: 8px;
         }
+
         .btn-premium-action.secondary {
-            background: rgba(255,255,255,0.05);
-            color: var(--text-primary, #fff);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(135deg, #e89855 0%, #cd7f32 50%, #8c5230 100%) !important;
+            color: #1f110a !important;
+            font-weight: 800 !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4) !important;
         }
-        .btn-premium-action.secondary:hover { background: rgba(255,255,255,0.1); }
+
         .btn-premium-action.primary {
-            background: var(--accent, #7c3aed);
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 45%, #94a3b8 100%) !important;
+            color: #14171a !important;
+            font-weight: 800 !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(226, 232, 240, 0.35) !important;
         }
-        .btn-premium-action.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
-        }
+
         .btn-premium-action.amber {
-            background: #fbbf24;
-            color: #000;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.3);
+            background: linear-gradient(135deg, #ffed4e 0%, #ffd700 50%, #f7a600 100%) !important;
+            color: #000000 !important;
+            font-weight: 900 !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4) !important;
         }
-        .btn-premium-action.amber:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.5);
+
+        @media (max-width: 992px) {
+            .premium-grid {
+                grid-template-columns: 1fr !important;
+                max-width: 450px !important;
+            }
         }
 
         /* ═══════════════════════════════════════════════════
@@ -1056,7 +1313,7 @@
         </div>
     </section>
 
-    <!-- TOOLS SECTION -->
+    <!-- TOOLS SECTION (NOW WITH FULL "USE NOW" BUTTON) -->
     <section class="tools-section" id="tools">
         <div class="tools-header">
             <div class="section-badge">🔧 Our Tools</div>
@@ -1064,54 +1321,73 @@
             <p class="section-subtitle">Everything you need for data security in one place. Professional grade, completely free.</p>
         </div>
         <div class="tools-grid">
+
             <a href="rsa-keytool.html" class="tool-card" id="tool-rsa">
                 <div class="tool-icon purple"><i class="fas fa-key"></i></div>
                 <div class="tool-name">RSA Key Generator</div>
                 <div class="tool-desc">Generate secure RSA key pairs with configurable sizes. Analyze key strength and export in PEM format.</div>
-                <div class="tool-tags"><span class="tag">RSA-2048</span><span class="tag">RSA-4096</span><span class="tag">PEM</span></div>
-                <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
+                <div class="tool-tags">
+                    <span class="tag">RSA-2048</span><span class="tag">RSA-4096</span><span class="tag">PEM</span>
+                </div>
+                <div class="tool-cta use-now-btn"><i class="fas fa-play"></i> Use Now</div>
             </a>
+
             <a href="file-integrity.html" class="tool-card" id="tool-integrity">
                 <div class="tool-icon blue"><i class="fas fa-fingerprint"></i></div>
                 <div class="tool-name">File Integrity Checker</div>
                 <div class="tool-desc">Verify file authenticity by generating and comparing cryptographic hashes. Detect any tampering instantly.</div>
-                <div class="tool-tags"><span class="tag">SHA-256</span><span class="tag">SHA-512</span><span class="tag">MD5</span></div>
-                <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
+                <div class="tool-tags">
+                    <span class="tag">SHA-256</span><span class="tag">SHA-512</span><span class="tag">MD5</span>
+                </div>
+                <div class="tool-cta use-now-btn"><i class="fas fa-play"></i> Use Now</div>
             </a>
+
             <a href="hash-generator.html" class="tool-card" id="tool-hash">
                 <div class="tool-icon green"><i class="fas fa-barcode"></i></div>
                 <div class="tool-name">Hash Generator</div>
                 <div class="tool-desc">Generate cryptographic hashes for text and files using multiple algorithms simultaneously.</div>
-                <div class="tool-tags"><span class="tag">MD5</span><span class="tag">SHA-1</span><span class="tag">BLAKE2</span></div>
-                <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
+                <div class="tool-tags">
+                    <span class="tag">MD5</span><span class="tag">SHA-1</span><span class="tag">BLAKE2</span>
+                </div>
+                <div class="tool-cta use-now-btn"><i class="fas fa-play"></i> Use Now</div>
             </a>
+
             <a href="text-encrypt.html" class="tool-card" id="tool-encrypt">
                 <div class="tool-icon red"><i class="fas fa-user-lock"></i></div>
                 <div class="tool-name">Text Encrypt / Decrypt</div>
                 <div class="tool-desc">Encrypt and decrypt messages using AES-256 or RSA. Secure your sensitive information with one click.</div>
-                <div class="tool-tags"><span class="tag">AES-256</span><span class="tag">RSA</span><span class="tag">CBC</span></div>
-                <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
+                <div class="tool-tags">
+                    <span class="tag">AES-256</span><span class="tag">RSA</span><span class="tag">CBC</span>
+                </div>
+                <div class="tool-cta use-now-btn"><i class="fas fa-play"></i> Use Now</div>
             </a>
+
             <a href="digital-signature.html" class="tool-card" id="tool-signature">
                 <div class="tool-icon yellow"><i class="fas fa-file-contract"></i></div>
                 <div class="tool-name">Digital Signature</div>
                 <div class="tool-desc">Sign and verify documents digitally. Ensure authenticity and non-repudiation of your data.</div>
-                <div class="tool-tags"><span class="tag">RSA-PSS</span><span class="tag">ECDSA</span><span class="tag">Verify</span></div>
-                <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
+                <div class="tool-tags">
+                    <span class="tag">RSA-PSS</span><span class="tag">ECDSA</span><span class="tag">Verify</span>
+                </div>
+                <div class="tool-cta use-now-btn"><i class="fas fa-play"></i> Use Now</div>
             </a>
+
             <a href="password-generator.html" class="tool-card" id="tool-password">
                 <div class="tool-icon pink"><i class="fas fa-unlock-keyhole"></i></div>
                 <div class="tool-name">Password Tools</div>
                 <div class="tool-desc">Generate cryptographically secure passwords and analyze strength with entropy calculations.</div>
-                <div class="tool-tags"><span class="tag">Entropy</span><span class="tag">CSPRNG</span><span class="tag">Strength</span></div>
-                <div class="tool-cta">Try Now <i class="fas fa-arrow-right"></i></div>
+                <div class="tool-tags">
+                    <span class="tag">Entropy</span><span class="tag">CSPRNG</span><span class="tag">Strength</span>
+                </div>
+                <div class="tool-cta use-now-btn"><i class="fas fa-play"></i> Use Now</div>
             </a>
+
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════
          PREMIUM TOOLS SECTION — Hidden until activated
-    ═══════════════════════════════════════════════════ -->
+    ═══════════════════════════════════════════════════════ -->
     <section class="premium-tools-section" id="premiumToolsSection">
         <div class="premium-tools-header">
             <div class="section-badge" style="background: rgba(251,191,36,0.1); color: #fbbf24;">👑 Premium Tools</div>
@@ -1287,7 +1563,7 @@
                 <span id="billingYearly" style="color: var(--text-secondary, #a0aec0);">Yearly Billing <span style="background: #10b981; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 8px; margin-left: 5px; font-weight: bold;">Save 20%</span></span>
             </div>
             <div class="premium-grid">
-                <!-- Free Tier -->
+<!----------------------------------------------- Free Tier -------------------------------------------------->
                 <div class="premium-card">
                     <div>
                         <div class="premium-badge">🛡️ Standard</div>
@@ -1305,7 +1581,7 @@
                     </div>
                     <button class="btn-premium-action secondary" disabled>Current Plan</button>
                 </div>
-                <!-- Pro Tier -->
+<!------------------------------------------------ Pro Tier ----------------------------------------------------->
                 <div class="premium-card popular">
                     <div>
                         <div class="premium-badge">⚡ Advanced</div>
@@ -1323,7 +1599,7 @@
                     </div>
                     <button class="btn-premium-action primary" id="proPlanBtn" onclick="openPaymentModal('Pro Cipher', '$9', 'pro')">Upgrade to Pro <i class="fas fa-star"></i></button>
                 </div>
-                <!-- Enterprise Tier -->
+<!------------------------------------------- Enterprise Tier --------------------------------------------------->
                 <div class="premium-card">
                     <div>
                         <div class="premium-badge" style="background: rgba(59,130,246,0.15); color: #3b82f6;">🌌 Quantum-Safe</div>
@@ -1687,7 +1963,7 @@
         }
 
         /* ──────────────────────────────────────
-           ACTIVATE PREMIUM
+           PREMIUM ACCESS ACTIVATION
         ────────────────────────────────────── */
         function activatePremiumMode(tier) {
             document.documentElement.classList.add('premium-active');

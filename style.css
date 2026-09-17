@@ -276,23 +276,6 @@ a {
     97% { transform: translate(0); opacity: 0; }
 }
 
-[data-theme="hacker"] .tool-card,
-[data-theme="hacker"] .feature-card,
-[data-theme="hacker"] .stat-card {
-    animation: borderPulse 3s ease-in-out infinite;
-}
-
-@keyframes borderPulse {
-    0%, 100% { border-color: rgba(0, 255, 65, 0.15); }
-    50% { border-color: rgba(0, 255, 65, 0.4); }
-}
-
-[data-theme="hacker"] .tool-card:hover,
-[data-theme="hacker"] .feature-card:hover,
-[data-theme="hacker"] .stat-card:hover {
-    animation: none;
-}
-
 [data-theme="hacker"] .section-title,
 [data-theme="hacker"] .tool-name,
 [data-theme="hacker"] .hero-title {
@@ -1070,51 +1053,11 @@ a {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
 }
 
-.tool-card {
-    border-radius: 16px; padding: 28px;
-    transition: all 0.4s; cursor: pointer;
-    position: relative; overflow: hidden; display: block;
-}
-[data-theme="normal"] .tool-card {
-    background: #fff; border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow);
-}
-[data-theme="hacker"] .tool-card {
-    background: #050505; border: 1px solid rgba(0, 255, 65, 0.15);
-}
-
-.tool-card::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    opacity: 0; transition: opacity 0.4s;
-}
-[data-theme="normal"] .tool-card::before {
-    background: linear-gradient(90deg, #6C63FF, #00B4D8);
-}
-[data-theme="hacker"] .tool-card::before {
-    background: linear-gradient(90deg, #00FF41, #00FFFF);
-    box-shadow: 0 0 10px #00FF41;
-}
-.tool-card:hover::before { opacity: 1; }
-
-[data-theme="normal"] .tool-card:hover {
-    border-color: rgba(108, 99, 255, 0.4);
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-hover);
-}
-[data-theme="hacker"] .tool-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-4px);
-    box-shadow: 0 0 25px var(--primary-glow);
-    animation: none;
-}
-
 .tool-icon {
     width: 52px; height: 52px; border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
     font-size: 22px; margin-bottom: 18px; transition: transform 0.3s;
 }
-.tool-card:hover .tool-icon { transform: scale(1.1) rotate(5deg); }
 
 [data-theme="normal"] .tool-icon.purple { background: rgba(108, 99, 255, 0.1); color: #6C63FF; }
 [data-theme="normal"] .tool-icon.blue { background: rgba(0, 180, 216, 0.1); color: #00B4D8; }
@@ -1155,7 +1098,6 @@ a {
     opacity: 0; transform: translateY(5px);
     transition: all 0.3s; color: var(--primary);
 }
-.tool-card:hover .tool-cta { opacity: 1; transform: translateY(0); }
 
 
 /* ═══════════════════════════════════════════
@@ -1168,22 +1110,6 @@ a {
     gap: 80px; align-items: center;
 }
 .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-.feature-card { border-radius: 14px; padding: 22px; transition: all 0.3s; }
-[data-theme="normal"] .feature-card {
-    background: #fff; border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow);
-}
-[data-theme="hacker"] .feature-card {
-    background: #050505; border: 1px solid rgba(0, 255, 65, 0.1);
-}
-[data-theme="normal"] .feature-card:hover {
-    border-color: rgba(108, 99, 255, 0.3);
-    box-shadow: var(--shadow-hover);
-}
-[data-theme="hacker"] .feature-card:hover {
-    border-color: rgba(0, 255, 65, 0.4); animation: none;
-}
 
 .feature-icon { font-size: 28px; margin-bottom: 12px; }
 .feature-title {
@@ -1259,24 +1185,6 @@ a {
 .stats-container {
     max-width: 900px; margin: 0 auto;
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
-}
-.stat-card {
-    border-radius: 16px; padding: 28px 20px;
-    text-align: center; transition: all 0.3s;
-}
-[data-theme="normal"] .stat-card {
-    background: #fff; border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow);
-}
-[data-theme="hacker"] .stat-card {
-    background: #050505; border: 1px solid rgba(0, 255, 65, 0.15);
-}
-[data-theme="normal"] .stat-card:hover {
-    transform: translateY(-4px); box-shadow: var(--shadow-hover);
-}
-[data-theme="hacker"] .stat-card:hover {
-    transform: translateY(-4px); border-color: var(--primary);
-    box-shadow: 0 0 20px var(--primary-glow); animation: none;
 }
 .stat-number {
     font-family: 'Space Grotesk', sans-serif;
@@ -1744,33 +1652,6 @@ a {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-}
-
-.review-card {
-    border-radius: 16px;
-    padding: 28px;
-    transition: all 0.3s;
-}
-
-[data-theme="normal"] .review-card {
-    background: #fff;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow);
-}
-
-[data-theme="hacker"] .review-card {
-    background: #050505;
-    border: 1px solid rgba(0, 255, 65, 0.12);
-}
-
-[data-theme="normal"] .review-card:hover {
-    box-shadow: var(--shadow-hover);
-    transform: translateY(-4px);
-}
-
-[data-theme="hacker"] .review-card:hover {
-    border-color: rgba(0, 255, 65, 0.4);
-    transform: translateY(-4px);
 }
 
 .review-stars {
@@ -2284,11 +2165,6 @@ html[data-theme="hacker"] .terminal-body       { color: var(--green-bright) !imp
 html[data-theme="hacker"] .os-btn             { color: var(--green-bright) !important; }
 html[data-theme="hacker"] .os-btn.active { background: var(--green-bright) !important; color: #000 !important; box-shadow: 0 0 10px var(--green-glow); }
 
-html[data-theme="hacker"] .tool-card { background: rgba(13, 27, 13, 0.6) !important; border: 1px solid rgba(0, 255, 65, 0.3) !important; backdrop-filter: blur(10px); }
-html[data-theme="hacker"] .tool-card:hover { border-color: var(--green-bright) !important; box-shadow: 0 0 30px var(--green-glow) !important; transform: translateY(-5px); }
-html[data-theme="hacker"] .tool-name { color: var(--green-bright) !important; text-shadow: 0 0 8px var(--green-glow); }
-html[data-theme="hacker"] .tool-desc { color: #B8FFB8 !important; }
-
 html[data-theme="hacker"] .tool-icon.purple { background: var(--accent-purple)  !important; box-shadow: 0 0 20px var(--accent-purple); }
 html[data-theme="hacker"] .tool-icon.blue   { background: var(--accent-cyan)    !important; color: #000 !important; box-shadow: 0 0 20px var(--accent-cyan); }
 html[data-theme="hacker"] .tool-icon.green  { background: var(--green-bright)   !important; color: #000 !important; box-shadow: 0 0 20px var(--green-glow); }
@@ -2302,23 +2178,18 @@ html[data-theme="hacker"] .section-title  { color: var(--green-bright) !importan
 html[data-theme="hacker"] .section-subtitle { color: #B8FFB8 !important; }
 html[data-theme="hacker"] .section-badge { background: rgba(255, 184, 0, 0.08) !important; color: var(--accent-amber) !important; border: 1px solid var(--accent-amber) !important; text-shadow: 0 0 8px var(--accent-amber); }
 
-html[data-theme="hacker"] .feature-card { background: rgba(13, 27, 13, 0.6) !important; border: 1px solid rgba(0, 255, 65, 0.3) !important; }
-html[data-theme="hacker"] .feature-card:hover { border-color: var(--green-bright) !important; box-shadow: 0 0 20px var(--green-glow) !important; }
 html[data-theme="hacker"] .feature-title { color: var(--green-bright) !important; }
 html[data-theme="hacker"] .feature-desc  { color: #B8FFB8 !important; }
 html[data-theme="hacker"] .why-list li   { color: #B8FFB8 !important; }
 html[data-theme="hacker"] .why-list .check { background: var(--green-bright) !important; color: #000 !important; box-shadow: 0 0 10px var(--green-glow); }
 
-html[data-theme="hacker"] .step-card { background: rgba(13, 27, 13, 0.6) !important; border: 1px solid rgba(0, 255, 65, 0.3) !important; }
 html[data-theme="hacker"] .step-number { background: var(--green-bright) !important; color: #000 !important; box-shadow: 0 0 20px var(--green-glow); }
 html[data-theme="hacker"] .step-title { color: var(--green-bright) !important; }
 html[data-theme="hacker"] .step-desc  { color: #B8FFB8 !important; }
 
-html[data-theme="hacker"] .stat-card { background: rgba(13, 27, 13, 0.6) !important; border: 1px solid rgba(0, 255, 65, 0.3) !important; }
 html[data-theme="hacker"] .stat-number { color: var(--green-bright) !important; text-shadow: 0 0 15px var(--green-glow); }
 html[data-theme="hacker"] .stat-label  { color: #B8FFB8 !important; }
 
-html[data-theme="hacker"] .review-card { background: rgba(13, 27, 13, 0.6) !important; border: 1px solid rgba(0, 255, 65, 0.3) !important; }
 html[data-theme="hacker"] .review-text { color: #B8FFB8 !important; }
 html[data-theme="hacker"] .review-name { color: var(--green-bright) !important; }
 html[data-theme="hacker"] .review-role { color: var(--accent-cyan) !important; }
@@ -2628,82 +2499,6 @@ html[data-theme="hacker"] .premium-tag.premium-tag-gold {
 }
 
 
-/* ─── Premium Unlock Card (Paywall) - ULTRA LUXURY ─── */
-.premium-unlock-card {
-    border-radius: 28px; padding: 70px 50px; text-align: center; position: relative; overflow: hidden; margin-top: 20px; transition: all 0.4s ease;
-}
-
-[data-theme="normal"] .premium-unlock-card {
-    background: var(--premium-surface); border: 1px solid var(--premium-border);
-    box-shadow: 0 30px 60px rgba(17, 12, 46, 0.04), 0 15px 40px rgba(245, 166, 35, 0.08);
-}
-[data-theme="normal"] .premium-unlock-card::before {
-    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(245, 166, 35, 0.04), transparent 50%); pointer-events: none;
-}
-
-html[data-theme="hacker"] .premium-unlock-card {
-    background: linear-gradient(135deg, rgba(10, 8, 0, 0.95), rgba(20, 15, 0, 0.9), rgba(10, 8, 0, 0.95)) !important;
-    border: 1px solid rgba(255, 215, 0, 0.5) !important;
-    box-shadow: 
-        0 0 100px rgba(255, 215, 0, 0.2),
-        0 0 50px rgba(255, 215, 0, 0.15),
-        inset 0 0 80px rgba(255, 215, 0, 0.03),
-        inset 0 1px 0 rgba(255, 215, 0, 0.1) !important;
-    backdrop-filter: blur(20px);
-}
-
-/* Animated Gold Border for Unlock Card */
-html[data-theme="hacker"] .premium-unlock-card::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: 30px;
-    background: linear-gradient(135deg, 
-        rgba(255, 215, 0, 0) 0%, 
-        rgba(255, 215, 0, 0.8) 25%, 
-        rgba(255, 237, 78, 1) 50%, 
-        rgba(255, 215, 0, 0.8) 75%, 
-        rgba(255, 215, 0, 0) 100%);
-    background-size: 300% 300%;
-    z-index: -1;
-    animation: hk-card-border-flow 6s linear infinite;
-    opacity: 0.6;
-    filter: blur(2px);
-}
-
-@keyframes hk-card-border-flow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Inner Glow Effects */
-html[data-theme="hacker"] .premium-unlock-card::after {
-    content: ''; 
-    position: absolute; 
-    inset: 0;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15), transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(255, 237, 78, 0.1), transparent 40%),
-        radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.08), transparent 60%);
-    pointer-events: none; 
-    z-index: 0;
-    animation: hk-inner-glow-shift 8s ease-in-out infinite;
-}
-
-@keyframes hk-inner-glow-shift {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-}
-
-/* Corner Accents for Card */
-html[data-theme="hacker"] .premium-unlock-card {
-    background-image: 
-        linear-gradient(135deg, rgba(10, 8, 0, 0.95), rgba(20, 15, 0, 0.9), rgba(10, 8, 0, 0.95)),
-        linear-gradient(45deg, transparent 48%, rgba(255, 215, 0, 0.15) 49%, rgba(255, 215, 0, 0.15) 51%, transparent 52%);
-}
-
-
 /* ─── Floating Crown Icon - ULTRA PREMIUM ─── */
 .unlock-icon-float {
     width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -2736,7 +2531,6 @@ html[data-theme="hacker"] .unlock-icon-float {
     100% { filter: hue-rotate(15deg); }
 }
 
-/* Multi-Layer Glow around Crown */
 html[data-theme="hacker"] .unlock-icon-float::before {
     content: ''; 
     position: absolute; 
@@ -2748,7 +2542,6 @@ html[data-theme="hacker"] .unlock-icon-float::before {
     filter: blur(15px);
 }
 
-/* Rotating Rings around Crown */
 html[data-theme="hacker"] .unlock-icon-float::after {
     content: '';
     position: absolute;
@@ -2770,371 +2563,88 @@ html[data-theme="hacker"] .unlock-icon-float::after {
 }
 
 
-/* ─── Unlock Card Heading & Description ─── */
-.premium-unlock-card h2 { 
-    font-family: 'Space Grotesk', sans-serif; 
-    font-size: clamp(24px, 3vw, 32px); 
-    font-weight: 700; 
-    margin-bottom: 18px; 
-    position: relative; 
-    z-index: 2; 
-    letter-spacing: -0.5px; 
+/* ═══════════════════════════════════════════════════════════════
+   ★ SUBSCRIPTION TIERS: BRONZE (FREE), SILVER (PRO), GOLD (QUANTUM) ★
+   ─── FIXED: Alignment ensures cards are equidistant & aligned ───
+═══════════════════════════════════════════════════════════════ */
+
+/* ─── Pricing Grid - Strict 3-Column Layout for Perfect Alignment ─── */
+.pricing-grid,
+.premium-grid { 
+    display: grid !important; 
+    grid-template-columns: repeat(3, 1fr) !important; 
+    gap: 30px !important; 
+    max-width: 1200px !important; 
+    margin: 50px auto 0 !important; 
+    position: relative !important; 
+    z-index: 2 !important; 
+    align-items: stretch !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
-[data-theme="normal"] .premium-unlock-card h2 { color: #5C3A00; }
-
-html[data-theme="hacker"] .premium-unlock-card h2 { 
-    background: linear-gradient(135deg, #FFED4E, #FFD700 50%, #FFA500) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
-    text-shadow: none !important;
+/* ─── Reset any card offsets to ensure level alignment ─── */
+.premium-card,
+.pricing-card {
+    margin: 0 !important;
+    position: relative !important;
+    transform: translateY(0) !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
 }
 
-.premium-unlock-card p { font-size: 15px; max-width: 560px; margin: 0 auto 44px; line-height: 1.7; position: relative; z-index: 2; }
-[data-theme="normal"] .premium-unlock-card p { color: var(--text-secondary); }
-html[data-theme="hacker"] .premium-unlock-card p { color: rgba(255, 237, 78, 0.85) !important; text-shadow: 0 0 3px rgba(255, 215, 0, 0.3); }
-
-
-/* ─── Pricing Grid ─── */
-.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 720px; margin: 0 auto; position: relative; z-index: 2; }
-
-.pricing-card { 
-    border-radius: 20px; 
-    padding: 36px 32px; 
-    text-align: left; 
-    position: relative; 
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); 
-    cursor: pointer; 
-    overflow: hidden;
-}
-
-[data-theme="normal"] .pricing-card { background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.05); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); }
-[data-theme="normal"] .pricing-card:hover { box-shadow: 0 20px 50px rgba(245, 166, 35, 0.12); transform: translateY(-6px); border-color: var(--premium-border); }
-
-html[data-theme="hacker"] .pricing-card { 
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(20, 15, 0, 0.5)) !important;
-    border: 1px solid rgba(255, 215, 0, 0.3) !important; 
-    backdrop-filter: blur(15px);
-    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.03);
-}
-
-/* Corner Decorations for Pricing Cards */
-html[data-theme="hacker"] .pricing-card::before {
-    content: '';
-    position: absolute;
-    top: 12px; left: 12px;
-    width: 20px; height: 20px;
-    border-top: 2px solid var(--premium-gold-main);
-    border-left: 2px solid var(--premium-gold-main);
-    opacity: 0.6;
-    transition: all 0.4s ease;
-}
-
-html[data-theme="hacker"] .pricing-card::after {
-    content: '';
-    position: absolute;
-    bottom: 12px; right: 12px;
-    width: 20px; height: 20px;
-    border-bottom: 2px solid var(--premium-gold-main);
-    border-right: 2px solid var(--premium-gold-main);
-    opacity: 0.6;
-    transition: all 0.4s ease;
-}
-
-html[data-theme="hacker"] .pricing-card:hover::before,
-html[data-theme="hacker"] .pricing-card:hover::after {
-    width: 30px; height: 30px;
-    opacity: 1;
-    box-shadow: 0 0 10px var(--premium-gold-main);
-}
-
-html[data-theme="hacker"] .pricing-card:hover { 
-    border-color: var(--premium-gold-main) !important;
-    box-shadow: 
-        0 0 50px rgba(255, 215, 0, 0.4),
-        inset 0 0 30px rgba(255, 215, 0, 0.05) !important;
-    transform: translateY(-8px);
-    background: linear-gradient(135deg, rgba(20, 15, 0, 0.9), rgba(30, 22, 0, 0.7)) !important;
-}
-
-/* ─── Popular Card Highlight - VIP ─── */
-[data-theme="normal"] .pricing-card.popular { border: 2px solid var(--premium-gold-main); box-shadow: 0 15px 40px rgba(245, 166, 35, 0.2); }
-
-html[data-theme="hacker"] .pricing-card.popular { 
-    border: 2px solid var(--premium-gold-main) !important;
-    background: linear-gradient(135deg, rgba(20, 15, 0, 0.95), rgba(40, 30, 0, 0.7), rgba(20, 15, 0, 0.95)) !important;
-    box-shadow: 
-        0 0 60px rgba(255, 215, 0, 0.4),
-        0 0 100px rgba(255, 215, 0, 0.2),
-        inset 0 0 40px rgba(255, 215, 0, 0.08) !important;
-    animation: hk-popular-glow 3s ease-in-out infinite;
-}
-
-@keyframes hk-popular-glow {
-    0%, 100% { 
-        box-shadow: 0 0 60px rgba(255, 215, 0, 0.4), 0 0 100px rgba(255, 215, 0, 0.2), inset 0 0 40px rgba(255, 215, 0, 0.08); 
-    }
-    50% { 
-        box-shadow: 0 0 80px rgba(255, 215, 0, 0.6), 0 0 150px rgba(255, 215, 0, 0.3), inset 0 0 60px rgba(255, 215, 0, 0.12); 
-    }
-}
-
-/* Animated Border for Popular Card */
-html[data-theme="hacker"] .pricing-card.popular::before,
-html[data-theme="hacker"] .pricing-card.popular::after {
-    border-color: var(--premium-gold-neon);
-    opacity: 1;
-    box-shadow: 0 0 15px var(--premium-gold-main);
-    width: 30px; height: 30px;
-}
-
-/* ─── Most Popular Badge - VIP ─── */
-.popular-badge { position: absolute; top: -14px; right: 24px; padding: 6px 14px; border-radius: 14px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; z-index: 2; }
-[data-theme="normal"] .popular-badge { background: var(--premium-gradient); color: #fff; box-shadow: 0 6px 15px rgba(245, 166, 35, 0.4); }
-
-html[data-theme="hacker"] .popular-badge { 
-    background: linear-gradient(135deg, #FFED4E, #FFD700, #FFA500) !important;
-    color: #000 !important;
-    box-shadow: 
-        0 0 25px var(--premium-gold-main),
-        0 0 50px rgba(255, 215, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    animation: hk-badge-pulse 2s ease-in-out infinite;
-    letter-spacing: 2px;
-    font-weight: 900;
-}
-
-@keyframes hk-badge-pulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 0 25px var(--premium-gold-main), 0 0 50px rgba(255, 215, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
-    50% { transform: scale(1.08); box-shadow: 0 0 40px var(--premium-gold-neon), 0 0 80px rgba(255, 215, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.7); }
+/* Only apply hover transform, no default translation */
+.premium-card:hover,
+.pricing-card:hover {
+    transform: translateY(-10px) !important;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    z-index: 5;
 }
 
 
-/* ─── Pricing Details ─── */
-.pricing-type { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; }
-[data-theme="normal"] .pricing-type { color: var(--text-muted); }
-
-html[data-theme="hacker"] .pricing-type { 
-    color: var(--premium-gold-main) !important;
-    text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-    letter-spacing: 2px;
-    font-weight: 800;
+/* ════════════════════════════════════
+   METALLIC ANIMATIONS
+════════════════════════════════════ */
+@keyframes metallic-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.pricing-price { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; display: flex; align-items: baseline; gap: 6px; line-height: 1; margin-bottom: 20px; }
-.pricing-period { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; }
-
-[data-theme="normal"] .pricing-price { color: var(--text-primary); }
-[data-theme="normal"] .pricing-period { color: var(--text-muted); }
-
-html[data-theme="hacker"] .pricing-price { 
-    background: linear-gradient(135deg, #FFED4E, #FFD700, #FFA500) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
-    text-shadow: none !important;
-    font-weight: 900;
+@keyframes gold-pulse-glow {
+    0%, 100% { box-shadow: 0 15px 45px rgba(255, 215, 0, 0.45), inset 0 1px 0 rgba(255, 245, 180, 0.6); }
+    50% { box-shadow: 0 20px 60px rgba(255, 215, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.8); }
 }
 
-html[data-theme="hacker"] .pricing-period { 
-    color: rgba(255, 215, 0, 0.7) !important; 
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
-    font-weight: 600;
-}
-
-/* ─── Premium CTA Button - ULTRA VIP ─── */
-.btn-premium { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px 24px; border-radius: 12px; border: none; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; font-family: inherit; margin-top: 12px; letter-spacing: 0.3px; position: relative; overflow: hidden; }
-
-[data-theme="normal"] .btn-premium { background: var(--premium-gradient); color: #fff; box-shadow: 0 8px 20px rgba(245, 166, 35, 0.3); }
-[data-theme="normal"] .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(245, 166, 35, 0.45); }
-
-html[data-theme="hacker"] .btn-premium { 
-    background: linear-gradient(135deg, #FFED4E, #FFD700, #FFA500) !important;
-    color: #000 !important;
-    box-shadow: 
-        0 0 30px rgba(255, 215, 0, 0.5),
-        0 5px 15px rgba(255, 215, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 900;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-html[data-theme="hacker"] .btn-premium::before {
-    content: '';
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
-    transition: left 0.6s ease;
-}
-
-html[data-theme="hacker"] .btn-premium:hover::before { left: 100%; }
-
-html[data-theme="hacker"] .btn-premium:hover { 
-    background: linear-gradient(135deg, #FFFFFF, #FFED4E, #FFD700) !important;
-    box-shadow: 
-        0 0 50px rgba(255, 237, 78, 0.8),
-        0 10px 25px rgba(255, 215, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
-    transform: translateY(-3px) scale(1.02);
-}
-
-/* ─── Feature List Inside Pricing Card ─── */
-.pricing-features { list-style: none; padding: 0; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
-.pricing-features li { display: flex; align-items: center; gap: 10px; font-size: 13px; line-height: 1.5; }
-[data-theme="normal"] .pricing-features li { color: var(--text-secondary); }
-.pricing-features li i { color: var(--premium-gold-main); font-size: 12px; flex-shrink: 0; }
-
-html[data-theme="hacker"] .pricing-features li { 
-    color: rgba(255, 215, 0, 0.85) !important; 
-    text-shadow: 0 0 3px rgba(255, 215, 0, 0.2);
-}
-
-html[data-theme="hacker"] .pricing-features li i { 
-    color: var(--premium-gold-neon) !important; 
-    text-shadow: 0 0 10px var(--premium-gold-main);
-    animation: hk-check-pulse 2s ease-in-out infinite;
-}
-
-@keyframes hk-check-pulse {
-    0%, 100% { opacity: 0.8; }
-    50% { opacity: 1; text-shadow: 0 0 15px var(--premium-gold-neon); }
+/* Bright Checkmarks for List Items */
+.pricing-grid li i,
+.pricing-grid li svg,
+.pricing-grid [class*="check"],
+.premium-grid li i,
+.premium-grid li svg,
+.premium-grid [class*="check"] {
+    color: #00ff88 !important;
+    filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6)) !important;
 }
 
 
-/* ═══════════════════════════════════════════
-   ★ NEW: HACKER MODE PREMIUM DECORATIVE ELEMENTS
-═══════════════════════════════════════════ */
-
-/* Floating Gold Particles inside Premium Card */
-html[data-theme="hacker"] .premium-unlock-card {
-    background-image: 
-        radial-gradient(circle at 15% 25%, rgba(255, 215, 0, 0.4) 1px, transparent 2px),
-        radial-gradient(circle at 85% 35%, rgba(255, 237, 78, 0.3) 1px, transparent 2px),
-        radial-gradient(circle at 25% 75%, rgba(255, 215, 0, 0.35) 1px, transparent 2px),
-        radial-gradient(circle at 75% 85%, rgba(255, 237, 78, 0.4) 1px, transparent 2px),
-        radial-gradient(circle at 50% 20%, rgba(255, 215, 0, 0.3) 1px, transparent 2px),
-        radial-gradient(circle at 60% 65%, rgba(255, 237, 78, 0.35) 1px, transparent 2px),
-        linear-gradient(135deg, rgba(10, 8, 0, 0.95), rgba(20, 15, 0, 0.9), rgba(10, 8, 0, 0.95));
-    background-size: 200px 200px, 250px 250px, 180px 180px, 220px 220px, 190px 190px, 210px 210px, 100% 100%;
-    animation: hk-particles-drift 30s linear infinite;
-}
-
-@keyframes hk-particles-drift {
-    0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
-    100% { background-position: 200px 200px, -250px 250px, 180px -180px, -220px -220px, 190px 190px, -210px -210px, 0 0; }
-}
-
-/* Premium Section Divider Line */
-.premium-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--premium-gold-main), transparent);
-    margin: 40px auto;
-    max-width: 300px;
-    opacity: 0.5;
-}
-
-html[data-theme="hacker"] .premium-divider {
-    background: linear-gradient(90deg, transparent, var(--premium-gold-neon), transparent);
-    box-shadow: 0 0 10px var(--premium-gold-main);
-    animation: hk-divider-pulse 3s ease-in-out infinite;
-}
-
-@keyframes hk-divider-pulse {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
-}
-
-/* VIP Trust Indicators */
-.premium-trust-row {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 2;
-}
-
-.premium-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    transition: all 0.3s ease;
-}
-
-[data-theme="normal"] .premium-trust-item {
-    background: rgba(245, 166, 35, 0.06);
-    color: var(--premium-gold-dark);
-    border: 1px solid var(--premium-border);
-}
-
-html[data-theme="hacker"] .premium-trust-item {
-    background: rgba(255, 215, 0, 0.05) !important;
-    color: var(--premium-gold-main) !important;
-    border: 1px solid rgba(255, 215, 0, 0.3) !important;
-    text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
-    box-shadow: 0 0 10px rgba(255, 215, 0, 0.1);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 600;
-}
-
-.premium-trust-item i {
-    color: var(--premium-gold-main);
-}
-
-html[data-theme="hacker"] .premium-trust-item i {
-    color: var(--premium-gold-neon) !important;
-    text-shadow: 0 0 8px var(--premium-gold-main);
-}
-
-/* Premium Card Ribbon Effect */
-.premium-ribbon {
-    position: absolute;
-    top: 20px;
-    left: -30px;
-    width: 120px;
-    padding: 5px 0;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transform: rotate(-45deg);
-    z-index: 3;
-}
-
-[data-theme="normal"] .premium-ribbon {
-    background: var(--premium-gradient);
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(245, 166, 35, 0.3);
-}
-
-html[data-theme="hacker"] .premium-ribbon {
-    background: linear-gradient(135deg, #FFED4E, #FFD700, #FFA500) !important;
-    color: #000 !important;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    animation: hk-ribbon-shine 3s ease-in-out infinite;
-}
-
-@keyframes hk-ribbon-shine {
-    0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
-    50% { box-shadow: 0 0 35px rgba(255, 237, 78, 0.8); }
+/* ─── Popular Badge on Silver Card ─── */
+.popular-badge,
+[class*="popular"] {
+    position: absolute; 
+    top: -14px; 
+    right: 24px; 
+    padding: 6px 14px; 
+    border-radius: 14px; 
+    font-size: 10px; 
+    font-weight: 800; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+    z-index: 5;
+    background: linear-gradient(135deg, #e2e8f0, #94a3b8) !important;
+    color: #14171a !important;
+    box-shadow: 0 6px 15px rgba(226, 232, 240, 0.55) !important;
 }
 
 
@@ -3146,6 +2656,14 @@ html[data-theme="hacker"] .premium-ribbon {
     .footer-top { grid-template-columns: 1fr 1fr; }
     .stats-container { grid-template-columns: repeat(2, 1fr); }
     .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 992px) {
+    .pricing-grid,
+    .premium-grid { 
+        grid-template-columns: 1fr !important; 
+        max-width: 480px !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -3172,12 +2690,8 @@ html[data-theme="hacker"] .premium-ribbon {
     /* Premium Responsive */
     .premium-header-wrapper { flex-direction: column; align-items: flex-start; gap: 20px; }
     .premium-icon-box { width: 72px; height: 72px; font-size: 30px; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    .premium-unlock-card { padding: 48px 28px; }
     .premium-toolbar { flex-direction: column; gap: 16px; align-items: flex-start; }
     .security-badge { font-size: 12px; padding: 10px 16px; }
-    .premium-trust-row { gap: 12px; }
-    .premium-trust-item { font-size: 11px; padding: 5px 10px; }
 }
 
 @media (max-width: 480px) {
@@ -3186,6 +2700,4 @@ html[data-theme="hacker"] .premium-ribbon {
     .cta-container { padding: 40px 24px; }
     .theme-toggle-label { display: none; }
     .mode-label { display: none; }
-    .pricing-price { font-size: 40px; }
-    .premium-unlock-card { padding: 40px 20px; }
 }
