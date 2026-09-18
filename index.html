@@ -19,7 +19,7 @@
 
     <style>
         /* ═══════════════════════════════════
-           FIX: Ensure fade-up elements are visible
+           Fade-up Animations
         ═══════════════════════════════════ */
         .fade-up {
             opacity: 1 !important;
@@ -154,14 +154,32 @@
             box-shadow: 0 0 8px var(--accent, #7c3aed);
         }
 
-        /* ═══════════════════════════════════
-           RESTORED: Base Card Styles
-        ═══════════════════════════════════ */
+        /* ═══════════════════════════════════════════════════
+           TOOL CARDS — Equal Height + Button Bottom Aligned
+        ═══════════════════════════════════════════════════ */
+        .tools-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+            gap: 24px !important;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            align-items: stretch !important;
+        }
         .tool-card {
-            border-radius: 16px; padding: 28px;
-            transition: all 0.4s; cursor: pointer;
-            position: relative; overflow: hidden; display: block;
-            text-decoration: none; color: inherit;
+            border-radius: 16px;
+            padding: 28px;
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            text-decoration: none;
+            color: inherit;
+            height: 100% !important;
+            box-sizing: border-box;
         }
         [data-theme="normal"] .tool-card {
             background: #fff; border: 1px solid var(--glass-border);
@@ -193,6 +211,10 @@
             transform: translateY(-4px);
             box-shadow: 0 0 25px var(--primary-glow);
             animation: none;
+        }
+
+        .tool-card .tool-tags {
+            margin-bottom: auto !important;
         }
 
         .feature-card { border-radius: 14px; padding: 22px; transition: all 0.3s; }
@@ -258,7 +280,7 @@
             justify-content: center;
             gap: 8px;
             margin-top: 15px; 
-            padding: 10px 18px;
+            padding: 12px 18px;
             border-radius: 10px;
             font-size: 13px;
             font-weight: 600;
@@ -305,10 +327,20 @@
             box-shadow: 0 6px 22px rgba(251, 191, 36, 0.55) !important;
             transform: translateY(-2px) !important;
         }
+        /* Enterprise active quantum tint */
+        html.enterprise-active .tool-cta.use-now-btn {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important;
+            color: #fff !important;
+            border: none !important;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4) !important;
+        }
+        html.enterprise-active .tool-card:hover .tool-cta.use-now-btn {
+            box-shadow: 0 6px 22px rgba(59, 130, 246, 0.55) !important;
+        }
 
 
         /* ═══════════════════════════════════
-           FIX: Live Demo centering
+           Live Demo centering
         ═══════════════════════════════════ */
         .live-demo {
             display: flex;
@@ -331,14 +363,14 @@
         .main-app-hidden { display: none !important; }
 
         /* ═══════════════════════════════════════════════════
-           NAVBAR ALIGNMENT & SPACING FIXES 
+           NAVBAR — Compact + All items visible
         ═══════════════════════════════════════════════════ */
         .navbar {
             display: flex !important;
             align-items: center !important;
             justify-content: space-between !important;
-            padding: 15px 40px !important;
-            gap: 20px !important;
+            padding: 15px 24px !important;
+            gap: 16px !important;
             flex-wrap: nowrap !important;
             width: 100%;
             box-sizing: border-box;
@@ -346,7 +378,7 @@
         .nav-logo {
             display: flex !important;
             align-items: center !important;
-            gap: 12px !important;
+            gap: 10px !important;
             flex-shrink: 0 !important;
             text-decoration: none !important;
         }
@@ -354,53 +386,58 @@
             display: none; 
             align-items: center !important;
             justify-content: center !important;
-            padding: 4px 10px !important;
+            padding: 3px 8px !important;
             background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(217,119,6,0.1)) !important;
             border: 1px solid rgba(251,191,36,0.3) !important;
             border-radius: 20px !important;
-            font-size: 11px !important;
+            font-size: 10px !important;
             font-weight: 600 !important;
             color: #fbbf24 !important;
             white-space: nowrap !important;
             margin-left: 0 !important;
         }
-        html.premium-active .nav-premium-indicator { display: inline-flex !important; }
+        html.premium-active .nav-premium-indicator, html.enterprise-active .nav-premium-indicator { display: inline-flex !important; }
+        html.enterprise-active .nav-premium-indicator {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.1)) !important;
+            border-color: rgba(59,130,246,0.3) !important;
+            color: #60a5fa !important;
+        }
         .nav-links {
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            gap: 25px !important;
+            gap: 18px !important;
             flex-grow: 1 !important;
             margin: 0 !important;
             padding: 0 !important;
             list-style: none !important;
+            min-width: 0 !important;
         }
         .nav-links li a {
             display: inline-flex !important;
             align-items: center !important;
-            gap: 6px !important;
+            gap: 5px !important;
             white-space: nowrap !important; 
             text-decoration: none !important;
-            font-size: 15px !important;
+            font-size: 14px !important;
             font-weight: 500 !important;
         }
         .nav-actions {
             display: flex !important;
             align-items: center !important;
-            gap: 12px !important;
+            gap: 10px !important;
             flex-shrink: 0 !important;
             flex-wrap: nowrap !important;
         }
 
-        /* Standardize all action buttons */
         .btn-nav-auth, .btn-back-normal, .btn-nav-cta {
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             white-space: nowrap !important;
-            height: 40px !important;
+            height: 38px !important;
             box-sizing: border-box !important;
-            padding: 0 16px !important;
+            padding: 0 14px !important;
             margin: 0 !important;
             border-radius: 8px !important;
             font-family: 'Space Grotesk', sans-serif !important;
@@ -409,6 +446,7 @@
             text-decoration: none !important;
             cursor: pointer;
             transition: all 0.2s ease;
+            line-height: 1 !important;
         }
         .btn-nav-auth {
             gap: 6px !important;
@@ -433,10 +471,20 @@
             color: #ef4444 !important;
             transform: translateY(-1px);
         }
-        html.premium-active .btn-back-normal { display: inline-flex !important; }
+        html.premium-active .btn-back-normal, html.enterprise-active .btn-back-normal { display: inline-flex !important; }
 
-        @media (max-width: 1200px) {
-            .navbar { padding: 15px 20px !important; gap: 15px !important; }
+        .mode-selector .mode-btn {
+            height: 38px !important;
+            padding: 0 12px !important;
+            font-size: 13px !important;
+        }
+
+        @media (max-width: 1100px) {
+            .navbar { padding: 15px 18px !important; gap: 12px !important; }
+            .nav-links { gap: 14px !important; }
+            .nav-links li a { font-size: 13px !important; }
+        }
+        @media (max-width: 980px) {
             .nav-links { display: none !important; } 
             .nav-actions { display: none !important; } 
             .hamburger { display: block !important; } 
@@ -496,7 +544,6 @@
             box-shadow: 0 0 15px #fbbf24;
         }
 
-        /* ── Strict 3-Column Equal Grid with Exact Spacing ── */
         .premium-grid {
             display: grid !important;
             grid-template-columns: repeat(3, 1fr) !important;
@@ -508,7 +555,6 @@
             box-sizing: border-box !important;
         }
 
-        /* Base Card Container Override: Forces Equal Width & Height & Top Alignment */
         .premium-card {
             border-radius: 24px !important;
             padding: 40px 30px !important;
@@ -529,13 +575,12 @@
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
         }
 
-        /* Equal Hover Behavior for All Cards */
         .premium-card:hover {
             transform: translateY(-8px) !important;
             z-index: 5 !important;
         }
 
-        /* ─── Card 1: Bronze Metallic (Community Free Tier) ─── */
+        /* Card 1: Bronze Metallic */
         .premium-grid > *:nth-child(1) {
             background: linear-gradient(145deg, #2b1810 0%, #54311e 30%, #8c5230 50%, #54311e 70%, #1f110a 100%) !important;
             background-size: 200% 200% !important;
@@ -547,26 +592,12 @@
             border-color: #e89855 !important;
             box-shadow: 0 20px 50px rgba(205, 127, 50, 0.55), inset 0 1px 0 rgba(255, 200, 160, 0.5) !important;
         }
-        .premium-grid > *:nth-child(1) .premium-plan-title {
-            color: #ffca9e !important;
-            text-shadow: 0 0 10px rgba(205, 127, 50, 0.5) !important;
-        }
-        .premium-grid > *:nth-child(1) .premium-price {
-            color: #ffffff !important;
-            text-shadow: 0 0 15px rgba(255, 200, 160, 0.6) !important;
-        }
-        .premium-grid > *:nth-child(1) .premium-period,
-        .premium-grid > *:nth-child(1) p,
-        .premium-grid > *:nth-child(1) li {
-            color: #f3d2c1 !important;
-        }
-        .premium-grid > *:nth-child(1) .premium-badge {
-            background: rgba(205, 127, 50, 0.2) !important;
-            color: #ffca9e !important;
-            border: 1px solid rgba(205, 127, 50, 0.4) !important;
-        }
+        .premium-grid > *:nth-child(1) .premium-plan-title { color: #ffca9e !important; text-shadow: 0 0 10px rgba(205, 127, 50, 0.5) !important; }
+        .premium-grid > *:nth-child(1) .premium-price { color: #ffffff !important; text-shadow: 0 0 15px rgba(255, 200, 160, 0.6) !important; }
+        .premium-grid > *:nth-child(1) .premium-period, .premium-grid > *:nth-child(1) p, .premium-grid > *:nth-child(1) li { color: #f3d2c1 !important; }
+        .premium-grid > *:nth-child(1) .premium-badge { background: rgba(205, 127, 50, 0.2) !important; color: #ffca9e !important; border: 1px solid rgba(205, 127, 50, 0.4) !important; }
 
-        /* ─── Card 2: Silver Metallic (Pro Cipher Tier) ─── */
+        /* Card 2: Silver/Pro */
         .premium-grid > *:nth-child(2) {
             background: linear-gradient(145deg, #1c2026 0%, #3d434d 25%, #88929e 50%, #3d434d 75%, #14171a 100%) !important;
             background-size: 200% 200% !important;
@@ -578,26 +609,12 @@
             border-color: #ffffff !important;
             box-shadow: 0 20px 55px rgba(255, 255, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
         }
-        .premium-grid > *:nth-child(2) .premium-plan-title {
-            color: #ffffff !important;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6) !important;
-        }
-        .premium-grid > *:nth-child(2) .premium-price {
-            color: #ffffff !important;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important;
-        }
-        .premium-grid > *:nth-child(2) .premium-period,
-        .premium-grid > *:nth-child(2) p,
-        .premium-grid > *:nth-child(2) li {
-            color: #e2e8f0 !important;
-        }
-        .premium-grid > *:nth-child(2) .premium-badge {
-            background: rgba(226, 232, 240, 0.15) !important;
-            color: #ffffff !important;
-            border: 1px solid rgba(226, 232, 240, 0.3) !important;
-        }
+        .premium-grid > *:nth-child(2) .premium-plan-title { color: #ffffff !important; text-shadow: 0 0 12px rgba(255, 255, 255, 0.6) !important; }
+        .premium-grid > *:nth-child(2) .premium-price { color: #ffffff !important; text-shadow: 0 0 15px rgba(255, 255, 255, 0.8) !important; }
+        .premium-grid > *:nth-child(2) .premium-period, .premium-grid > *:nth-child(2) p, .premium-grid > *:nth-child(2) li { color: #e2e8f0 !important; }
+        .premium-grid > *:nth-child(2) .premium-badge { background: rgba(226, 232, 240, 0.15) !important; color: #ffffff !important; border: 1px solid rgba(226, 232, 240, 0.3) !important; }
 
-        /* ─── Card 3: Gold Metallic (Quantum Enterprise Tier) ─── */
+        /* Card 3: Gold/Quantum */
         .premium-grid > *:nth-child(3) {
             background: linear-gradient(145deg, #261e00 0%, #5c4700 25%, #b88f00 45%, #ffd700 55%, #b88f00 70%, #1a1300 100%) !important;
             background-size: 200% 200% !important;
@@ -609,167 +626,41 @@
             border-color: #ffed4e !important;
             box-shadow: 0 22px 65px rgba(255, 215, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
         }
-        .premium-grid > *:nth-child(3) .premium-plan-title {
-            color: #ffed4e !important;
-            text-shadow: 0 0 14px rgba(255, 215, 0, 0.7) !important;
-        }
-        .premium-grid > *:nth-child(3) .premium-price {
-            color: #ffffff !important;
-            text-shadow: 0 0 18px rgba(255, 215, 0, 0.8) !important;
-        }
-        .premium-grid > *:nth-child(3) .premium-period,
-        .premium-grid > *:nth-child(3) p,
-        .premium-grid > *:nth-child(3) li {
-            color: #fff4b3 !important;
-        }
-        .premium-grid > *:nth-child(3) .premium-badge {
-            background: rgba(255, 215, 0, 0.15) !important;
-            color: #ffd700 !important;
-            border: 1px solid rgba(255, 215, 0, 0.4) !important;
-        }
+        .premium-grid > *:nth-child(3) .premium-plan-title { color: #ffed4e !important; text-shadow: 0 0 14px rgba(255, 215, 0, 0.7) !important; }
+        .premium-grid > *:nth-child(3) .premium-price { color: #ffffff !important; text-shadow: 0 0 18px rgba(255, 215, 0, 0.8) !important; }
+        .premium-grid > *:nth-child(3) .premium-period, .premium-grid > *:nth-child(3) p, .premium-grid > *:nth-child(3) li { color: #fff4b3 !important; }
+        .premium-grid > *:nth-child(3) .premium-badge { background: rgba(255, 215, 0, 0.15) !important; color: #ffd700 !important; border: 1px solid rgba(255, 215, 0, 0.4) !important; }
 
-        /* Metallic shine glow for list checkmarks */
-        .premium-grid li i {
-            color: #00ff88 !important;
-            filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6)) !important;
-        }
+        .premium-grid li i { color: #00ff88 !important; filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.6)) !important; }
 
-        /* ─── Keyframe Animations ─── */
-        @keyframes metallic-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes gold-pulse-glow {
-            0%, 100% { box-shadow: 0 15px 45px rgba(255, 215, 0, 0.45), inset 0 1px 0 rgba(255, 245, 180, 0.6); }
-            50% { box-shadow: 0 20px 60px rgba(255, 215, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.8); }
-        }
+        @keyframes metallic-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes gold-pulse-glow { 0%, 100% { box-shadow: 0 15px 45px rgba(255, 215, 0, 0.45), inset 0 1px 0 rgba(255, 245, 180, 0.6); } 50% { box-shadow: 0 20px 60px rgba(255, 215, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.8); } }
 
         .premium-card.popular::before {
-            content: 'MOST POPULAR';
-            position: absolute;
-            top: 20px; right: -35px;
-            background: #e2e8f0;
-            color: #14171a;
-            font-size: 10px;
-            font-weight: 800;
-            padding: 4px 35px;
-            transform: rotate(45deg);
-            letter-spacing: 1px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            content: 'MOST POPULAR'; position: absolute; top: 20px; right: -35px; background: #e2e8f0; color: #14171a; font-size: 10px; font-weight: 800; padding: 4px 35px; transform: rotate(45deg); letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
-        .premium-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            width: fit-content;
-        }
-
-        .premium-plan-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .premium-price-wrap {
-            margin: 20px 0;
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        .premium-price {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            transition: opacity 0.2s;
-        }
-
-        .premium-period {
-            font-size: 14px;
-        }
-
-        .premium-features {
-            list-style: none;
-            padding: 0;
-            margin: 30px 0;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            flex-grow: 1; /* Pushes action button cleanly to bottom of all cards */
-        }
-
-        .premium-features li {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
-
-        .premium-features li.disabled {
-            opacity: 0.5;
-            text-decoration: line-through;
-        }
-
+        .premium-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 30px; font-size: 12px; font-weight: 600; margin-bottom: 20px; width: fit-content; }
+        .premium-plan-title { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+        .premium-price-wrap { margin: 20px 0; display: flex; align-items: baseline; gap: 8px; }
+        .premium-price { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; transition: opacity 0.2s; }
+        .premium-period { font-size: 14px; }
+        .premium-features { list-style: none; padding: 0; margin: 30px 0; text-align: left; display: flex; flex-direction: column; gap: 14px; flex-grow: 1; }
+        .premium-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+        .premium-features li.disabled { opacity: 0.5; text-decoration: line-through; }
         .premium-features li.disabled i { color: #ef4444 !important; filter: none !important; }
 
         .btn-premium-action {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            width: 100%; padding: 14px; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: none; display: flex; align-items: center; justify-content: center; gap: 8px;
         }
+        .btn-premium-action.secondary { background: linear-gradient(135deg, #e89855 0%, #cd7f32 50%, #8c5230 100%) !important; color: #1f110a !important; font-weight: 800 !important; border: none !important; box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4) !important; }
+        .btn-premium-action.primary { background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 45%, #94a3b8 100%) !important; color: #14171a !important; font-weight: 800 !important; border: none !important; box-shadow: 0 4px 15px rgba(226, 232, 240, 0.35) !important; }
+        .btn-premium-action.amber { background: linear-gradient(135deg, #ffed4e 0%, #ffd700 50%, #f7a600 100%) !important; color: #000000 !important; font-weight: 900 !important; border: none !important; box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4) !important; }
 
-        .btn-premium-action.secondary {
-            background: linear-gradient(135deg, #e89855 0%, #cd7f32 50%, #8c5230 100%) !important;
-            color: #1f110a !important;
-            font-weight: 800 !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4) !important;
-        }
-
-        .btn-premium-action.primary {
-            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 45%, #94a3b8 100%) !important;
-            color: #14171a !important;
-            font-weight: 800 !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(226, 232, 240, 0.35) !important;
-        }
-
-        .btn-premium-action.amber {
-            background: linear-gradient(135deg, #ffed4e 0%, #ffd700 50%, #f7a600 100%) !important;
-            color: #000000 !important;
-            font-weight: 900 !important;
-            border: none !important;
-            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4) !important;
-        }
-
-        @media (max-width: 992px) {
-            .premium-grid {
-                grid-template-columns: 1fr !important;
-                max-width: 450px !important;
-            }
-        }
+        @media (max-width: 992px) { .premium-grid { grid-template-columns: 1fr !important; max-width: 450px !important; } }
 
         /* ═══════════════════════════════════════════════════
-           PREMIUM TOOLS SECTION — Hidden by default
+           PREMIUM TOOLS & QUANTUM TOOLS SECTIONS
         ═══════════════════════════════════════════════════ */
         .premium-tools-section {
             display: none;
@@ -785,26 +676,25 @@
             from { opacity: 0; transform: translateY(40px); }
             to   { opacity: 1; transform: translateY(0); }
         }
-        .premium-tools-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+        .premium-tools-header { text-align: center; margin-bottom: 50px; }
         .premium-tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
             max-width: 1200px;
             margin: 0 auto;
+            align-items: stretch !important;
         }
 
-        /* Premium Tool Card */
+        /* Tool Cards (Shared structure for both tiers) */
         .premium-tool-card {
-            display: flex;
-            flex-direction: column;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
             text-decoration: none;
             color: inherit;
             background: var(--card-bg, rgba(20,20,35,0.7));
-            border: 1px solid rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.15); /* Default Pro Border */
             border-radius: 20px;
             padding: 30px 24px;
             position: relative;
@@ -812,13 +702,13 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(12px);
             cursor: pointer;
+            height: 100% !important;
+            min-height: 340px !important;
+            box-sizing: border-box !important;
         }
         .premium-tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706); /* Default Pro Top Line */
         }
         .premium-tool-card:hover {
             transform: translateY(-6px);
@@ -826,162 +716,85 @@
             box-shadow: 0 16px 40px rgba(251, 191, 36, 0.15);
         }
         .premium-tool-card .premium-crown {
-            position: absolute;
-            top: 14px; right: 16px;
-            font-size: 18px;
-            filter: drop-shadow(0 0 6px rgba(251,191,36,0.6));
-        }
-        .premium-tool-icon {
-            width: 52px; height: 52px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-bottom: 18px;
-            color: #fff;
-        }
-        .premium-tool-icon.gold {
-            background: linear-gradient(135deg, #fbbf24, #d97706);
-            box-shadow: 0 4px 15px rgba(251,191,36,0.3);
-        }
-        .premium-tool-icon.silver {
-            background: linear-gradient(135deg, #94a3b8, #64748b);
-            box-shadow: 0 4px 15px rgba(148,163,184,0.3);
-        }
-        .premium-tool-name {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-primary, #fff);
-        }
-        .premium-tool-desc {
-            font-size: 13px;
-            color: var(--text-secondary, #a0aec0);
-            line-height: 1.6;
-            margin-bottom: 16px;
-            flex-grow: 1;
-        }
-        .premium-tool-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 16px;
-        }
-        .premium-tool-tags .ptag {
-            padding: 3px 10px;
-            background: rgba(251,191,36,0.1);
-            color: #fbbf24;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-        .premium-tool-cta {
-            font-size: 13px;
-            font-weight: 600;
-            color: #fbbf24;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            position: absolute; top: 14px; right: 16px; font-size: 18px; filter: drop-shadow(0 0 6px rgba(251,191,36,0.6));
         }
 
-        /* Coming Soon card variant */
-        .premium-tool-card.coming-soon {
-            opacity: 0.55;
-            cursor: default;
-            border-style: dashed;
-            border-color: rgba(255,255,255,0.1);
+        /* QUANTUM Tool Cards Overrides */
+        .quantum-tool-card {
+            border-color: rgba(59,130,246,0.25);
         }
-        .premium-tool-card.coming-soon::before {
-            background: linear-gradient(90deg, rgba(148,163,184,0.4), rgba(100,116,139,0.4));
+        .quantum-tool-card::before {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #d946ef);
         }
-        .premium-tool-card.coming-soon:hover {
-            transform: none;
-            border-color: rgba(255,255,255,0.15);
-            box-shadow: none;
+        .quantum-tool-card:hover {
+            border-color: #8b5cf6;
+            box-shadow: 0 16px 40px rgba(139, 92, 246, 0.25);
         }
-        .coming-soon-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 12px;
-            background: rgba(255,255,255,0.06);
-            color: var(--text-secondary, #a0aec0);
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
+        .quantum-tool-card .premium-crown {
+            filter: drop-shadow(0 0 8px rgba(139,92,246,0.8));
         }
+
+        .premium-tool-icon {
+            width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 18px; color: #fff; flex-shrink: 0;
+        }
+        .premium-tool-icon.gold { background: linear-gradient(135deg, #fbbf24, #d97706); box-shadow: 0 4px 15px rgba(251,191,36,0.3); }
+        .premium-tool-icon.silver { background: linear-gradient(135deg, #94a3b8, #64748b); box-shadow: 0 4px 15px rgba(148,163,184,0.3); }
+        .premium-tool-icon.quantum-glow { background: linear-gradient(135deg, #3b82f6, #8b5cf6); box-shadow: 0 4px 20px rgba(139,92,246,0.4); }
+
+        .premium-tool-name { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary, #fff); }
+        .premium-tool-desc { font-size: 13px; color: var(--text-secondary, #a0aec0); line-height: 1.6; margin-bottom: 16px; }
+        
+        .premium-tool-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; margin-top: auto !important; }
+        .premium-tool-tags .ptag { padding: 3px 10px; background: rgba(251,191,36,0.1); color: #fbbf24; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .premium-tool-tags .qtag { padding: 3px 10px; background: rgba(139,92,246,0.15); color: #a78bfa; border-radius: 20px; font-size: 11px; font-weight: 600; border: 1px solid rgba(139,92,246,0.3); }
+
+        .premium-tool-cta { font-size: 13px; font-weight: 600; color: #fbbf24; display: flex; align-items: center; gap: 6px; margin-top: 0 !important; }
+        .quantum-cta { color: #a78bfa !important; }
+
+        .premium-tool-card.coming-soon { opacity: 0.55; cursor: default; border-style: dashed; border-color: rgba(255,255,255,0.1); }
+        .premium-tool-card.coming-soon::before { background: linear-gradient(90deg, rgba(148,163,184,0.4), rgba(100,116,139,0.4)); }
+        .premium-tool-card.coming-soon:hover { transform: none; border-color: rgba(255,255,255,0.15); box-shadow: none; }
+        .coming-soon-badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; background: rgba(255,255,255,0.06); color: var(--text-secondary, #a0aec0); border-radius: 20px; font-size: 11px; font-weight: 600; width: fit-content; }
 
         /* ═══════════════════════════════════════════════════
-           PREMIUM ACTIVE — Global Premium Glow State
+           PREMIUM / ENTERPRISE GLOBAL ACTIVE STATES
         ═══════════════════════════════════════════════════ */
-        html.premium-active .navbar {
-            border-bottom: 1px solid rgba(251,191,36,0.15) !important;
-        }
-        html.premium-active .hero-badge {
-            background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(217,119,6,0.1)) !important;
-            border-color: rgba(251,191,36,0.3) !important;
-        }
-        html.premium-active .hero-badge .dot {
-            background: #fbbf24 !important;
-            box-shadow: 0 0 8px #fbbf24 !important;
-        }
-        html.premium-active .tool-card:hover {
-            box-shadow: 0 16px 40px rgba(251,191,36,0.08) !important;
-        }
-        html.premium-active .stats-section {
-            border-top: 1px solid rgba(251,191,36,0.1);
-            border-bottom: 1px solid rgba(251,191,36,0.1);
-        }
-        html.premium-active .cta-section .cta-glow {
-            background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%) !important;
-        }
-        html.premium-active .scroll-top {
-            background: linear-gradient(135deg, #fbbf24, #d97706) !important;
-            color: #000 !important;
-        }
-        html.premium-active .ai-fab {
-            box-shadow: 0 4px 20px rgba(251,191,36,0.3) !important;
-        }
+        html.premium-active .navbar, html.enterprise-active .navbar { border-bottom: 1px solid rgba(251,191,36,0.15) !important; }
+        html.enterprise-active .navbar { border-bottom: 1px solid rgba(139,92,246,0.2) !important; }
+
+        html.premium-active .hero-badge { background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(217,119,6,0.1)) !important; border-color: rgba(251,191,36,0.3) !important; }
+        html.enterprise-active .hero-badge { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.1)) !important; border-color: rgba(139,92,246,0.4) !important; }
+        html.premium-active .hero-badge .dot { background: #fbbf24 !important; box-shadow: 0 0 8px #fbbf24 !important; }
+        html.enterprise-active .hero-badge .dot { background: #8b5cf6 !important; box-shadow: 0 0 8px #8b5cf6 !important; }
+
+        html.premium-active .tool-card:hover { box-shadow: 0 16px 40px rgba(251,191,36,0.08) !important; }
+        html.enterprise-active .tool-card:hover { box-shadow: 0 16px 40px rgba(139,92,246,0.1) !important; border-color: rgba(139,92,246,0.4) !important; }
+
+        html.premium-active .stats-section, html.enterprise-active .stats-section { border-top: 1px solid rgba(251,191,36,0.1); border-bottom: 1px solid rgba(251,191,36,0.1); }
+        html.enterprise-active .stats-section { border-color: rgba(139,92,246,0.2) !important; }
+
+        html.premium-active .cta-section .cta-glow { background: radial-gradient(circle, rgba(251,191,36,0.15), transparent 70%) !important; }
+        html.enterprise-active .cta-section .cta-glow { background: radial-gradient(circle, rgba(139,92,246,0.2), transparent 70%) !important; }
+
+        html.premium-active .scroll-top { background: linear-gradient(135deg, #fbbf24, #d97706) !important; color: #000 !important; }
+        html.enterprise-active .scroll-top { background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important; color: #fff !important; }
+
+        html.premium-active .ai-fab { box-shadow: 0 4px 20px rgba(251,191,36,0.3) !important; }
+        html.enterprise-active .ai-fab { box-shadow: 0 4px 20px rgba(139,92,246,0.4) !important; }
 
         /* Premium Success Toast */
         .premium-toast {
-            display: none;
-            position: fixed;
-            top: 90px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            z-index: 100000;
-            background: linear-gradient(135deg, #fbbf24, #d97706);
-            color: #000;
-            padding: 16px 32px;
-            border-radius: 16px;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            box-shadow: 0 12px 40px rgba(251,191,36,0.5);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-            white-space: nowrap;
+            display: none; position: fixed; top: 90px; left: 50%; transform: translateX(-50%) translateY(-20px); z-index: 100000;
+            background: linear-gradient(135deg, #fbbf24, #d97706); color: #000; padding: 16px 32px; border-radius: 16px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; box-shadow: 0 12px 40px rgba(251,191,36,0.5); opacity: 0; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); white-space: nowrap;
         }
-        .premium-toast.show {
-            display: block;
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-        .premium-toast.downgrade {
-            background: linear-gradient(135deg, #64748b, #475569) !important;
-            color: #fff !important;
-            box-shadow: 0 12px 40px rgba(100,116,139,0.5) !important;
-        }
+        .premium-toast.enterprise-toast { background: linear-gradient(135deg, #3b82f6, #8b5cf6) !important; color: #fff !important; box-shadow: 0 12px 40px rgba(139,92,246,0.5) !important; }
+        .premium-toast.show { display: block; opacity: 1; transform: translateX(-50%) translateY(0); }
+        .premium-toast.downgrade { background: linear-gradient(135deg, #64748b, #475569) !important; color: #fff !important; box-shadow: 0 12px 40px rgba(100,116,139,0.5) !important; }
     </style>
 </head>
 <body>
 
-    <!-- ═══════════════════════════════════
-         OVERLAYS & BACKGROUNDS
-    ═══════════════════════════════════ -->
+    <!-- OVERLAYS -->
     <div class="theme-transition-overlay" id="themeOverlay">
         <div class="transition-text" id="transitionText"></div>
     </div>
@@ -994,14 +807,11 @@
     <canvas id="matrix-canvas"></canvas>
     <canvas id="particle-canvas"></canvas>
 
-    <!-- Premium Success Toast -->
     <div class="premium-toast" id="premiumToast">
         👑 Premium Activated — Welcome to the elite tier!
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════
-         AUTH SCREEN
-    ═══════════════════════════════════════════════════════ -->
+    <!-- AUTH SCREEN -->
     <div class="auth-screen" id="authScreen">
         <div class="auth-container">
             <a href="#" class="auth-brand" onclick="event.preventDefault();">
@@ -1017,7 +827,6 @@
                 <span class="nav-logo-text">CryptoKit</span>
             </a>
             <div class="auth-card">
-                <!-- LOGIN PANEL -->
                 <div class="auth-panel active" id="loginPanel">
                     <div class="auth-panel-head">
                         <div class="section-badge">🔐 Welcome Back</div>
@@ -1063,7 +872,6 @@
                     </p>
                 </div>
 
-                <!-- SIGN UP PANEL -->
                 <div class="auth-panel" id="signupPanel">
                     <div class="auth-panel-head">
                         <div class="section-badge">✨ Get Started</div>
@@ -1128,9 +936,7 @@
     </div>
 
 
-    <!-- ═══════════════════════════════════════════════════════
-         MAIN WEBSITE UI
-    ═══════════════════════════════════════════════════════ -->
+    <!-- MAIN WEBSITE UI -->
     <div id="mainApp" class="main-app-hidden">
 
     <!-- NAVBAR -->
@@ -1161,7 +967,6 @@
         </ul>
 
         <div class="nav-actions">
-            <!-- MODE SELECTOR -->
             <div class="mode-selector" id="modeSelector">
                 <button class="mode-btn" onclick="if(typeof toggleModeDropdown==='function')toggleModeDropdown();">
                     <span id="modeIcon">☀️</span>
@@ -1187,17 +992,14 @@
                 </div>
             </div>
 
-            <!-- BACK TO NORMAL MODE (Premium Downgrade) — shown only when premium active -->
             <button class="btn-back-normal" id="backToNormalBtn" onclick="deactivatePremiumMode();" title="Downgrade to free version">
-                <i class="fas fa-rotate-left"></i> Go back to normal mode
+                <i class="fas fa-rotate-left"></i> Normal Mode
             </button>
 
-            <!-- SINGLE AUTH TOGGLE BUTTON (Login/Logout dynamic) -->
             <button class="btn-nav-auth" id="navAuthBtn" onclick="handleAuthToggle();">
                 <i class="fas fa-user"></i> Login
             </button>
 
-            <!-- GO PREMIUM CTA -->
             <a href="#premium" class="btn-nav-cta" id="navPremiumBtn">👑 Go Premium</a>
         </div>
 
@@ -1228,7 +1030,6 @@
         </div>
     </div>
 
-    <!-- MOBILE TERMINAL MODE POPUP -->
     <div class="mobile-dev-popup" id="mobileDevPopup">
         <div class="mobile-dev-popup-box">
             <span class="mobile-dev-popup-icon">🖥️</span>
@@ -1284,7 +1085,7 @@
         </div>
     </section>
 
-    <!-- LIVE DEMO SECTION -->
+    <!-- LIVE DEMO -->
     <section class="live-demo" id="demo">
         <div class="demo-container">
             <div class="demo-header">
@@ -1313,7 +1114,7 @@
         </div>
     </section>
 
-    <!-- TOOLS SECTION (NOW WITH FULL "USE NOW" BUTTON) -->
+    <!-- TOOLS SECTION -->
     <section class="tools-section" id="tools">
         <div class="tools-header">
             <div class="section-badge">🔧 Our Tools</div>
@@ -1385,59 +1186,39 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════
-         PREMIUM TOOLS SECTION — Hidden until activated
-    ═══════════════════════════════════════════════════════ -->
-    <section class="premium-tools-section" id="premiumToolsSection">
+    <!-- SECTION: PRO CIPHER ARSENAL -->
+    <section class="premium-tools-section" id="proToolsSection">
         <div class="premium-tools-header">
-            <div class="section-badge" style="background: rgba(251,191,36,0.1); color: #fbbf24;">👑 Premium Tools</div>
+            <div class="section-badge" style="background: rgba(251,191,36,0.1); color: #fbbf24;">⚡ Pro Cipher</div>
             <h2 class="section-title">
-                Exclusive <span class="gradient-text">Premium Arsenal</span>
+                Pro <span class="gradient-text">Arsenal</span>
             </h2>
-            <p class="section-subtitle">Advanced tools unlocked with your premium subscription. More dropping soon.</p>
+            <p class="section-subtitle">Advanced vulnerability testing and certificate tools for security architects.</p>
         </div>
 
         <div class="premium-tools-grid">
 
-            <!-- Premium Tool 1: Crypto Security Scanner (ACTIVE) -->
             <a href="crypto-scanner.html" class="premium-tool-card" id="ptool-scanner">
                 <span class="premium-crown">👑</span>
                 <div class="premium-tool-icon gold"><i class="fas fa-shield-virus"></i></div>
                 <div class="premium-tool-name">Crypto Security Scanner</div>
                 <div class="premium-tool-desc">
-                    Deep-scan your cryptographic implementations for vulnerabilities, weak ciphers, deprecated protocols, and configuration flaws. Get actionable security recommendations instantly.
+                    Deep-scan your cryptographic implementations for vulnerabilities, weak ciphers, deprecated protocols, and configuration flaws.
                 </div>
                 <div class="premium-tool-tags">
                     <span class="ptag">Vuln Scan</span>
                     <span class="ptag">TLS Audit</span>
                     <span class="ptag">Cipher Check</span>
-                    <span class="ptag">NIST</span>
                 </div>
                 <div class="premium-tool-cta">Launch Scanner <i class="fas fa-arrow-right"></i></div>
             </a>
 
-            <!-- Premium Tool 2: Coming Soon -->
-            <div class="premium-tool-card coming-soon">
-                <span class="premium-crown" style="opacity:0.4;">🔒</span>
-                <div class="premium-tool-icon silver"><i class="fas fa-network-wired"></i></div>
-                <div class="premium-tool-name">Quantum Key Exchange</div>
-                <div class="premium-tool-desc">
-                    Simulate post-quantum key exchange protocols including Kyber and NTRU. Test quantum-resistant handshakes.
-                </div>
-                <div class="premium-tool-tags">
-                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Kyber</span>
-                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">NTRU</span>
-                </div>
-                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
-            </div>
-
-            <!-- Premium Tool 3: Coming Soon -->
             <div class="premium-tool-card coming-soon">
                 <span class="premium-crown" style="opacity:0.4;">🔒</span>
                 <div class="premium-tool-icon silver"><i class="fas fa-certificate"></i></div>
                 <div class="premium-tool-name">Certificate Analyzer</div>
                 <div class="premium-tool-desc">
-                    Parse, validate, and inspect X.509 certificates. Check chain of trust, expiry, and cipher suites.
+                    Parse, validate, and inspect X.509 certificates. Check chain of trust, expiry, and cipher suites securely.
                 </div>
                 <div class="premium-tool-tags">
                     <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">X.509</span>
@@ -1446,22 +1227,6 @@
                 <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
             </div>
 
-            <!-- Premium Tool 4: Coming Soon -->
-            <div class="premium-tool-card coming-soon">
-                <span class="premium-crown" style="opacity:0.4;">🔒</span>
-                <div class="premium-tool-icon silver"><i class="fas fa-code-compare"></i></div>
-                <div class="premium-tool-name">Steganography Suite</div>
-                <div class="premium-tool-desc">
-                    Hide encrypted messages inside images, audio, and documents. Extract hidden payloads with detection tools.
-                </div>
-                <div class="premium-tool-tags">
-                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Images</span>
-                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Audio</span>
-                </div>
-                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
-            </div>
-
-            <!-- Premium Tool 5: Coming Soon -->
             <div class="premium-tool-card coming-soon">
                 <span class="premium-crown" style="opacity:0.4;">🔒</span>
                 <div class="premium-tool-icon silver"><i class="fas fa-vault"></i></div>
@@ -1476,17 +1241,74 @@
                 <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
             </div>
 
-            <!-- Premium Tool 6: Coming Soon -->
-            <div class="premium-tool-card coming-soon">
-                <span class="premium-crown" style="opacity:0.4;">🔒</span>
-                <div class="premium-tool-icon silver"><i class="fas fa-diagram-project"></i></div>
-                <div class="premium-tool-name">Protocol Visualizer</div>
+        </div>
+    </section>
+
+    <!-- SECTION: QUANTUM ELITE LABS -->
+    <section class="premium-tools-section" id="quantumToolsSection">
+        <div class="premium-tools-header">
+            <div class="section-badge" style="background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3);">🌌 Quantum Elite</div>
+            <h2 class="section-title">
+                Quantum Elite <span style="background: linear-gradient(135deg, #3b82f6, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Labs</span>
+            </h2>
+            <p class="section-subtitle">Next-generation cryptographic simulators, forensics, and CTF challenges exclusively for Elite members.</p>
+        </div>
+
+        <div class="premium-tools-grid">
+
+            <a href="#" class="premium-tool-card quantum-tool-card" id="qtool-attack-sim">
+                <span class="premium-crown">🌌</span>
+                <div class="premium-tool-icon quantum-glow"><i class="fas fa-crosshairs"></i></div>
+                <div class="premium-tool-name">Cryptographic Attack Simulator</div>
                 <div class="premium-tool-desc">
-                    Visual step-by-step walkthrough of cryptographic protocols like TLS handshake, Diffie-Hellman, and OAuth flows.
+                    Simulate real-world attacks like Padding Oracles, Brute Force, and Length Extension on custom payloads to test defenses.
                 </div>
                 <div class="premium-tool-tags">
-                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">TLS</span>
-                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">DH</span>
+                    <span class="qtag">Red Team</span>
+                    <span class="qtag">Padding Oracle</span>
+                    <span class="qtag">Simulation</span>
+                </div>
+                <div class="premium-tool-cta quantum-cta">Launch Simulator <i class="fas fa-bolt"></i></div>
+            </a>
+
+            <div class="premium-tool-card quantum-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-flag"></i></div>
+                <div class="premium-tool-name">Crypto CTF / Challenge Mode</div>
+                <div class="premium-tool-desc">
+                    Interactive cryptography challenges. Decode ciphers, break custom hashes, and capture the flags in an isolated lab environment.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">CTF</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Challenges</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
+
+            <div class="premium-tool-card quantum-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fas fa-microscope"></i></div>
+                <div class="premium-tool-name">Crypto Forensics Lab</div>
+                <div class="premium-tool-desc">
+                    Reverse-engineer compromised keys, analyze cryptographic signatures for forgery, and examine packet captures.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Forensics</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">PCAP</span>
+                </div>
+                <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
+            </div>
+
+            <div class="premium-tool-card quantum-tool-card coming-soon">
+                <span class="premium-crown" style="opacity:0.4;">🔒</span>
+                <div class="premium-tool-icon silver"><i class="fab fa-hive"></i></div>
+                <div class="premium-tool-name">Blockchain Security Analyzer</div>
+                <div class="premium-tool-desc">
+                    Audit smart contract cryptographic primitives, check signature schemes, and simulate post-quantum ledger migrations.
+                </div>
+                <div class="premium-tool-tags">
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Web3</span>
+                    <span class="ptag" style="background:rgba(148,163,184,0.1); color:#94a3b8;">Audit</span>
                 </div>
                 <div class="coming-soon-badge"><i class="fas fa-clock"></i> Coming Soon</div>
             </div>
@@ -1494,7 +1316,7 @@
         </div>
     </section>
 
-    <!-- WHY US SECTION -->
+    <!-- WHY US -->
     <section class="why-section" id="about">
         <div class="why-container">
             <div class="why-content">
@@ -1515,7 +1337,7 @@
                 <div class="feature-card"><div class="feature-icon">🔒</div><div class="feature-title">Privacy First</div><div class="feature-desc">Zero data retention policy, always</div></div>
                 <div class="feature-card"><div class="feature-icon">📖</div><div class="feature-title">Open Source</div><div class="feature-desc">MIT licensed. Fork, audit, contribute</div></div>
                 <div class="feature-card"><div class="feature-icon">🌐</div><div class="feature-title">No Install</div><div class="feature-desc">100% browser-based, any device</div></div>
-                <div class="feature-card"><div class="feature-icon">🆓</div><div class="feature-title">Free Forever</div><div class="feature-desc">No premium tiers. No hidden charges.</div></div>
+                <div class="feature-card"><div class="feature-icon">🆓</div><div class="feature-title">Premium Sets</div><div class="feature-desc">Two premium tiers. </div></div>
             </div>
         </div>
     </section>
@@ -1536,7 +1358,7 @@
         </div>
     </section>
 
-    <!-- STATS SECTION -->
+    <!-- STATS -->
     <section class="stats-section">
         <div class="stats-container">
             <div class="stat-card"><div class="stat-icon">🔧</div><span class="stat-number" data-target="12">0</span><div class="stat-label">Tools Available</div></div>
@@ -1546,7 +1368,7 @@
         </div>
     </section>
 
-    <!-- PREMIUM PRICING SECTION -->
+    <!-- PREMIUM PRICING -->
     <section class="premium-section" id="premium">
         <div class="premium-container">
             <div class="premium-header">
@@ -1563,7 +1385,6 @@
                 <span id="billingYearly" style="color: var(--text-secondary, #a0aec0);">Yearly Billing <span style="background: #10b981; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 8px; margin-left: 5px; font-weight: bold;">Save 20%</span></span>
             </div>
             <div class="premium-grid">
-<!----------------------------------------------- Free Tier -------------------------------------------------->
                 <div class="premium-card">
                     <div>
                         <div class="premium-badge">🛡️ Standard</div>
@@ -1574,14 +1395,13 @@
                             <li><i class="fas fa-check"></i> Standard Hash Generation</li>
                             <li><i class="fas fa-check"></i> Basic RSA Key Tool (up to 2048-bit)</li>
                             <li><i class="fas fa-check"></i> File Integrity (up to 50MB)</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Quantum-Resistant NTRU / Kyber</li>
-                            <li class="disabled"><i class="fas fa-times"></i> High-Throughput API Gateway</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Fully Decoupled Local Backups</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Crypto Security Scanner</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Advance RSA and ECC tools</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Advanced File Integrity Checker</li>
                         </ul>
                     </div>
                     <button class="btn-premium-action secondary" disabled>Current Plan</button>
                 </div>
-<!------------------------------------------------ Pro Tier ----------------------------------------------------->
                 <div class="premium-card popular">
                     <div>
                         <div class="premium-badge">⚡ Advanced</div>
@@ -1589,30 +1409,29 @@
                         <p style="color: var(--text-secondary, #a0aec0); font-size: 14px; min-height: 42px;">Perfect for security architects, developers, &amp; advanced users.</p>
                         <div class="premium-price-wrap"><span class="premium-price" id="proPrice">$9</span><span class="premium-period" id="proPeriod">/ month</span></div>
                         <ul class="premium-features">
-                            <li><i class="fas fa-check"></i> <strong>Everything in Community</strong></li>
-                            <li><i class="fas fa-check"></i> RSA Keys up to 8192-bit</li>
-                            <li><i class="fas fa-check"></i> Unlimited file size checking</li>
-                            <li><i class="fas fa-check"></i> AES-256 GCM authenticated mode</li>
-                            <li><i class="fas fa-check"></i> Dedicated Priority Support channels</li>
-                            <li class="disabled"><i class="fas fa-times"></i> Premium Developer API Access</li>
+                            <li><i class="fas fa-check"></i> Crypto Security Scanner</li>
+                            <li><i class="fas fa-check"></i> Certificate Analyzer</li>
+                            <li><i class="fas fa-check"></i> Secure Vault Manager</li>
+                            <li><i class="fas fa-check"></i> Professional Security Report</li>
+                            <li><i class="fas fa-check"></i> Digital Signature Suite</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Advanced Attack Simulation</li>
+                            <li class="disabled"><i class="fas fa-times"></i> Quantum Elite Lab Access</li>
                         </ul>
                     </div>
                     <button class="btn-premium-action primary" id="proPlanBtn" onclick="openPaymentModal('Pro Cipher', '$9', 'pro')">Upgrade to Pro <i class="fas fa-star"></i></button>
                 </div>
-<!------------------------------------------- Enterprise Tier --------------------------------------------------->
                 <div class="premium-card">
                     <div>
                         <div class="premium-badge" style="background: rgba(59,130,246,0.15); color: #3b82f6;">🌌 Quantum-Safe</div>
-                        <h3 class="premium-plan-title">Quantum Enterprise</h3>
+                        <h3 class="premium-plan-title">Quantum Elite</h3>
                         <p style="color: var(--text-secondary, #a0aec0); font-size: 14px; min-height: 42px;">Next-generation post-quantum security structures and full systems control.</p>
                         <div class="premium-price-wrap"><span class="premium-price" id="enterprisePrice">$29</span><span class="premium-period" id="enterprisePeriod">/ month</span></div>
                         <ul class="premium-features">
                             <li><i class="fas fa-check"></i> <strong>Everything in Pro Cipher</strong></li>
-                            <li><i class="fas fa-check"></i> Post-quantum Algorithms (Kyber, Dilithium)</li>
-                            <li><i class="fas fa-check"></i> Secure SDK &amp; Developer API Access</li>
-                            <li><i class="fas fa-check"></i> Zero-Knowledge decentralized cloud backup</li>
-                            <li><i class="fas fa-check"></i> Customized enterprise deployment pipelines</li>
-                            <li><i class="fas fa-check"></i> Direct 1-on-1 advisor assistance</li>
+                            <li><i class="fas fa-check"></i> Cryptographic Attack Simulator</li>
+                            <li><i class="fas fa-check"></i> Crypto CTF / Challenge Mode</li>
+                            <li><i class="fas fa-check"></i> Crypto Forensics Lab</li>
+                            <li><i class="fas fa-check"></i> Blockchain Security Analyzer </li>
                         </ul>
                     </div>
                     <button class="btn-premium-action amber" id="enterprisePlanBtn" onclick="openPaymentModal('Quantum Enterprise', '$29', 'enterprise')">Get Quantum <i class="fas fa-bolt"></i></button>
@@ -1621,7 +1440,7 @@
         </div>
     </section>
 
-    <!-- FEEDBACK & REVIEWS -->
+    <!-- FEEDBACK -->
     <section class="feedback-section" id="feedback">
         <div class="feedback-header">
             <div class="section-badge">💬 Feedback</div>
@@ -1631,18 +1450,18 @@
         <div class="reviews-grid">
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <p class="review-text">"CryptoKit is exactly what I needed. Fast, free, and privacy-focused. The hash generator is incredibly useful for my workflow."</p>
-                <div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">David Kim</div><div class="review-role">Security Engineer</div></div></div>
+                <p class="review-text">"Comments will be available soon"</p>
+                <div class="review-author"><div class="review-avatar">D</div><div><div class="review-name">---</div><div class="review-role"></div></div></div>
             </div>
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <p class="review-text">"The hacker mode is incredible! Love the Matrix aesthetic. Finally a crypto toolkit that doesn't look boring."</p>
-                <div class="review-author"><div class="review-avatar">E</div><div><div class="review-name">Emma Wilson</div><div class="review-role">CS Student</div></div></div>
+                <p class="review-text">"Comments will be available soon"</p>
+                <div class="review-author"><div class="review-avatar">E</div><div><div class="review-name">---</div><div class="review-role"></div></div></div>
             </div>
             <div class="review-card">
                 <div class="review-stars">⭐⭐⭐⭐⭐</div>
-                <p class="review-text">"Open source and zero data storage is a game changer. I recommend CryptoKit to all my developer colleagues."</p>
-                <div class="review-author"><div class="review-avatar">R</div><div><div class="review-name">Raj Sharma</div><div class="review-role">Full Stack Dev</div></div></div>
+                <p class="review-text">"Comments will be available soon"</p>
+                <div class="review-author"><div class="review-avatar">R</div><div><div class="review-name">---</div><div class="review-role"></div></div></div>
             </div>
         </div>
         <div class="feedback-form-wrapper" id="feedbackFormWrapper">
@@ -1666,7 +1485,7 @@
         </div>
     </section>
 
-    <!-- CTA SECTION -->
+    <!-- CTA -->
     <section class="cta-section">
         <div class="cta-container">
             <div class="cta-glow"></div>
@@ -1745,13 +1564,10 @@
         </div>
     </footer>
 
-    <!-- SCROLL TO TOP -->
     <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'});"><i class="fas fa-chevron-up"></i></button>
 
-    <!-- AI ASSISTANT FAB -->
     <button class="ai-fab" id="aiFab" onclick="if(typeof toggleChat==='function')toggleChat();" title="Ask CryptoBot"><span id="fabIcon">🤖</span></button>
 
-    <!-- AI CHAT WINDOW -->
     <div class="ai-chat-window" id="aiChatWindow">
         <div class="ai-chat-header">
             <div class="ai-header-info">
@@ -1779,7 +1595,7 @@
         </div>
     </div>
 
-    <!-- PREMIUM PAYMENT MODAL -->
+    <!-- PAYMENT MODAL -->
     <div class="mobile-dev-popup" id="premiumPaymentModal">
         <div class="mobile-dev-popup-box" style="max-width: 420px; text-align: left;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
@@ -1815,9 +1631,7 @@
     </div><!-- /#mainApp -->
 
 
-    <!-- ═══════════════════════════════════════════════════════
-         SCRIPTS
-    ═══════════════════════════════════════════════════════ -->
+    <!-- SCRIPTS -->
     <script>
         (function () {
             var isAuthed = (function () {
@@ -1835,9 +1649,6 @@
     <script src="auth.js"></script>
 
     <script>
-        /* ══════════════════════════════════════════════
-           ERROR HANDLER & FALLBACKS
-        ══════════════════════════════════════════════ */
         window.addEventListener('error', function(e) { console.warn('Resource loading error:', e.message || e); }, true);
 
         if (typeof toggleChat !== 'function') { window.toggleChat = function() { var cw = document.getElementById('aiChatWindow'); if (cw) cw.style.display = cw.style.display === 'flex' ? 'none' : 'flex'; }; }
@@ -1845,15 +1656,11 @@
         if (typeof selectMode !== 'function') { window.selectMode = function(mode) { document.documentElement.setAttribute('data-theme', mode); localStorage.setItem('cryptokit-theme', mode); }; }
         if (typeof toggleModeDropdown !== 'function') { window.toggleModeDropdown = function() { var d = document.getElementById('modeDropdown'); if (d) d.classList.toggle('active'); }; }
 
-        /* ──────────────────────────────────────
-           SINGLE LOGIN/LOGOUT TOGGLE HANDLER
-        ────────────────────────────────────── */
         window.handleAuthToggle = function() {
             var isAuthed = false;
             try { isAuthed = sessionStorage.getItem('cryptokit_auth') === 'true' || localStorage.getItem('cryptokit_auth') === 'true'; } catch(e) {}
             
             if (isAuthed) {
-                // Perform Logout
                 if (typeof handleLogout === 'function') {
                     handleLogout();
                 } else {
@@ -1862,7 +1669,6 @@
                     window.location.reload();
                 }
             } else {
-                // Show Login Screen
                 document.getElementById('mainApp').classList.add('main-app-hidden');
                 document.getElementById('authScreen').classList.remove('auth-screen-hidden');
                 if (typeof switchAuthPanel === 'function') switchAuthPanel('login');
@@ -1884,9 +1690,6 @@
             }
         }
 
-        /* ──────────────────────────────────────
-           Mobile theme submenu
-        ────────────────────────────────────── */
         function toggleMobileThemeMenu(btn) {
             var s = document.getElementById('mobileThemeSubmenu'), a = document.getElementById('mobileThemeArrow');
             if (!s || !a) return;
@@ -1915,9 +1718,6 @@
             if (p) { p.classList.add('show'); document.body.style.overflow = 'hidden'; }
         }
 
-        /* ──────────────────────────────────────
-           PREMIUM SYSTEM
-        ────────────────────────────────────── */
         var activePlanId = null;
 
         function toggleBillingPeriod(toggleInput) {
@@ -1962,31 +1762,53 @@
             input.value = v.length > 2 ? v.substring(0, 2) + '/' + v.substring(2, 4) : v;
         }
 
-        /* ──────────────────────────────────────
-           PREMIUM ACCESS ACTIVATION
-        ────────────────────────────────────── */
+        /* ════════════════════════════════════════════════════
+           PREMIUM MODE ACTIVATION (Handles Dual Display)
+        ══════════════════════════════════════════════════════ */
         function activatePremiumMode(tier) {
-            document.documentElement.classList.add('premium-active');
+            // Remove previous active classes
+            document.documentElement.classList.remove('premium-active');
+            document.documentElement.classList.remove('enterprise-active');
+            
+            // Add correct active class
+            if(tier === 'pro') {
+                document.documentElement.classList.add('premium-active');
+            } else if (tier === 'enterprise') {
+                document.documentElement.classList.add('enterprise-active');
+            }
+
             localStorage.setItem('cryptokit_premium_tier', tier);
             activePlanId = tier;
 
-            var premiumTools = document.getElementById('premiumToolsSection');
-            if (premiumTools) premiumTools.classList.add('unlocked');
+            // Handle section visibility
+            var proTools = document.getElementById('proToolsSection');
+            var quantumTools = document.getElementById('quantumToolsSection');
 
+            if (tier === 'pro') {
+                if (proTools) proTools.classList.add('unlocked');
+                if (quantumTools) quantumTools.classList.remove('unlocked');
+            } else if (tier === 'enterprise') {
+                if (proTools) proTools.classList.add('unlocked');
+                if (quantumTools) quantumTools.classList.add('unlocked');
+            }
+
+            // Update CTA Button
             var navCta = document.getElementById('navPremiumBtn');
             if (navCta) {
                 if (tier === 'pro') {
                     navCta.innerHTML = '✨ Pro Cipher';
                     navCta.style.background = 'linear-gradient(135deg, #fbbf24, #d97706)';
                     navCta.style.color = '#000';
+                    navCta.href = '#proToolsSection';
                 } else if (tier === 'enterprise') {
                     navCta.innerHTML = '🌌 Enterprise';
                     navCta.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
                     navCta.style.color = '#fff';
+                    navCta.href = '#quantumToolsSection';
                 }
-                navCta.href = '#premiumToolsSection';
             }
 
+            // Update Badge
             var navBadge = document.getElementById('navPremiumBadge');
             if (navBadge) {
                 navBadge.innerText = tier === 'enterprise' ? '🌌 QUANTUM' : '👑 PRO';
@@ -1995,6 +1817,7 @@
             var mobileBackBtn = document.getElementById('mobileBackToNormal');
             if (mobileBackBtn) mobileBackBtn.style.display = 'block';
 
+            // Update Pricing Table Buttons
             if (tier === 'pro') {
                 var pb = document.getElementById('proPlanBtn');
                 if (pb) { pb.innerText = 'Plan Active ✅'; pb.disabled = true; pb.style.opacity = '0.6'; pb.style.cursor = 'default'; }
@@ -2005,36 +1828,43 @@
                 if (pb2) { pb2.innerText = 'Included ✅'; pb2.disabled = true; pb2.style.opacity = '0.6'; pb2.style.cursor = 'default'; }
             }
 
+            // Toast setup
             var toast = document.getElementById('premiumToast');
             if (toast) {
                 toast.classList.remove('downgrade');
-                toast.innerText = tier === 'enterprise'
-                    ? '🌌 Quantum Enterprise Activated — All tools unlocked!'
-                    : '👑 Pro Cipher Activated — Premium tools unlocked!';
+                toast.classList.remove('enterprise-toast');
+                if (tier === 'enterprise') {
+                    toast.innerText = '🌌 Quantum Elite Activated — All labs & tools unlocked!';
+                    toast.classList.add('enterprise-toast');
+                } else {
+                    toast.innerText = '👑 Pro Cipher Activated — Premium tools unlocked!';
+                }
+                
                 toast.classList.add('show');
                 setTimeout(function() { toast.classList.remove('show'); }, 4000);
             }
 
+            // Scroll down
             setTimeout(function() {
-                var el = document.getElementById('premiumToolsSection');
+                var el = tier === 'enterprise' ? document.getElementById('quantumToolsSection') : document.getElementById('proToolsSection');
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }, 600);
         }
 
-        /* ──────────────────────────────────────
-           DEACTIVATE PREMIUM (Go back to normal mode)
-        ────────────────────────────────────── */
         function deactivatePremiumMode() {
             if (!confirm('Are you sure you want to downgrade back to the free Community version? You will lose access to all premium tools.')) {
                 return;
             }
 
             document.documentElement.classList.remove('premium-active');
+            document.documentElement.classList.remove('enterprise-active');
             localStorage.removeItem('cryptokit_premium_tier');
             activePlanId = null;
 
-            var premiumTools = document.getElementById('premiumToolsSection');
-            if (premiumTools) premiumTools.classList.remove('unlocked');
+            var proTools = document.getElementById('proToolsSection');
+            if (proTools) proTools.classList.remove('unlocked');
+            var quantumTools = document.getElementById('quantumToolsSection');
+            if (quantumTools) quantumTools.classList.remove('unlocked');
 
             var navCta = document.getElementById('navPremiumBtn');
             if (navCta) {
@@ -2069,6 +1899,7 @@
             if (toast) {
                 toast.innerText = '🔄 Downgraded to Community — Welcome back!';
                 toast.classList.add('downgrade');
+                toast.classList.remove('enterprise-toast');
                 toast.classList.add('show');
                 setTimeout(function() {
                     toast.classList.remove('show');
@@ -2079,9 +1910,6 @@
             setTimeout(function() { window.scrollTo({ top: 0, behavior: 'smooth' }); }, 400);
         }
 
-        /* ──────────────────────────────────────
-           Payment submit handler
-        ────────────────────────────────────── */
         function handlePremiumPaymentSubmit(event) {
             event.preventDefault();
             var btn = event.target.querySelector('button[type="submit"]');
@@ -2102,9 +1930,6 @@
             }, 1500);
         }
 
-        /* ──────────────────────────────────────
-           DOM Ready
-        ────────────────────────────────────── */
         document.addEventListener('DOMContentLoaded', function () {
             var closeBtn = document.getElementById('mobileDevPopupCloseBtn');
             if (closeBtn) closeBtn.addEventListener('click', function(e) { e.stopPropagation(); var p = document.getElementById('mobileDevPopup'); if (p) { p.classList.remove('show'); document.body.style.overflow = ''; } });
@@ -2116,17 +1941,19 @@
             if (payModal) payModal.addEventListener('click', function(e) { if (e.target === payModal) closePaymentModal(); });
 
             updateMobileThemeDots();
-            updateAuthButtons(); // Sets correct login/out text automatically
+            updateAuthButtons();
 
-            // ═══════════════════════════════════
-            // RESTORE PREMIUM STATE (silent)
-            // ═══════════════════════════════════
+            // Load saved tier on load
             var savedTier = localStorage.getItem('cryptokit_premium_tier');
             if (savedTier && (savedTier === 'pro' || savedTier === 'enterprise')) {
-                document.documentElement.classList.add('premium-active');
+                // Call activate logic without scrolling or toast
+                document.documentElement.classList.add(savedTier === 'enterprise' ? 'enterprise-active' : 'premium-active');
                 activePlanId = savedTier;
-                var pts = document.getElementById('premiumToolsSection');
-                if (pts) pts.classList.add('unlocked');
+                
+                var pt = document.getElementById('proToolsSection');
+                var qt = document.getElementById('quantumToolsSection');
+                if (savedTier === 'pro') { if(pt) pt.classList.add('unlocked'); }
+                if (savedTier === 'enterprise') { if(pt) pt.classList.add('unlocked'); if(qt) qt.classList.add('unlocked'); }
 
                 var navCta = document.getElementById('navPremiumBtn');
                 if (navCta) {
@@ -2134,12 +1961,13 @@
                         navCta.innerHTML = '✨ Pro Cipher';
                         navCta.style.background = 'linear-gradient(135deg, #fbbf24, #d97706)';
                         navCta.style.color = '#000';
+                        navCta.href = '#proToolsSection';
                     } else {
                         navCta.innerHTML = '🌌 Enterprise';
                         navCta.style.background = 'linear-gradient(135deg, #3b82f6, #1d4ed8)';
                         navCta.style.color = '#fff';
+                        navCta.href = '#quantumToolsSection';
                     }
-                    navCta.href = '#premiumToolsSection';
                 }
 
                 var navBadge = document.getElementById('navPremiumBadge');
